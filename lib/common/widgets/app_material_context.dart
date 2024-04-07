@@ -28,7 +28,7 @@ class _AppMaterialContextState extends State<AppMaterialContext> {
           child: Builder(
             builder: (context) => MaterialApp(
               debugShowCheckedModeBanner: false,
-              title: 'kcal',
+              title: 'dsd',
               locale: InheritedLocalNotifier.maybeOf(context)?.appLocal ?? const Locale('ru', 'RU'),
               theme: themeController.theme,
               supportedLocales: const [Locale('uz', 'UZ'), Locale('ru', 'RU'), Locale('en', 'US')],
