@@ -1,3 +1,5 @@
+import 'package:dsd/common/router/route_name.dart';
+import 'package:dsd/common/widgets/tab_bar.dart';
 import 'package:flutter/material.dart';
 import '../styles/colors.dart';
 
@@ -7,6 +9,8 @@ class AppRouter<T extends Object?> {
   // ignore: long-method
   Route<T> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case AppRouteName.TAB_BAR:
+        return MaterialPageRoute(builder: (ctx) => const TabScreen());
       default:
         return _errorRoute();
     }
