@@ -11,6 +11,13 @@ class AppColors {
   static const white = Color(0xffffffff);
   static const black = Color(0xFF000000);
 
+  static const c202020 = Color(0xff202020);
+  static const c313131 = Color(0xff313131);
+  static const c57C5B6 = Color(0xff57C5B6);
+  static const c0B8978 = Color(0xff0B8978);
+  static const cFFFFFF = Color(0xffFFFFFF);
+  static const c33FF00 = Color(0xff33FF00);
+
   static const cF2F4F7 = Color(0xffF2F4F7);
   static const c8BC0A9 = Color(0xff8BC0A9);
   static const c219361 = Color(0xff219361);
@@ -98,16 +105,16 @@ class AppColors {
   static const cC4AB87 = Color(0xffC4AB87);
   static const c997F59 = Color(0xff997F59);
   static const c93826B = Color(0xff93826B);
-  static const c787879 = Color(0xff787879);
+  static const c787879 = Color(0xff787879);  
 
   // gradients
-  static const buttonGradient = <Color>[c3554D1, c1E3CA5];
-  static const switchOnButton = <Color>[c427CF8, c1A3FC7];
-  static const statusStandardGold = <Color>[cC4AB87, c997F59];
-  static const statusStandardSilver = <Color>[cCBCACF, c787879];
-  static const homeScanner = <Color>[c183CC4, c4581FC];
-  static const homeTerminal = <Color>[c83023B, cE61C75];
-  static const homePartner = <Color>[cD63004, cEB7350];
-  static const homePayment = <Color>[c1DA960, c21AD64];
-  static const homePayment1 = <Color>[c787879, c787879];
+  // static const buttonGradient = <Color>[c3554D1, c1E3CA5];
+  // static const switchOnButton = <Color>[c427CF8, c1A3FC7];
+  // static const statusStandardGold = <Color>[cC4AB87, c997F59];
+  // static const statusStandardSilver = <Color>[cCBCACF, c787879];
+  // static const homeScanner = <Color>[c183CC4, c4581FC];
+  // static const homeTerminal = <Color>[c83023B, cE61C75];
+  // static const homePartner = <Color>[cD63004, cEB7350];
+  // static const homePayment = <Color>[c1DA960, c21AD64];
+  // static const homePayment1 = <Color>[c787879, c787879];
 }
