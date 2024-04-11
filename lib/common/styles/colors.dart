@@ -10,6 +10,9 @@ class AppColors {
 
   static const white = Color(0xffffffff);
   static const black = Color(0xFF000000);
+  static const backround = Color(0xFF202020);
+
+  static const greenishblue = Color(0xFF57C5B6);
 
   static const c202020 = Color(0xff202020);
   static const c313131 = Color(0xff313131);
@@ -117,4 +120,5 @@ class AppColors {
   // static const homePartner = <Color>[cD63004, cEB7350];
   // static const homePayment = <Color>[c1DA960, c21AD64];
   // static const homePayment1 = <Color>[c787879, c787879];
+  // static const c787879 = Color(0xff787879);
 }

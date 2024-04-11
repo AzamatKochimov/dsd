@@ -1,5 +1,10 @@
 import 'package:dsd/common/router/route_name.dart';
 import 'package:dsd/common/widgets/tab_bar.dart';
+import 'package:dsd/feature/auth/presentation/pages/initial/initial_page.dart';
+import 'package:dsd/feature/auth/presentation/pages/log_in/log_in_page.dart';
+import 'package:dsd/feature/auth/presentation/pages/register/on_complete_page.dart';
+import 'package:dsd/feature/auth/presentation/pages/register/register_page.dart';
+import 'package:dsd/feature/auth/presentation/pages/register/sms_verification_page.dart';
 import 'package:dsd/feature/profile/presentation/change_email.dart';
 import 'package:dsd/feature/profile/presentation/edit_profile.dart';
 import 'package:dsd/feature/profile/presentation/notifications.dart';
@@ -9,8 +14,6 @@ import '../styles/colors.dart';
 
 class AppRouter<T extends Object?> {
   const AppRouter();
-
-  // ignore: long-method
   Route<T> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
       case AppRouteName.TAB_BAR:
@@ -33,6 +36,16 @@ class AppRouter<T extends Object?> {
         return MaterialPageRoute(
           builder: (ctx) => const ChangeEmail(),
         );
+      case AppRouteName.INITIAL_PAGE:
+        return MaterialPageRoute(builder: (ctx) => const InitialPage());
+      case AppRouteName.LOGIN_PAGE:
+        return MaterialPageRoute(builder: (ctx) => const LoginPage());
+      case AppRouteName.REGISTER_PAGE:
+        return MaterialPageRoute(builder: (ctx) => const RegisterPage());
+      case AppRouteName.SMS_VERIFICATION_PAGE:
+        return MaterialPageRoute(builder: (ctx) => const SMSVerificationPage());
+      case AppRouteName.ON_COMPLETE_PAGE:
+        return MaterialPageRoute(builder: (ctx) => const OnCompletePage());
       default:
         return _errorRoute();
     }

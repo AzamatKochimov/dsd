@@ -11,7 +11,7 @@ class AppTextStyle extends TextTheme {
   TextStyle? get bodyLarge =>  TextStyle(
         fontWeight: FontWeight.w400,
         fontSize: FontSize.size16,
-        color: AppColors.c12154C,
+        color: AppColors.white,
     fontFamily: 'Regular',
       );
 
