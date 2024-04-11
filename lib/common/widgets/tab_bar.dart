@@ -1,4 +1,9 @@
+import 'package:dsd/common/styles/colors.dart';
 import 'package:dsd/common/widgets/navigation_bar.dart';
+import 'package:dsd/feature/cart/presentation/pages/cart_page.dart';
+import 'package:dsd/feature/home/presentation/pages/home_page.dart';
+import 'package:dsd/feature/likes/presentation/pages/likes_page.dart';
+import 'package:dsd/feature/profile/presentation/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -14,9 +19,9 @@ class _TabScreenState extends State<TabScreen> {
 
   final List<Widget> _children = [
     const Menu(),
-    const Likes(),
+    const LikesPage(),
     const Add(),
-    const Cart(),
+    const CartPage(),
     const Profile(),
   ];
 
@@ -40,49 +45,13 @@ class _TabScreenState extends State<TabScreen> {
   }
 }
 
-
-
-class Menu extends StatelessWidget {
-  const Menu({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold();
-  }
-}
-
-class Profile extends StatelessWidget {
-  const Profile({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold();
-  }
-}
-
-class Likes extends StatelessWidget {
-  const Likes({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold();
-  }
-}
-
 class Add extends StatelessWidget {
   const Add({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold();
-  }
-}
-
-class Cart extends StatelessWidget {
-  const Cart({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold();
+    return const Scaffold(
+      backgroundColor: AppColors.c202020,
+    );
   }
 }

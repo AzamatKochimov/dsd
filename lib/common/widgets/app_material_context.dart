@@ -1,3 +1,4 @@
+import 'package:dsd/common/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
@@ -27,6 +28,7 @@ class _AppMaterialContextState extends State<AppMaterialContext> {
           localController: localController,
           child: Builder(
             builder: (context) => MaterialApp(
+              color: AppColors.c202020,
               debugShowCheckedModeBanner: false,
               title: 'dsd',
               locale: InheritedLocalNotifier.maybeOf(context)?.appLocal ?? const Locale('ru', 'RU'),
