@@ -31,17 +31,24 @@ class _AppMaterialContextState extends State<AppMaterialContext> {
               color: AppColors.c202020,
               debugShowCheckedModeBanner: false,
               title: 'dsd',
-              locale: InheritedLocalNotifier.maybeOf(context)?.appLocal ?? const Locale('ru', 'RU'),
+              locale: InheritedLocalNotifier.maybeOf(context)?.appLocal ??
+                  const Locale('ru', 'RU'),
               theme: themeController.theme,
-              supportedLocales: const [Locale('uz', 'UZ'), Locale('ru', 'RU'), Locale('en', 'US')],
+              supportedLocales: const [
+                Locale('uz', 'UZ'),
+                Locale('ru', 'RU'),
+                Locale('en', 'US')
+              ],
               localizationsDelegates: const [
                 AppLocalizations.delegate,
                 GlobalMaterialLocalizations.delegate,
                 GlobalWidgetsLocalizations.delegate,
                 GlobalCupertinoLocalizations.delegate,
               ],
-              localeResolutionCallback: (final deviceLocale, final supportedLocales) {
-                final local = InheritedLocalNotifier.maybeOf(context, listen: false)!;
+              localeResolutionCallback:
+                  (final deviceLocale, final supportedLocales) {
+                final local =
+                    InheritedLocalNotifier.maybeOf(context, listen: false)!;
 
                 for (final locale in supportedLocales) {
                   if (locale.languageCode == local.appLocal.languageCode) {
@@ -56,11 +63,14 @@ class _AppMaterialContextState extends State<AppMaterialContext> {
                 local.changeLocal(LangCodes.ru);
                 return const Locale('ru', 'RU');
               },
-              initialRoute: '/',
+              initialRoute: "/",
               onGenerateRoute: router.onGenerateRoute,
               builder: (context, child) => MediaQuery(
-                data: MediaQuery.of(context).copyWith(textScaler: TextScaler.noScaling),
-                child: ScrollConfiguration(behavior: const ScrollBehavior(), child: child ?? const Scaffold()),
+                data: MediaQuery.of(context)
+                    .copyWith(textScaler: TextScaler.noScaling),
+                child: ScrollConfiguration(
+                    behavior: const ScrollBehavior(),
+                    child: child ?? const Scaffold()),
               ),
             ),
           ),

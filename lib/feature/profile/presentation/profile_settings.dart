@@ -146,11 +146,11 @@ class _ProfileSettingsState extends State<ProfileSettings> {
             padding: EdgeInsets.symmetric(horizontal: 10.0.w),
             child: const Divider(color: AppColors.white),
           ),
-          TextButton(
+          IconButton(
             onPressed: () {
               Navigator.pushNamed(context, AppRouteName.CHANGE_EMAIL);
             },
-            child: const Row(
+            icon: const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
