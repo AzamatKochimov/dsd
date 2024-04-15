@@ -128,7 +128,7 @@ enum Words {
   purchaseZpay2Minutes,
   buyPay6MonthsPassportPaymentCard,
 
-  /// for create pin code
+  /// for create_part pin code
   setPIN,
   verifyPIN,
   enterPIN,

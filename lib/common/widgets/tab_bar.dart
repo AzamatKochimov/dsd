@@ -7,6 +7,8 @@ import 'package:dsd/feature/profile/presentation/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../feature/crud/presentation/pages/add_item_home_page.dart';
+
 class TabScreen extends StatefulWidget {
   const TabScreen({super.key});
 
@@ -18,9 +20,9 @@ class _TabScreenState extends State<TabScreen> {
   int _currentIndex = 0;
 
   final List<Widget> _children = [
-    const Menu(),
+    const HomePage(),
     const LikesPage(),
-    const Add(),
+    const AddItemHomePage(),
     const CartPage(),
     const Profile(),
   ];

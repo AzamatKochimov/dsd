@@ -1,7 +1,7 @@
+import 'package:dsd/common/router/route_name.dart';
 import 'package:dsd/common/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-
 import '../../settings/widget/inherited_local_notifier.dart';
 import '../../settings/widget/inherited_theme_notifier.dart';
 import '../../settings/widget/local_controller.dart';
@@ -63,7 +63,7 @@ class _AppMaterialContextState extends State<AppMaterialContext> {
                 local.changeLocal(LangCodes.ru);
                 return const Locale('ru', 'RU');
               },
-              initialRoute: "/product_details_page",
+              initialRoute: '/',
               onGenerateRoute: router.onGenerateRoute,
               builder: (context, child) => MediaQuery(
                 data: MediaQuery.of(context)
