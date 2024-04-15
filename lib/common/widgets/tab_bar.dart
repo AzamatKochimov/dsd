@@ -18,7 +18,7 @@ class _TabScreenState extends State<TabScreen> {
   int _currentIndex = 0;
 
   final List<Widget> _children = [
-    const Menu(),
+    const HomePage(),
     const LikesPage(),
     const Add(),
     const CartPage(),

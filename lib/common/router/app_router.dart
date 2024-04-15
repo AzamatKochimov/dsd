@@ -5,6 +5,7 @@ import 'package:dsd/feature/auth/presentation/pages/log_in/log_in_page.dart';
 import 'package:dsd/feature/auth/presentation/pages/register/on_complete_page.dart';
 import 'package:dsd/feature/auth/presentation/pages/register/register_page.dart';
 import 'package:dsd/feature/auth/presentation/pages/register/sms_verification_page.dart';
+import 'package:dsd/feature/home/presentation/pages/home_page.dart';
 import 'package:dsd/feature/profile/presentation/change_email.dart';
 import 'package:dsd/feature/profile/presentation/edit_profile.dart';
 import 'package:dsd/feature/profile/presentation/notifications.dart';
@@ -46,6 +47,8 @@ class AppRouter<T extends Object?> {
         return MaterialPageRoute(builder: (ctx) => const SMSVerificationPage());
       case AppRouteName.ON_COMPLETE_PAGE:
         return MaterialPageRoute(builder: (ctx) => const OnCompletePage());
+      case AppRouteName.HOME_PAGE:
+        return MaterialPageRoute(builder: (ctx) => const HomePage());
       default:
         return _errorRoute();
     }
