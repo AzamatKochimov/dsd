@@ -23,7 +23,7 @@ class AppThemes {
         inputDecorationTheme: const _InputDecorationTheme._(),
       );
 
-  static ThemeData dark() => light();
+  static ThemeData dark() => ThemeData.dark();
 }
 
 @immutable
