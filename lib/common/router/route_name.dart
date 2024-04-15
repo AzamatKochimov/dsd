@@ -11,4 +11,5 @@ class AppRouteName {
   static const String SMS_VERIFICATION_PAGE = "/sms_verification_page";
   static const String ON_COMPLETE_PAGE = "/on_complete_page";
   static const String HOME_PAGE = "/home_page";
+  static const String PRODUCT_DETAILS_PAGE = "/product_details_page";
 }
