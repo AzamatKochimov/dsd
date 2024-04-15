@@ -1,4 +1,5 @@
 import 'package:dsd/common/router/route_name.dart';
+import 'package:dsd/common/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import '../../settings/widget/inherited_local_notifier.dart';
@@ -27,6 +28,7 @@ class _AppMaterialContextState extends State<AppMaterialContext> {
           localController: localController,
           child: Builder(
             builder: (context) => MaterialApp(
+              color: AppColors.c202020,
               debugShowCheckedModeBanner: false,
               title: 'dsd',
               locale: InheritedLocalNotifier.maybeOf(context)?.appLocal ??
@@ -61,7 +63,9 @@ class _AppMaterialContextState extends State<AppMaterialContext> {
                 local.changeLocal(LangCodes.ru);
                 return const Locale('ru', 'RU');
               },
-              initialRoute: AppRouteName.ADDITEMHOMEPAGE,
+              // initialRoute: AppRouteName.ADDITEMHOMEPAGE,
+              // initialRoute: AppRouteName.HOME_PAGE,
+              initialRoute: '/',
               onGenerateRoute: router.onGenerateRoute,
               builder: (context, child) => MediaQuery(
                 data: MediaQuery.of(context)

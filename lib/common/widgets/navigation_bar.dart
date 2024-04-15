@@ -1,5 +1,6 @@
 import 'package:dsd/common/styles/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class NavigationBars extends StatefulWidget {
   final ValueChanged<int> onTap;
@@ -22,79 +23,63 @@ class _NavigationBarsState extends State<NavigationBars> {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
+      selectedLabelStyle: const TextStyle(color: AppColors.c0B8978),
+      selectedItemColor: AppColors.c0B8978,
+      // unselectedLabelStyle: const TextStyle(fontSize: 6, color: AppColors.c313131),
+      showSelectedLabels: true,
+      showUnselectedLabels: true,
       currentIndex: _currentIndex,
       onTap: onTabTapped,
       items: [
         BottomNavigationBarItem(
-          icon: _currentIndex == 0
-              ? Image.asset(
-                  "assets/icons/home-g.png",
-                  width: 24,
-                  height: 24,
-                )
-              : Image.asset(
-                  "assets/icons/home-b.png",
-                  width: 24,
-                  height: 24,
-                ),
+          icon: SvgPicture.asset(
+            _currentIndex == 0
+                ? "assets/icons/home-g.svg"
+                : "assets/icons/home-b.svg",
+            width: 24,
+            height: 24,
+          ),
           label: 'menu',
         ),
         BottomNavigationBarItem(
-          icon: _currentIndex == 1
-              ? Image.asset(
-                  "assets/icons/like-g.png",
-                  width: 24,
-                  height: 24,
-                )
-              : Image.asset(
-                  "assets/icons/like-b.png",
-                  width: 24,
-                  height: 24,
-                ),
-          label: 'likes',
-          activeIcon: Icon(Icons.add),
-          backgroundColor: AppColors.black
-        ),
+            icon: SvgPicture.asset(
+              _currentIndex == 1
+                  ? "assets/icons/like-g.svg"
+                  : "assets/icons/like-b.svg",
+              width: 24,
+              height: 24,
+            ),
+            label: 'likes',
+            backgroundColor: AppColors.black),
         BottomNavigationBarItem(
-          icon: _currentIndex == 2
-              ? Image.asset(
-                  "assets/icons/add-g.png",
-                  width: 24,
-                  height: 24,
-                )
-              : Image.asset(
-                  "assets/icons/add-b.png",
-                  width: 24,
-                  height: 24,
-                ),
+          icon: SvgPicture.asset(
+              _currentIndex == 2
+                  ? "assets/icons/add-g.svg"
+                  : "assets/icons/add-b.svg",
+              width: 24,
+              height: 24,
+            ),
           label: 'add',
         ),
         BottomNavigationBarItem(
-          icon: _currentIndex == 3
-              ? Image.asset(
-                  "assets/icons/cart-g.png",
-                  width: 24,
-                  height: 24,
-                )
-              : Image.asset(
-                  "assets/icons/cart-b.png",
-                  width: 24,
-                  height: 24,
-                ),
+          icon: SvgPicture.asset(
+              _currentIndex == 3
+                  ? "assets/icons/cart-g.svg"
+                  : "assets/icons/cart-b.svg",
+              width: 24,
+              height: 24,
+            ),
           label: 'basket',
         ),
         BottomNavigationBarItem(
-          icon: _currentIndex == 4
-              ? Image.asset(
-                  "assets/icons/profile-g.png",
-                  width: 24,
-                  height: 24,
-                )
-              : Image.asset(
-                  "assets/icons/profile-b.png",
-                  width: 24,
-                  height: 24,
-                ),
+          tooltip: "profile",
+          icon: SvgPicture.asset(
+            _currentIndex == 4
+                ? "assets/icons/profile-g.svg"
+                : "assets/icons/profile-b.svg",
+            width: 24,
+            height: 24,
+          ),
           label: 'profile',
         ),
       ],
