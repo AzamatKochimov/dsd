@@ -1,3 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final currentPageIndexProvider = StateProvider<int>((ref) => 0);
+final currentTabBarPageIndexCrudProvider = StateProvider<int>((ref) => 0);
+
+

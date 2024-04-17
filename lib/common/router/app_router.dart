@@ -1,14 +1,13 @@
 import 'package:dsd/common/router/route_name.dart';
-import 'package:dsd/common/router/route_name.dart';
-import 'package:dsd/common/router/route_name.dart';
 import 'package:dsd/common/styles/colors.dart';
-import 'package:dsd/common/widgets/tab_bar.dart';
+import 'package:dsd/common/widgets/bottom_tab_bar.dart';
 import 'package:dsd/feature/crud/presentation/pages/add_item_home_page.dart';
 import 'package:dsd/feature/crud/presentation/pages/create_part/create_product_main_page.dart';
+import 'package:dsd/feature/crud/presentation/pages/create_part/choose_subcategory.dart';
 import 'package:flutter/material.dart';
 import '../../feature/crud/presentation/pages/active_products_page.dart';
+import '../../feature/crud/presentation/pages/create_part/choose_category_main_page.dart';
 import '../../feature/crud/presentation/pages/draft_products_page.dart';
-import '../styles/colors.dart';
 import 'package:dsd/feature/auth/presentation/pages/initial/initial_page.dart';
 import 'package:dsd/feature/auth/presentation/pages/log_in/log_in_page.dart';
 import 'package:dsd/feature/auth/presentation/pages/register/on_complete_page.dart';
@@ -20,60 +19,70 @@ import 'package:dsd/feature/profile/presentation/change_email.dart';
 import 'package:dsd/feature/profile/presentation/edit_profile.dart';
 import 'package:dsd/feature/profile/presentation/notifications.dart';
 import 'package:dsd/feature/profile/presentation/profile_settings.dart';
-import 'package:flutter/material.dart';
-// >>>>>>> e58c54169a0f60f47bcdeec9e5d62abea04c5d5c
 
 class AppRouter<T extends Object?> {
   const AppRouter();
+
   Route<T> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
       case AppRouteName.TAB_BAR:
-// <<<<<<< HEAD
-        return MaterialPageRoute(builder: (ctx) => const TabScreen());
-      case AppRouteName.ADDITEMHOMEPAGE:
-        return MaterialPageRoute(builder: (ctx) => const AddItemHomePage());
-      case AppRouteName.DRAFTPRODUCTSPAGE:
-        return MaterialPageRoute(builder: (ctx) => const DraftProductsPage());
-      case AppRouteName.ACTIVEPRODUCTSPAGE:
-        return MaterialPageRoute(builder: (ctx) => const ActiveProductsPage());
-      case AppRouteName.CREATEPRODUCTMAINPAGE:
-        return MaterialPageRoute(builder: (ctx) => const CreateProductMainPage());
-// =======
         return MaterialPageRoute(
-          builder: (ctx) => const TabScreen(),
-        );
+            builder: (ctx) => const TabScreen(), settings: settings);
+
+      // CRUD FOLDER PAGES
+      case AppRouteName.ADDITEMHOMEPAGE:
+        return MaterialPageRoute(
+            builder: (ctx) => const AddItemHomePage(), settings: settings);
+      case AppRouteName.DRAFTPRODUCTSPAGE:
+        return MaterialPageRoute(
+            builder: (ctx) => const DraftProductsPage(), settings: settings);
+      case AppRouteName.ACTIVEPRODUCTSPAGE:
+        return MaterialPageRoute(
+            builder: (ctx) => const ActiveProductsPage(), settings: settings);
+      case AppRouteName.CREATEPRODUCTMAINPAGE:
+        return MaterialPageRoute(
+            builder: (ctx) => const CreateProductMainPage(),
+            settings: settings);
+      case AppRouteName.CHOOSECATEGORYMAINPAGE:
+        return MaterialPageRoute(
+            builder: (ctx) => const ChooseCategoryMainPage(),
+            settings: settings);
+      case AppRouteName.CHOOSESUBCATEGORY:
+        return MaterialPageRoute(
+            builder: (ctx) => const ChooseSubcategory(), settings: settings);
       case AppRouteName.EDIT_PROFILE:
         return MaterialPageRoute(
-          builder: (ctx) => const EditProfile(),
-        );
+            builder: (ctx) => const EditProfile(), settings: settings);
       case AppRouteName.NOTIFICATIONS:
         return MaterialPageRoute(
-          builder: (ctx) => const Notifications(),
-        );
+            builder: (ctx) => const Notifications(), settings: settings);
       case AppRouteName.PROFILE_SETTINGS:
         return MaterialPageRoute(
-          builder: (ctx) => const ProfileSettings(),
-        );
+            builder: (ctx) => const ProfileSettings(), settings: settings);
       case AppRouteName.CHANGE_EMAIL:
         return MaterialPageRoute(
-          builder: (ctx) => const ChangeEmail(),
-        );
+            builder: (ctx) => const ChangeEmail(), settings: settings);
       case AppRouteName.PRODUCT_DETAILS_PAGE:
         return MaterialPageRoute(
-          builder: (ctx) => const ProductDetailsPage(),
-        );
+            builder: (ctx) => const ProductDetailsPage(), settings: settings);
       case AppRouteName.INITIAL_PAGE:
-        return MaterialPageRoute(builder: (ctx) => const InitialPage());
+        return MaterialPageRoute(
+            builder: (ctx) => const InitialPage(), settings: settings);
       case AppRouteName.LOGIN_PAGE:
-        return MaterialPageRoute(builder: (ctx) => const LoginPage());
+        return MaterialPageRoute(
+            builder: (ctx) => const LoginPage(), settings: settings);
       case AppRouteName.REGISTER_PAGE:
-        return MaterialPageRoute(builder: (ctx) => const RegisterPage());
+        return MaterialPageRoute(
+            builder: (ctx) => const RegisterPage(), settings: settings);
       case AppRouteName.SMS_VERIFICATION_PAGE:
-        return MaterialPageRoute(builder: (ctx) => const SMSVerificationPage());
+        return MaterialPageRoute(
+            builder: (ctx) => const SMSVerificationPage(), settings: settings);
       case AppRouteName.ON_COMPLETE_PAGE:
-        return MaterialPageRoute(builder: (ctx) => const OnCompletePage());
+        return MaterialPageRoute(
+            builder: (ctx) => const OnCompletePage(), settings: settings);
       case AppRouteName.HOME_PAGE:
-        return MaterialPageRoute(builder: (ctx) => const HomePage());
+        return MaterialPageRoute(
+            builder: (ctx) => const HomePage(), settings: settings);
       default:
         return _errorRoute();
     }
