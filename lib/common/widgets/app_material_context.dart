@@ -63,7 +63,11 @@ class _AppMaterialContextState extends State<AppMaterialContext> {
                 local.changeLocal(LangCodes.ru);
                 return const Locale('ru', 'RU');
               },
+<<<<<<< HEAD
               initialRoute: AppRouteName.REAL_ESTATE_PAGE,
+=======
+              initialRoute: '/',
+>>>>>>> f1f86e5ef7ea47db103952c3d5918eaa5fd2bd76
               onGenerateRoute: router.onGenerateRoute,
               builder: (context, child) => MediaQuery(
                 data: MediaQuery.of(context)

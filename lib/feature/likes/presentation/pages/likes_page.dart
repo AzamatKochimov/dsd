@@ -3,20 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class LikesPage extends StatefulWidget {
+class LikesPage extends StatelessWidget {
   const LikesPage({super.key});
 
-  @override
-  State<LikesPage> createState() => _LikesPageState();
-}
-
-class _LikesPageState extends State<LikesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.c202020,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
+        centerTitle: true,
         title: const Text(
           'Favorites',
           style: TextStyle(
@@ -25,7 +21,7 @@ class _LikesPageState extends State<LikesPage> {
               color: AppColors.white),
         ),
       ),
-      body: Container(
+      body: SizedBox(
         width: double.infinity,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

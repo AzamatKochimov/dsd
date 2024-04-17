@@ -11,7 +11,7 @@ class CustomAppNavBar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final currentIndex = ref.watch(currentPageIndexProvider);
+    final currentIndex = ref.watch(currentTabBarPageIndexCrudProvider);
     return SafeArea(
       child: Container(
         // height: 60,
@@ -54,7 +54,7 @@ class CustomAppNavBar extends ConsumerWidget {
                         ? AppColors.c57C5B6
                         : Colors.white,
                     onPressed: () {
-                      ref.read(currentPageIndexProvider.notifier).state = index;
+                      ref.read(currentTabBarPageIndexCrudProvider.notifier).state = index;
                     },
                     child: Text(
                       navBarLabels[index],

@@ -15,6 +15,7 @@ class _CartPageState extends State<CartPage> {
     return Scaffold(
       backgroundColor: AppColors.c202020,
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: Colors.transparent,
         title: const Text(
           'Basket',
@@ -24,7 +25,7 @@ class _CartPageState extends State<CartPage> {
               color: AppColors.white),
         ),
       ),
-      body: Container(
+      body: SizedBox(
         width: double.infinity,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

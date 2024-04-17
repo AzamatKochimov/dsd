@@ -31,7 +31,7 @@ class AddItemHomePage extends StatelessWidget {
             Expanded(
               child: Consumer(
                 builder: (cntx, ref, child) {
-                  final currentPageIndex = ref.watch(currentPageIndexProvider);
+                  final currentPageIndex = ref.watch(currentTabBarPageIndexCrudProvider);
                   return IndexedStack(
                     index: currentPageIndex,
                     children: pages,
