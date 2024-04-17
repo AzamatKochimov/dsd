@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-<<<<<<< HEAD
 final currentPageIndexProvider = StateProvider<int>((ref) => 0);
 
 var createref = ChangeNotifierProvider.autoDispose<CreateNotifier>(
@@ -41,8 +40,6 @@ class CreateNotifier extends ChangeNotifier {
 
     String region = 'English';
 }
-=======
 final currentTabBarPageIndexCrudProvider = StateProvider<int>((ref) => 0);
 
 
->>>>>>> f1f86e5ef7ea47db103952c3d5918eaa5fd2bd76
