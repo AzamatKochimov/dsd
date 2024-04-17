@@ -120,6 +120,7 @@ class _CategoriesWidgetState extends ConsumerState<CategoriesWidget> {
   Widget build(BuildContext context) {
     return GridView.builder(
       itemCount: 6,
+      physics: const NeverScrollableScrollPhysics(),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3, // number of items in each row
         mainAxisSpacing: 8.0, // spacing between rows

@@ -144,7 +144,7 @@ class CustomFloatingActionButton extends StatelessWidget {
       child: FloatingActionButton(
         backgroundColor: AppColors.c57C5B6,
         onPressed: () {
-          Navigator.pushNamed(context, AppRouteName.CREATEPRODUCTMAINPAGE);
+          Navigator.pushNamed(context, AppRouteName.CHILDREN_PRODUCT_PAGE);
         },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,

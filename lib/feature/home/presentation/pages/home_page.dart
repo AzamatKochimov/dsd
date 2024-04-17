@@ -22,7 +22,7 @@ class HomePageState extends ConsumerState<HomePage> {
           // ref.watch(homeref);
           return SingleChildScrollView(
             child: Container(
-              padding: const EdgeInsets.all(15),
+              padding: const EdgeInsets.only(top: 50, bottom: 15, right: 15, left: 15),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -83,10 +83,7 @@ class HomePageState extends ConsumerState<HomePage> {
                     "Find what?",
                     style: TextStyle(color: Colors.white),
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  SizedBox(height: 250.h, child: const CategoriesWidget()),
+                  SizedBox(height: 300.h, child: const CategoriesWidget()),
                   Image.asset(
                     'assets/images/sale.png',
                     height: 150,

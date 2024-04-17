@@ -1,4 +1,3 @@
-import 'package:dsd/common/styles/colors.dart';
 import 'package:dsd/common/widgets/navigation_bar.dart';
 import 'package:dsd/feature/cart/presentation/pages/cart_page.dart';
 import 'package:dsd/feature/home/presentation/pages/home_page.dart';
@@ -47,13 +46,3 @@ class _TabScreenState extends State<TabScreen> {
   }
 }
 
-class Add extends StatelessWidget {
-  const Add({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold(
-      backgroundColor: AppColors.c202020,
-    );
-  }
-}

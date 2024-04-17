@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 class CustomTextWidget extends StatelessWidget {
-  String text;
-  double? customFontSize;
-  FontWeight? customFontWeight;
+  final String text;
+  final double? customFontSize;
+  final FontWeight? customFontWeight;
 
   CustomTextWidget(
-      {super.key, required this.text, customFontSize, customFontWeight});
+      {super.key, required this.text, this.customFontSize, this.customFontWeight});
 
   @override
   Widget build(BuildContext context) {
