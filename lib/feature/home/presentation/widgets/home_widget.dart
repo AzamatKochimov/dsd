@@ -1,5 +1,5 @@
 import 'package:dsd/common/styles/colors.dart';
-import 'package:dsd/feature/home/view_model/data_model.dart';
+import 'package:dsd/feature/home/view_model/home_vm.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

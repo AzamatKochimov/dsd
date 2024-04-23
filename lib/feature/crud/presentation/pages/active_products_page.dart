@@ -129,6 +129,7 @@ class CustomProductCard extends StatelessWidget {
   }
 }
 
+
 // add new product
 class CustomFloatingActionButton extends StatelessWidget {
   const CustomFloatingActionButton({

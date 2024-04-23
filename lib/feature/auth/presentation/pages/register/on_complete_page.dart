@@ -1,63 +1,69 @@
-import 'package:dsd/common/styles/colors.dart';
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class OnCompletePage extends StatelessWidget {
-  const OnCompletePage({super.key});
+  const OnCompletePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    // Delayed navigation function
+    void navigateToNextPage() {
+      Navigator.pushReplacementNamed(context, '/');
+    }
+
+    // Schedule navigation after 3 seconds
+    Timer(Duration(seconds: 3), navigateToNextPage);
+
     return Scaffold(
-      backgroundColor: AppColors.backround,
+      backgroundColor: Colors.blue, // Change this to your desired background color
       body: Container(
-        padding:
-            EdgeInsets.only(top: 110.h, left: 24.w, right: 24.w, bottom: 40.h),
+        padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 110.h),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               "All Done",
               style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w700,
-                  color: Colors.white),
+                fontSize: 24.sp,
+                fontWeight: FontWeight.w700,
+                color: Colors.white,
+              ),
             ),
-            SizedBox(
-              height: 10,
-            ),
+            SizedBox(height: 10.h),
             Text(
               "Thanks for giving us your precious time. Now you are ready for an enjoyable moment.",
               style: TextStyle(color: Colors.white),
             ),
-            SizedBox(
-              height: 60,
-            ),
+            SizedBox(height: 60.h),
             Center(
               child: Image.asset(
                 "assets/images/alldone.png",
-                width: 233,
-                height: 233,
+                width: 233.w,
+                height: 233.h,
               ),
             ),
-            const Spacer(),
+            Spacer(),
             Center(
               child: Material(
                 borderRadius: BorderRadius.circular(15),
                 elevation: 5,
-                color: AppColors.greenishblue,
+                color: Colors.green, // Change this to your desired button color
                 child: InkWell(
                   borderRadius: BorderRadius.circular(15),
-                  onTap: () {},
+                  onTap: () {
+                    navigateToNextPage(); // Navigate immediately on button tap
+                  },
                   child: SizedBox(
-                    height: 55,
+                    height: 55.h,
                     width: 310.w,
-                    child: const Center(
+                    child: Center(
                       child: Text(
                         "Let's go!",
                         style: TextStyle(
-                          fontSize: 16,
+                          fontSize: 16.sp,
                           fontWeight: FontWeight.w700,
-                          color: AppColors.white,
+                          color: Colors.white,
                         ),
                       ),
                     ),

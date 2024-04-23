@@ -74,7 +74,7 @@ class ApiService {
     }
   }
 
-  static Future<String?> post(String api, Map<String, dynamic> data, [Map<String, dynamic> params = const <String, dynamic>{}]) async {
+  static Future<String?> post(String api, Map<String, dynamic> data, {required Map<String, dynamic> params}) async {
     try {
       final response = await (await initDio()).post<dynamic>(api, data: data, queryParameters: params);
       return jsonEncode(response.data);

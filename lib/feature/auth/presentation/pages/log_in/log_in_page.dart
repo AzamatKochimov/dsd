@@ -23,6 +23,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
         body: Consumer(
           builder: (context, ref, _) {
             ref.watch(loginref);
+            var reff = ref.watch(loginref);
             return Container(
               margin: const EdgeInsets.only(top: 90, left: 25, right: 25),
               child: Column(
@@ -245,7 +246,24 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       color: AppColors.greenishblue,
                       child: InkWell(
                         borderRadius: BorderRadius.circular(15),
-                        onTap: () {},
+                        onTap: () async {
+                          Map<String, dynamic> mapp = {
+                            'phoneNumber': phoneController.text,
+                            'password': passwordController.text
+                          };
+                          var result = await reff.login(mapp);
+                          if (result['success'] = true) {
+                            Navigator.pushReplacementNamed(context, '/');
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content:
+                                    Text('Login failed. Please try again.'),
+                                duration: Duration(seconds: 3),
+                              ),
+                            );
+                          }
+                        },
                         child: SizedBox(
                           height: 55,
                           width: 310.w,
