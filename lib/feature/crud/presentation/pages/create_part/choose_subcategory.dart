@@ -1,3 +1,4 @@
+import 'package:dsd/common/router/route_name.dart';
 import 'package:dsd/common/styles/colors.dart';
 import 'package:dsd/common/widgets/custom_text_widget.dart';
 import 'package:dsd/feature/crud/presentation/pages/create_part/extra_later_will_be_deleted/model.dart';
@@ -20,7 +21,7 @@ class ChooseSubcategory extends StatelessWidget {
           body: Column(
             children: [
               Card(
-                color: AppColors.white,
+                color: AppColors.c202020,
                 child: ListTile(
                   contentPadding: const EdgeInsets.all(8),
                   leading: Container(
@@ -30,7 +31,10 @@ class ChooseSubcategory extends StatelessWidget {
                     width: 61.w,
                     // height: 61.h,
                   ),
-                  title: customTextWidget(text: data.categoryName, color: AppColors.black, fontWeight: FontWeight.bold),
+                  title: customTextWidget(
+                      text: data.categoryName,
+                      // color: AppColors.black,
+                      fontWeight: FontWeight.bold),
                 ),
               ),
               Expanded(
@@ -38,6 +42,11 @@ class ChooseSubcategory extends StatelessWidget {
                 itemBuilder: (context, i) {
                   var currentItem = data.subCategories[i];
                   return ListTile(
+                    onTap: () {
+                      Navigator.pushNamed(
+                          context, AppRouteName.CHILDREN_PRODUCT_PAGE,
+                          arguments: data);
+                    },
                     title: customTextWidget(text: currentItem.subCategoryName),
                   );
                 },

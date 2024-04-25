@@ -20,7 +20,7 @@ class ChooseCategoryMainPage extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title : customTextWidget(text: "Category", fontSize: 20),
+        title: customTextWidget(text: "Category", fontSize: 20),
         leading: const CustomArrowBackButton(),
         elevation: 0,
         scrolledUnderElevation: 0,
@@ -29,7 +29,6 @@ class ChooseCategoryMainPage extends ConsumerWidget {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-
             spaceWidget(isHeight: true, size: 10),
             Expanded(
                 child: categoriesData.when(
@@ -42,7 +41,7 @@ class ChooseCategoryMainPage extends ConsumerWidget {
                             var currentItem = data[index];
                             return Card(
                               clipBehavior: Clip.hardEdge,
-                              color: Colors.white,
+                              color: AppColors.c202020,
                               child: ListTile(
                                 onTap: () {
                                   Navigator.pushNamed(
@@ -59,17 +58,17 @@ class ChooseCategoryMainPage extends ConsumerWidget {
                                 ),
                                 title: customTextWidget(
                                     text: currentItem.categoryName,
-                                    color: AppColors.black,
+                                    // color: AppColors.black,
                                     fontSize: 18,
                                     fontWeight: FontWeight.w700),
                                 subtitle: customTextWidget(
                                     text: currentItem.categoryAdsNumber,
-                                    color: AppColors.black,
+                                    // color: AppColors.black,
                                     fontSize: 16,
                                     fontWeight: FontWeight.w400),
                                 trailing: const Icon(
                                   Icons.navigate_next_outlined,
-                                  color: AppColors.black,
+                                  // color: AppColors.black,
                                   size: 30,
                                 ),
                               ),
