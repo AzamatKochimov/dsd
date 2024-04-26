@@ -9,6 +9,7 @@ class AppRouteName {
   static const String CREATEPRODUCTMAINPAGE = "Create_Product_Main_Page";
   static const String CHOOSECATEGORYMAINPAGE = "Choose_Category_Main_Page";
   static const String CHOOSESUBCATEGORY = "Choose_Subcategory";
+  static const String CREATE_PRODUCT_ONE = "Create_product_one";
 
   static const String PROFILE_SETTINGS = "profile-settings";
   static const String EDIT_PROFILE = "edit-profile";

@@ -16,6 +16,7 @@ class ActiveProductsPage extends StatelessWidget {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       body: CustomScrollView(
+        physics: const BouncingScrollPhysics(),
         slivers: [
           SliverToBoxAdapter(
               child: ClipRRect(
@@ -48,7 +49,8 @@ class CustomProductsCardGridView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverGrid(
-      delegate: SliverChildListDelegate(List.generate(10, (index) {
+      delegate: SliverChildListDelegate(
+          List.generate(10, (index) {
         return const CustomProductCard();
       })),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

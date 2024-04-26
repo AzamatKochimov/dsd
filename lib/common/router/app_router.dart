@@ -4,10 +4,11 @@ import 'package:dsd/common/widgets/bottom_tab_bar.dart';
 import 'package:dsd/feature/crud/presentation/pages/add_item_home_page.dart';
 import 'package:dsd/feature/crud/presentation/pages/create_part/categories/create_childs_product.dart';
 import 'package:dsd/feature/crud/presentation/pages/create_part/categories/create_real_estate.dart';
-import 'package:dsd/feature/crud/presentation/pages/create_part/choose_subcategory.dart';
+import 'package:dsd/feature/crud/presentation/pages/create_part/category_part/choose_subcategory.dart';
+import 'package:dsd/feature/crud/presentation/pages/create_part/products/create_product_1.dart';
 import 'package:flutter/material.dart';
 import '../../feature/crud/presentation/pages/active_products_page.dart';
-import '../../feature/crud/presentation/pages/create_part/choose_category_main_page.dart';
+import '../../feature/crud/presentation/pages/create_part/category_part/choose_category_main_page.dart';
 import '../../feature/crud/presentation/pages/draft_products_page.dart';
 import 'package:dsd/feature/auth/presentation/pages/initial/initial_page.dart';
 import 'package:dsd/feature/auth/presentation/pages/log_in/log_in_page.dart';
@@ -38,10 +39,10 @@ class AppRouter<T extends Object?> {
       case AppRouteName.ACTIVEPRODUCTSPAGE:
         return MaterialPageRoute(
             builder: (ctx) => const ActiveProductsPage(), settings: settings);
-      case AppRouteName.CHILDREN_PRODUCT_PAGE:
-        return MaterialPageRoute(
-            builder: (ctx) => const CreateChildrenProduct(),
-            settings: settings);
+      // case AppRouteName.CHILDREN_PRODUCT_PAGE:
+      //   return MaterialPageRoute(
+      //       builder: (ctx) => const CreateChildrenProduct(),
+      //       settings: settings);
       case AppRouteName.REAL_ESTATE_PAGE:
         return MaterialPageRoute(
             builder: (ctx) => const TabScreen(), settings: settings);
@@ -56,10 +57,10 @@ class AppRouter<T extends Object?> {
       case AppRouteName.ACTIVEPRODUCTSPAGE:
         return MaterialPageRoute(
             builder: (ctx) => const ActiveProductsPage(), settings: settings);
-      case AppRouteName.CREATEPRODUCTMAINPAGE:
-        return MaterialPageRoute(
-            builder: (ctx) => const CreateChildrenProduct(),
-            settings: settings);
+      // case AppRouteName.CREATEPRODUCTMAINPAGE:
+      //   return MaterialPageRoute(
+      //       builder: (ctx) => const CreateChildrenProduct(),
+      //       settings: settings);
       case AppRouteName.CHOOSECATEGORYMAINPAGE:
         return MaterialPageRoute(
             builder: (ctx) => const ChooseCategoryMainPage(),
@@ -67,6 +68,9 @@ class AppRouter<T extends Object?> {
       case AppRouteName.CHOOSESUBCATEGORY:
         return MaterialPageRoute(
             builder: (ctx) => const ChooseSubcategory(), settings: settings);
+      case AppRouteName.CREATE_PRODUCT_ONE:
+        return MaterialPageRoute(
+            builder: (ctx) => const CreateProductOnePage(), settings: settings);
       case AppRouteName.EDIT_PROFILE:
         return MaterialPageRoute(
             builder: (ctx) => const EditProfile(), settings: settings);

@@ -124,6 +124,7 @@ class NavigationBars extends ConsumerWidget {
     }
 
     return BottomNavigationBar(
+        backgroundColor: AppColors.black,
         currentIndex: currentPageIndex,
         onTap: (index) => ref.read(currentIndexProvider.notifier).state = index,
         selectedLabelStyle: const TextStyle(color: AppColors.white),
