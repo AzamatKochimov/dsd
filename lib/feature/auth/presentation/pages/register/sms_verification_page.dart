@@ -42,9 +42,14 @@ class _SMSVerificationPageState extends ConsumerState<SMSVerificationPage> {
       appBar: AppBar(
         backgroundColor: AppColors.backround,
         leading: GestureDetector(
-            child: const Icon(
-          Icons.arrow_back_ios,
-          color: Colors.white,
+            child: GestureDetector(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: const Icon(
+            Icons.arrow_back_ios,
+            color: Colors.white,
+          ),
         )),
       ),
       body: Consumer(
@@ -104,7 +109,8 @@ class _SMSVerificationPageState extends ConsumerState<SMSVerificationPage> {
                       log(reff.lastName!);
                       log(pin);
                       reff.register(mapp);
-                      Navigator.pushNamed(context, AppRouteName.ON_COMPLETE_PAGE);
+                      Navigator.pushNamed(
+                          context, AppRouteName.ON_COMPLETE_PAGE);
                     },
                     // onChanged: (value) {
                     //   pinCode.state = value;

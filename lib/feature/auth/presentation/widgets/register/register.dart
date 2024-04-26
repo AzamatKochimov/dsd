@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 
-List<Widget> customTextfield(TextEditingController controller, String title) {
+List<Widget> customTextfield(TextEditingController controller, String title, {Color color = Colors.white}) {
   return [
     Text(
       title,
-      style: const TextStyle(color: Colors.white),
+      style: TextStyle(color: color),
     ),
     Container(
       width: double.infinity,
       decoration: BoxDecoration(
+        border: Border.all(color: color),
           color: Colors.white.withOpacity(0.5),
           borderRadius: const BorderRadius.all(Radius.circular(5))),
       height: 50,

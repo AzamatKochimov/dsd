@@ -1,5 +1,9 @@
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:dsd/common/router/route_name.dart';
 import 'package:dsd/common/styles/colors.dart';
+import 'package:dsd/data/entities/user.dart';
 import 'package:dsd/feature/auth/view_model/auth_vm.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -16,9 +20,13 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+
+  bool isNumberValid = true;
+  bool isEmailValid = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: AppColors.backround,
         body: Consumer(
           builder: (context, ref, _) {
@@ -251,10 +259,32 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                             'phoneNumber': phoneController.text,
                             'password': passwordController.text
                           };
+
+                          log(mapp['phoneNumber']);
+                          log(mapp['password']);
+
                           var result = await reff.login(mapp);
-                          if (result['success'] = true) {
+                          try{
+                          if (result['status'] == true) {
+                            // Login successful
+                            // var data = result['data'];
+                            // reff.currentUser = User(phoneNumber: data['phoneNumber'], email: data['email'], firstName: data['firstName'], lastName: data['lastName'],);
+                            // log("heres the current user");
+                            // log(reff.currentUser!.email);
                             Navigator.pushReplacementNamed(context, '/');
+                            log("login successful");
                           } else {
+                            // Login failed
+                            log("login not successful");
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content:
+                                    Text('Login failed. Please try again.'),
+                                duration: Duration(seconds: 3),
+                              ),
+                            );
+                          }}
+                          catch (e){
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
                                 content:
