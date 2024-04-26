@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:device_preview/device_preview.dart';
 import 'package:dio/dio.dart';
 import 'package:dsd/common/server/api/api.dart';
@@ -51,7 +50,7 @@ class GetCategoriesService {
   //     //         CategoryModel.fromJson(examJson as Map<String, dynamic>))
   //     //     .toList();
   //     if(response.data != null && response.statusCode == 200 && response.data[response.data] != null) {
-  //       var responseData = response.data[response.data] as List;
+  //       var responseData = response.data['data'] as List;
   //       List<Categories> model =
   //       responseData.map((e) => Categories.fromJson(e)).toList();
   //       l.w("$responseData / $response");

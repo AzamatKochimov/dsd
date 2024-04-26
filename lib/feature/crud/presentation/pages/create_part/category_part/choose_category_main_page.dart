@@ -33,7 +33,7 @@ class ChooseCategoryMainPage extends ConsumerWidget {
             Expanded(
                 child: categoriesData.when(
                     data: (data) => ListView.separated(
-                      physics: const BouncingScrollPhysics(),
+                          physics: const BouncingScrollPhysics(),
                           separatorBuilder: (context, index) {
                             return spaceWidget(isHeight: true, size: 10);
                           },
