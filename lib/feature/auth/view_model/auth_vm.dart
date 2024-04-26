@@ -11,6 +11,8 @@ var loginref =
     ChangeNotifierProvider.autoDispose<LoginNotifier>((ref) => LoginNotifier());
 
 class LoginNotifier extends ChangeNotifier {
+  User? currentUser;
+
   bool isEmail = true;
   bool isObscure = true;
   bool isChecked = false;
@@ -126,40 +128,40 @@ class LoginNotifier extends ChangeNotifier {
   }
 
   Future<Map<String, dynamic>> login(Map<String, dynamic> map) async {
-    Map<String, dynamic> result;
     SharedPreferences prefs = await SharedPreferences.getInstance();
+
     try {
-      var response =
+      log("login func");
+      String? response =
           await ApiService.post("api/auth/login", map, params: {});
+      log(response!);
 
       Map<String, dynamic> responseObj = jsonDecode(response!);
 
-      if (responseObj['success'] = true) {
-        // User user = User.fromJson(json.decode(response.body));
+      if (responseObj.containsKey('success') &&
+          responseObj['success'] == true) {
+        // Login successful
         prefs.setString("token", responseObj['data']['accessToken']);
-        log("THIS IS NEW TOKEN!!!");
-        log(prefs.getString('token')!);
-        result = {
+        print("correct"); // Print "correct" to console
+        return {
           'status': true,
-          'message': 'Successfully registered.',
-          // 'data': user
+          'message': 'Successfully logged in.',
         };
       } else {
-        // String message = '${json.decode(response.body)['message']}.';
-        result = {
+        // Login failed
+        print("password or number is wrong"); // Print error message to console
+        return {
           'status': false,
-          'message': 'Register failed.',
-          // 'data': message
+          'message': 'Login failed. Please try again.',
         };
       }
-    } catch (error) {
-      log("Error: $error");
-      result = {
+    } catch (e) {
+      // Exception occurred during login request
+      print("Login request failed: $e");
+      return {
         'status': false,
-        'message': 'Unsuccessful request.',
-        'data': 'An error occurred during the request.'
+        'message': 'Login failed. Please try again.',
       };
     }
-    return result;
   }
 }
