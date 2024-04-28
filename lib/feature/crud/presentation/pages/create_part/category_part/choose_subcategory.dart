@@ -1,10 +1,13 @@
+import 'package:dsd/common/router/route_name.dart';
 import 'package:dsd/common/styles/colors.dart';
 import 'package:dsd/common/widgets/custom_text_widget.dart';
+import 'package:dsd/feature/crud/models/category_model.dart';
+import 'package:dsd/feature/crud/models/subcategory_model.dart';
 import 'package:dsd/feature/crud/presentation/pages/create_part/extra_later_will_be_deleted/model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../add_item_home_page.dart';
+import '../../add_item_home_page.dart';
 
 class ChooseSubcategory extends StatelessWidget {
   const ChooseSubcategory({super.key});
@@ -12,7 +15,7 @@ class ChooseSubcategory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var data = ModalRoute.of(context)?.settings.arguments;
-    if (data is CategoryModel) {
+    if (data is Categories) {
       return Scaffold(
           appBar: AppBar(
             leading: const CustomArrowBackButton(),
@@ -20,7 +23,7 @@ class ChooseSubcategory extends StatelessWidget {
           body: Column(
             children: [
               Card(
-                color: AppColors.white,
+                color: AppColors.c202020,
                 child: ListTile(
                   contentPadding: const EdgeInsets.all(8),
                   leading: Container(
@@ -30,21 +33,30 @@ class ChooseSubcategory extends StatelessWidget {
                     width: 61.w,
                     // height: 61.h,
                   ),
-                  title: customTextWidget(text: data.categoryName, color: AppColors.black, fontWeight: FontWeight.bold),
+                  title: customTextWidget(
+                      text: data.name,
+                      // color: AppColors.black,
+                      fontWeight: FontWeight.bold),
                 ),
               ),
               Expanded(
                   child: ListView.separated(
+                physics: const BouncingScrollPhysics(),
                 itemBuilder: (context, i) {
-                  var currentItem = data.subCategories[i];
+                  var currentItem = data.categoryDtoList[i];
                   return ListTile(
-                    title: customTextWidget(text: currentItem.subCategoryName),
+                    onTap: () {
+                      Navigator.pushNamed(
+                          context, AppRouteName.CREATE_PRODUCT_ONE,
+                          arguments: data);
+                    },
+                    title: customTextWidget(text: currentItem.name.toString()),
                   );
                 },
                 separatorBuilder: (cntx, i) {
                   return const Divider();
                 },
-                itemCount: data.subCategories.length,
+                itemCount: data.categoryDtoList.length,
               )),
             ],
           ));

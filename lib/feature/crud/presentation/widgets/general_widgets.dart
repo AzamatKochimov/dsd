@@ -170,7 +170,7 @@ class _CentralAsianDropdownState extends State<CentralAsianDropdown> {
     'Kyrgyzstan': ['Bishkek', 'Osh', 'Jalal-Abad', 'Issyk-Kul'],
     'Tajikistan': ['Dushanbe', 'Khujand', 'Kulob', 'Khorugh'],
     'Turkmenistan': ['Ashgabat', 'Turkmenabat', 'Dashoguz', 'Mary'],
-    'Uzbekistan': ['Tashkent', 'Samarkand', 'Bukhara', 'Andijan'],
+    'Uzbekistan': ['Tashkent', 'Samarkand', 'Bukhara', 'Andijan','Namangan', 'Fergana', 'Jizzakh', 'Navoi'],
   };
 
   late String selectedRepublic;

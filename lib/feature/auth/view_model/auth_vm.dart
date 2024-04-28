@@ -149,4 +149,12 @@ class LoginNotifier extends ChangeNotifier {
       };
     }
   }
+
+
+  Future<bool>isLoggedIn()async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString('token');
+    return token != null;
+  }
+
 }

@@ -1,18 +1,30 @@
+import 'package:dsd/common/styles/colors.dart';
 import 'package:flutter/material.dart';
+
+/* Custom Text Widget, shu widgetan foydalanib xoxlagan custom text yozsa boladi, parametrlani tog'ri chaqirilsa boldi */
 
 class CustomTextWidget extends StatelessWidget {
   final String text;
   final double? customFontSize;
   final FontWeight? customFontWeight;
+  final TextAlign? textAlign;
+  final Color? textColor;
 
-  CustomTextWidget(
-      {super.key, required this.text, this.customFontSize, this.customFontWeight});
+  const CustomTextWidget(
+      {super.key,
+      required this.text,
+      this.customFontSize,
+      this.customFontWeight,
+      this.textAlign,
+      this.textColor});
 
   @override
   Widget build(BuildContext context) {
     return Text(
+      textAlign: textAlign ?? TextAlign.center,
       text,
       style: TextStyle(
+        color: textColor ?? AppColors.white,
         fontSize: customFontSize ?? 18,
         fontWeight: customFontWeight ?? FontWeight.w500,
       ),
