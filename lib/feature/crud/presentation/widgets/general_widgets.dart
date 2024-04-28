@@ -85,7 +85,7 @@ class _StateWidgetState extends ConsumerState<StateWidget> {
                 borderRadius: BorderRadius.circular(5),
                 elevation: 5,
                 color: ref.read(createref).isNew
-                    ? AppColors.greenishblue
+                    ? AppColors.greenishBlue
                     : AppColors.white,
                 child: InkWell(
                   borderRadius: BorderRadius.circular(15),
@@ -126,7 +126,7 @@ class _StateWidgetState extends ConsumerState<StateWidget> {
                 elevation: 5,
                 color: ref.read(createref).isNew
                     ? AppColors.white
-                    : AppColors.greenishblue,
+                    : AppColors.greenishBlue,
                 child: InkWell(
                   borderRadius: BorderRadius.circular(15),
                   onTap: () {
@@ -337,12 +337,12 @@ class _ColorChangeButtonState extends State<ColorChangeButton> {
       width: double.infinity,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
-        color: _isActive ? AppColors.greenishblue : Colors.white,
+        color: _isActive ? AppColors.greenishBlue : Colors.white,
       ),
       child: Material(
         borderRadius: BorderRadius.circular(15),
         elevation: 5,
-        color: AppColors.greenishblue,
+        color: AppColors.greenishBlue,
         child: InkWell(
           borderRadius: BorderRadius.circular(15),
           onTap: () {

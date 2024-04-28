@@ -8,10 +8,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class LikesPage extends ConsumerWidget {
+  const LikesPage({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final likedProducts = ref.watch(likedProductsProvider);
-
     return Scaffold(
       backgroundColor: AppColors.c202020,
       appBar: AppBar(
@@ -131,7 +131,7 @@ class LikesPage extends ConsumerWidget {
                                                   "Very smart and big...",
                                             ),
                                           );
-                                    }else {
+                                    } else {
                                       // Remove the product from the liked products list
                                       ref
                                           .read(likedProductsProvider.notifier)

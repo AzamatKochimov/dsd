@@ -64,7 +64,7 @@ class _SMSVerificationPageState extends ConsumerState<SMSVerificationPage> {
   @override
   Widget build(BuildContext context) {
     const focusedBorderColor = Color.fromRGBO(255, 255, 255, 1);
-    const fillColor = AppColors.greenishblue;
+    const fillColor = AppColors.greenishBlue;
 
     final defaultPinTheme = PinTheme(
       width: 56,
@@ -74,17 +74,17 @@ class _SMSVerificationPageState extends ConsumerState<SMSVerificationPage> {
         color: Color.fromRGBO(255, 255, 255, 1),
       ),
       decoration: BoxDecoration(
-        color: AppColors.backround,
+        color: AppColors.background,
         borderRadius: BorderRadius.circular(19),
-        border: Border.all(color: AppColors.greenishblue, width: 2),
+        border: Border.all(color: AppColors.greenishBlue, width: 2),
       ),
     );
 
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      backgroundColor: AppColors.backround,
+      backgroundColor: AppColors.background,
       appBar: AppBar(
-        backgroundColor: AppColors.backround,
+        backgroundColor: AppColors.background,
         leading: GestureDetector(
             child: GestureDetector(
           onTap: () {

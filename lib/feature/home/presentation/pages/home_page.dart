@@ -16,12 +16,12 @@ class HomePageState extends ConsumerState<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backround,
+      backgroundColor: AppColors.background,
       body: Consumer(
         builder: (context, ref, child) {
           return SingleChildScrollView(
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
+              padding: const EdgeInsets.all(15),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -86,8 +86,10 @@ class HomePageState extends ConsumerState<HomePage> {
                     "Find what?",
                     style: TextStyle(color: Colors.white),
                   ),
-                  SizedBox(height: 260.h, child: const CategoriesWidget()),
-                  SizedBox(height: 10.h),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  SizedBox(height: 250.h, child: const CategoriesWidget()),
                   Image.asset(
                     'assets/images/sale.png',
                     height: 150,

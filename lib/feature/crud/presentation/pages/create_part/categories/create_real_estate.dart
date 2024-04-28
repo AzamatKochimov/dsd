@@ -23,9 +23,9 @@ class _CreateRealEstateState extends ConsumerState<CreateRealEstate> {
     TextEditingController emailController = TextEditingController();
     TextEditingController phoneController = TextEditingController();
     return Scaffold(
-      backgroundColor: AppColors.backround,
+      backgroundColor: AppColors.background,
       appBar: AppBar(
-        backgroundColor: AppColors.backround,
+        backgroundColor: AppColors.background,
         leading: GestureDetector(
           child: const Icon(Icons.arrow_back),
           onTap: () {
@@ -78,7 +78,7 @@ class _CreateRealEstateState extends ConsumerState<CreateRealEstate> {
                     width: double.infinity,
                     height: 140,
                     decoration: const BoxDecoration(
-                        color: AppColors.greenishblue,
+                        color: AppColors.greenishBlue,
                         borderRadius: BorderRadius.all(Radius.circular(15))),
                     child: Center(
                         child: Column(
