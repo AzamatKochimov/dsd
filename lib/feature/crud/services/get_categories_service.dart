@@ -5,7 +5,10 @@ import 'package:dsd/common/server/api/api.dart';
 import 'package:dsd/feature/crud/models/category_model.dart';
 import 'package:dsd/feature/crud/presentation/pages/create_part/extra_later_will_be_deleted/model.dart';
 import 'package:flutter/foundation.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:l/l.dart';
+
+import '../models/image_model.dart';
 
 // https://dominant-soft-development.up.railway.app/category/list
 
@@ -14,13 +17,16 @@ import 'package:l/l.dart';
 class GetCategoriesService {
   static BaseOptions _options = BaseOptions();
   static Dio _dio = Dio();
-  static const Duration connectionTimeout = Duration(seconds: 15);
-  static const Duration receiveTimeout = Duration(seconds: 15);
+  static const Duration connectionTimeout = Duration(seconds: 30);
+  static const Duration receiveTimeout = Duration(seconds: 30);
   static const String baseUrl =
       "https://dominant-soft-development.up.railway.app";
 
   // apies
   static const String apiGetAllCategoryList = "/category/list";
+  static const String apiUploadImageAttachment = "/attachment/upload";
+
+  // headers
   static const Map<String, String> headers = {
     "Content-Type": "application/json",
   };
@@ -88,6 +94,27 @@ class GetCategoriesService {
     } catch (e) {
       l.e('Failed to load data: $e');
       throw Exception('Failed to load data: $e');
+    }
+  }
+
+  static Future<String> uploadImage(String api, XFile imageFile) async {
+    FormData formData = FormData.fromMap({
+      'file': await MultipartFile.fromFile(imageFile.path,
+          filename: imageFile.name),
+    });
+
+    try {
+      // Perform a POST request to upload the image
+      Response response = await init().post(api, data: formData);
+      if (response.statusCode == 200) {
+        return "Image uploaded successfully";
+      } else {
+        return "Failed to upload image: ${response.statusCode}";
+      }
+    } on DioError catch (e) {
+      return "DioError: ${e.response?.data['message'] ?? e.message}";
+    } catch (e) {
+      return "Error: $e";
     }
   }
 }

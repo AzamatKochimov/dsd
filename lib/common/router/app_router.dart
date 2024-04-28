@@ -5,7 +5,7 @@ import 'package:dsd/feature/crud/presentation/pages/add_item_home_page.dart';
 import 'package:dsd/feature/crud/presentation/pages/create_part/categories/create_childs_product.dart';
 import 'package:dsd/feature/crud/presentation/pages/create_part/categories/create_real_estate.dart';
 import 'package:dsd/feature/crud/presentation/pages/create_part/category_part/choose_subcategory.dart';
-import 'package:dsd/feature/crud/presentation/pages/create_part/products/create_product_1.dart';
+import 'package:dsd/feature/crud/presentation/pages/create_part/products/pages/create_product_1.dart';
 import 'package:flutter/material.dart';
 import '../../feature/crud/presentation/pages/active_products_page.dart';
 import '../../feature/crud/presentation/pages/create_part/category_part/choose_category_main_page.dart';
