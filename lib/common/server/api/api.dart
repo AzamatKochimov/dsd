@@ -58,12 +58,12 @@ class ApiService {
     return headers;
   }
 
-  static Future<String?> get(String api, Map<String, dynamic> params) async {
+  static Future<String?> get(String api, Map<String, dynamic> data) async {
     try {
-      final response = await (await initDio()).get<dynamic>(api, queryParameters: params);
+      final response = await (await initDio()).get<dynamic>(api, data: data);
       return jsonEncode(response.data);
     } on TimeoutException catch (_) {
-      l.e('The connection has timed out, Please try again!');
+      l.e('The connection has timed out, Please try again!');   
       rethrow;
     } on DioException catch (e) {
       l.e(e.response.toString());

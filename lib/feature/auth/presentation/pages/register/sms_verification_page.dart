@@ -1,7 +1,10 @@
+import 'dart:async';
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:dsd/common/router/route_name.dart';
 import 'package:dsd/common/styles/colors.dart';
+import 'package:dsd/data/entities/user.dart';
 import 'package:dsd/feature/auth/view_model/auth_vm.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -17,6 +20,47 @@ class SMSVerificationPage extends ConsumerStatefulWidget {
 }
 
 class _SMSVerificationPageState extends ConsumerState<SMSVerificationPage> {
+  late Duration _countdownDuration;
+  late Timer _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    _startCountdown();
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
+  }
+
+  void _startCountdown() {
+    // Set the countdown duration to 3 minutes
+    _countdownDuration = const Duration(minutes: 3);
+    // Start the countdown timer
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      setState(() {
+        _countdownDuration -= const Duration(seconds: 1);
+        if (_countdownDuration <= Duration.zero) {
+          // Handle timeout by navigating back to the previous page
+          Navigator.pop(context);
+          _timer.cancel();
+        }
+      });
+    });
+  }
+
+  String _formatDuration(Duration duration) {
+    String twoDigits(int n) {
+      if (n >= 10) return "$n";
+      return "0$n";
+    }
+
+    String twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60));
+    String twoDigitSeconds = twoDigits(duration.inSeconds.remainder(60));
+    return "${twoDigits(duration.inHours)}:$twoDigitMinutes:$twoDigitSeconds";
+  }
   @override
   Widget build(BuildContext context) {
     const focusedBorderColor = Color.fromRGBO(255, 255, 255, 1);
@@ -74,9 +118,9 @@ class _SMSVerificationPageState extends ConsumerState<SMSVerificationPage> {
                   const SizedBox(
                     height: 10,
                   ),
-                  const Text(
-                    "An SMS with a confirmation code will be sent to the number +99890 990 01 10 within 57 seconds",
-                    style: TextStyle(color: Colors.grey),
+                  Text(
+                    "An SMS with a confirmation code will be sent to the number ${reff.phoneNumber} within ${_formatDuration(_countdownDuration)}",
+                    style: const TextStyle(color: Colors.grey),
                   ),
                   const SizedBox(
                     height: 60,
@@ -92,7 +136,7 @@ class _SMSVerificationPageState extends ConsumerState<SMSVerificationPage> {
                     separatorBuilder: (index) => const SizedBox(width: 20),
                     validator: (value) {},
                     hapticFeedbackType: HapticFeedbackType.lightImpact,
-                    onCompleted: (pin) {
+                    onCompleted: (pin) async {
                       log('onCompleted: $pin');
                       Map<String, dynamic> mapp = {
                         "phoneNumber": reff.phoneNumber,
@@ -102,15 +146,33 @@ class _SMSVerificationPageState extends ConsumerState<SMSVerificationPage> {
                         "lastName": reff.lastName,
                         "code": int.parse(pin),
                       };
-                      log(reff.phoneNumber!);
-                      log(reff.email!);
-                      log(reff.password!);
-                      log(reff.firstName!);
-                      log(reff.lastName!);
-                      log(pin);
-                      reff.register(mapp);
-                      Navigator.pushNamed(
-                          context, AppRouteName.ON_COMPLETE_PAGE);
+
+                      log(jsonEncode(mapp));
+                      // reff.register(mapp);
+                      var result = await reff.register(mapp);
+                          log("result:");
+                          log(jsonEncode(result));
+                          if (result['status'] == true) {
+                            // Login successful
+                            var data = result['userDto'];
+                            reff.currentUser = User(phoneNumber: data['phoneNumber'], email: data['email'], firstName: data['firstName'], lastName: data['lastName'], id: data['id'], photo_url: data['attachment']);
+                            log("heres the current user ${reff.currentUser.toString()}");
+                            print(reff.currentUser.toString());
+                            // print(result);
+                            // print(result['userDto']);
+                            Navigator.pushNamed(context, AppRouteName.ON_COMPLETE_PAGE);
+                            log("register successful");
+                          } else {
+                            // Login failed
+                            log("Register not successful");
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content:
+                                    Text('Register failed. Please try again.'),
+                                duration: Duration(seconds: 3),
+                              ),
+                            );
+                          }
                     },
                     // onChanged: (value) {
                     //   pinCode.state = value;
@@ -149,17 +211,6 @@ class _SMSVerificationPageState extends ConsumerState<SMSVerificationPage> {
                   ),
                   const SizedBox(
                     height: 30,
-                  ),
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Send again after",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      Text(" (time left)",
-                          style: TextStyle(color: Colors.white))
-                    ],
                   ),
                 ],
               ),

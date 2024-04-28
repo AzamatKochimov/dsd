@@ -262,29 +262,22 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
                           log(mapp['phoneNumber']);
                           log(mapp['password']);
-
                           var result = await reff.login(mapp);
-                          try{
+                          log("result:");
+                          log(jsonEncode(result));
                           if (result['status'] == true) {
                             // Login successful
-                            // var data = result['data'];
-                            // reff.currentUser = User(phoneNumber: data['phoneNumber'], email: data['email'], firstName: data['firstName'], lastName: data['lastName'],);
-                            // log("heres the current user");
-                            // log(reff.currentUser!.email);
+                            var data = result['userDto'];
+                            reff.currentUser = User(phoneNumber: data['phoneNumber'], email: data['email'], firstName: data['firstName'], lastName: data['lastName'], id: data['id'], photo_url: data['attachment']);
+                            log("heres the current user");
+                            print(reff.currentUser.toString());
+                            // print(result);
+                            // print(result['userDto']);
                             Navigator.pushReplacementNamed(context, '/');
                             log("login successful");
                           } else {
                             // Login failed
                             log("login not successful");
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content:
-                                    Text('Login failed. Please try again.'),
-                                duration: Duration(seconds: 3),
-                              ),
-                            );
-                          }}
-                          catch (e){
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
                                 content:
