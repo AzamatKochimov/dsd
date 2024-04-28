@@ -16,6 +16,7 @@ class LikesPage extends ConsumerWidget {
       backgroundColor: AppColors.c202020,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
+        centerTitle: true,
         title: const Text(
           'Favorites',
           style: TextStyle(

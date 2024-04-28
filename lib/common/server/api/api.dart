@@ -58,12 +58,12 @@ class ApiService {
     return headers;
   }
 
-  static Future<String?> get(String api, Map<String, dynamic> params) async {
+  static Future<String?> get(String api, Map<String, dynamic> data) async {
     try {
-      final response = await (await initDio()).get<dynamic>(api, queryParameters: params);
+      final response = await (await initDio()).get<dynamic>(api, data: data);
       return jsonEncode(response.data);
     } on TimeoutException catch (_) {
-      l.e('The connection has timed out, Please try again!');
+      l.e('The connection has timed out, Please try again!');   
       rethrow;
     } on DioException catch (e) {
       l.e(e.response.toString());
@@ -74,20 +74,20 @@ class ApiService {
     }
   }
 
-  static Future<String?> post(String api, Map<String, dynamic> data, [Map<String, dynamic> params = const <String, dynamic>{}]) async {
-    try {
-      final response = await (await initDio()).post<dynamic>(api, data: data, queryParameters: params);
-      return jsonEncode(response.data);
-    } on TimeoutException catch (_) {
-      l.e('The connection has timed out, Please try again!');
-      rethrow;
-    } on DioException catch (e) {
-      l.e(e.response.toString());
-      rethrow;
-    } on Object catch (_) {
-      rethrow;
+    static Future<String?> post(String api, Map<String, dynamic> data, {required Map<String, dynamic> params}) async {
+      try {
+        final response = await (await initDio()).post<dynamic>(api, data: data, queryParameters: params);
+        return jsonEncode(response.data);
+      } on TimeoutException catch (_) {
+        l.e('The connection has timed out, Please try again!');
+        rethrow;
+      } on DioException catch (e) {
+        l.e(e.response.toString());
+        rethrow;
+      } on Object catch (_) {
+        rethrow;
+      }
     }
-  }
 
   static Future<String?> multipart(
     String api,

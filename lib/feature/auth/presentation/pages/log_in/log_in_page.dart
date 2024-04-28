@@ -1,5 +1,9 @@
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:dsd/common/router/route_name.dart';
 import 'package:dsd/common/styles/colors.dart';
+import 'package:dsd/data/entities/user.dart';
 import 'package:dsd/feature/auth/view_model/auth_vm.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -16,13 +20,18 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+
+  bool isNumberValid = true;
+  bool isEmailValid = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: AppColors.backround,
         body: Consumer(
           builder: (context, ref, _) {
             ref.watch(loginref);
+            var reff = ref.watch(loginref);
             return Container(
               margin: const EdgeInsets.only(top: 90, left: 25, right: 25),
               child: Column(
@@ -245,7 +254,39 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       color: AppColors.greenishblue,
                       child: InkWell(
                         borderRadius: BorderRadius.circular(15),
-                        onTap: () {},
+                        onTap: () async {
+                          Map<String, dynamic> mapp = {
+                            'phoneNumber': phoneController.text,
+                            'password': passwordController.text
+                          };
+
+                          log(mapp['phoneNumber']);
+                          log(mapp['password']);
+                          var result = await reff.login(mapp);
+                          log("result:");
+                          log(jsonEncode(result));
+                          if (result['status'] == true) {
+                            // Login successful
+                            var data = result['userDto'];
+                            reff.currentUser = User(phoneNumber: data['phoneNumber'], email: data['email'], firstName: data['firstName'], lastName: data['lastName'], id: data['id']);
+                            log("heres the current user");
+                            print(reff.currentUser.toString());
+                            // print(result);
+                            // print(result['userDto']);
+                            Navigator.pushReplacementNamed(context, '/');
+                            log("login successful");
+                          } else {
+                            // Login failed
+                            log("login not successful");
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content:
+                                    Text('Login failed. Please try again.'),
+                                duration: Duration(seconds: 3),
+                              ),
+                            );
+                          }
+                        },
                         child: SizedBox(
                           height: 55,
                           width: 310.w,

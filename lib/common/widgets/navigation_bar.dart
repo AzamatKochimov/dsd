@@ -1,3 +1,5 @@
+/*
+
 import 'package:dsd/common/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -32,6 +34,7 @@ class _NavigationBarsState extends State<NavigationBars> {
       onTap: onTabTapped,
       items: [
         BottomNavigationBarItem(
+          backgroundColor: Colors.white,
           icon: SvgPicture.asset(
             _currentIndex == 0
                 ? "assets/icons/home-g.svg"
@@ -84,5 +87,60 @@ class _NavigationBarsState extends State<NavigationBars> {
         ),
       ],
     );
+  }
+}
+
+*/
+
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
+import '../styles/colors.dart';
+
+// state for page index
+final currentIndexProvider = StateProvider<int>((ref) => 0);
+
+class NavigationBars extends ConsumerWidget {
+  const NavigationBars({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final currentPageIndex = ref.watch(currentIndexProvider);
+
+    BottomNavigationBarItem buildItem(
+        String activeIcon, String inactiveIcon, String label) {
+      return BottomNavigationBarItem(
+        backgroundColor: AppColors.black,
+        icon: SvgPicture.asset(
+          currentPageIndex == label.hashCode ? activeIcon : inactiveIcon,
+          width: 24,
+          height: 24,
+          color: AppColors.white,
+        ),
+        label: label,
+      );
+    }
+
+    return BottomNavigationBar(
+        backgroundColor: AppColors.black,
+        currentIndex: currentPageIndex,
+        onTap: (index) => ref.read(currentIndexProvider.notifier).state = index,
+        selectedLabelStyle: const TextStyle(color: AppColors.white),
+        selectedItemColor: AppColors.white,
+        showSelectedLabels: true,
+        showUnselectedLabels: false,
+        items: [
+          buildItem(
+              "assets/icons/home-g.svg", "assets/icons/home-b.svg", 'Home'),
+          buildItem(
+              "assets/icons/like-g.svg", "assets/icons/like-b.svg", 'Likes'),
+          buildItem("assets/icons/add-g.svg", "assets/icons/add-b.svg", 'Add'),
+          buildItem(
+              "assets/icons/cart-g.svg", "assets/icons/cart-b.svg", 'Basket'),
+          buildItem("assets/icons/profile-g.svg", "assets/icons/profile-b.svg",
+              'Profile'),
+        ]);
   }
 }

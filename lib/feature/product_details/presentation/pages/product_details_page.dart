@@ -1,12 +1,18 @@
 import 'package:dsd/common/styles/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class ProductDetailsPage extends StatelessWidget {
+class ProductDetailsPage extends ConsumerStatefulWidget {
   const ProductDetailsPage({super.key});
 
+  @override
+  ConsumerState<ProductDetailsPage> createState() => _ProductDetailsPageState();
+}
+
+class _ProductDetailsPageState extends ConsumerState<ProductDetailsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

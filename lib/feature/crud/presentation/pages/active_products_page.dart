@@ -16,6 +16,7 @@ class ActiveProductsPage extends StatelessWidget {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       body: CustomScrollView(
+        physics: const BouncingScrollPhysics(),
         slivers: [
           SliverToBoxAdapter(
               child: ClipRRect(
@@ -48,7 +49,8 @@ class CustomProductsCardGridView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverGrid(
-      delegate: SliverChildListDelegate(List.generate(10, (index) {
+      delegate: SliverChildListDelegate(
+          List.generate(10, (index) {
         return const CustomProductCard();
       })),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -129,6 +131,7 @@ class CustomProductCard extends StatelessWidget {
   }
 }
 
+
 // add new product
 class CustomFloatingActionButton extends StatelessWidget {
   const CustomFloatingActionButton({
@@ -144,7 +147,8 @@ class CustomFloatingActionButton extends StatelessWidget {
       child: FloatingActionButton(
         backgroundColor: AppColors.c57C5B6,
         onPressed: () {
-          Navigator.pushNamed(context, AppRouteName.CREATEPRODUCTMAINPAGE);
+          // Navigator.pushNamed(context, AppRouteName.CHILDREN_PRODUCT_PAGE);
+          Navigator.pushNamed(context, AppRouteName.CHOOSECATEGORYMAINPAGE);
         },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
