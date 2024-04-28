@@ -19,13 +19,14 @@ class HomePageState extends ConsumerState<HomePage> {
       backgroundColor: AppColors.backround,
       body: Consumer(
         builder: (context, ref, child) {
-          // ref.watch(homeref);
           return SingleChildScrollView(
             child: Container(
-              padding: const EdgeInsets.all(15),
+              padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  SizedBox(height: 45.h),
+
                   /// search bar and notifications
                   Row(
                     children: [
@@ -62,9 +63,9 @@ class HomePageState extends ConsumerState<HomePage> {
                       ),
                     ],
                   ),
-                  const SizedBox(
-                    height: 15,
-                  ),
+                  SizedBox(height: 15.h),
+
+                  /// Choose region part
                   const Row(
                     children: [
                       Spacer(),
@@ -79,22 +80,21 @@ class HomePageState extends ConsumerState<HomePage> {
                       )
                     ],
                   ),
+
+                  /// Categories
                   const Text(
                     "Find what?",
                     style: TextStyle(color: Colors.white),
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  SizedBox(height: 250.h, child: const CategoriesWidget()),
+                  SizedBox(height: 260.h, child: const CategoriesWidget()),
+                  SizedBox(height: 10.h),
                   Image.asset(
                     'assets/images/sale.png',
                     height: 150,
                     width: double.infinity,
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
+
+                  /// products
                   const ProductGenerator(),
                 ],
               ),
