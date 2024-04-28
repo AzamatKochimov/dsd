@@ -84,42 +84,37 @@ class LoginNotifier extends ChangeNotifier {
   //   return response;
   // }
 
+  
+
   Future<Map<String, dynamic>> register(Map<String, dynamic> map) async {
-    Map<String, dynamic> result;
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    try {
-      var response =
+      log("register check:");
+    
+      String? response =
           await ApiService.post("api/auth/register", map, params: {});
 
+      log("register check:");
+      print(response);
       Map<String, dynamic> responseObj = jsonDecode(response!);
 
-      if (responseObj['success'] = true) {
-        // User user = User.fromJson(json.decode(response.body));
-        prefs.setString("token", responseObj['data']['accessToken']);
-        log("THIS IS TOKEN!!!!");
-        log(prefs.getString('token')!);
-        result = {
-          'status': true,
-          'message': 'Successfully registered.',
-          // 'data': user
-        };
-      } else {
-        // String message = '${json.decode(response.body)['message']}.';
-        result = {
-          'status': false,
-          'message': 'Register failed.',
-          // 'data': message
-        };
-      }
-    } catch (error) {
-      log("Error: $error");
-      result = {
+      if (responseObj.containsKey('success') && responseObj['success'] == true) {
+      // Login successful
+      prefs.setString("token", responseObj['data']['accessToken']);
+      print("correct"); // Print "correct" to console
+      return {
+        'status': true,
+        'message': 'Successfully registered.',
+        'userDto': responseObj['data']['userDTO']
+      };
+    } else {
+      // Login failed
+      print("password or number is wrong"); // Print error message to console
+      return {
         'status': false,
-        'message': 'Unsuccessful request.',
-        'data': 'An error occurred during the request.'
+        'message': 'Register failed. Please try again.',
       };
     }
-    return result;
+    
   }
 
   Future<void> logOut() async {
@@ -130,34 +125,24 @@ class LoginNotifier extends ChangeNotifier {
   Future<Map<String, dynamic>> login(Map<String, dynamic> map) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    try {
-      log("login func");
-      String? response =
-          await ApiService.post("api/auth/login", map, params: {});
-      log(response!);
+    log("login func");
+    String? response = await ApiService.post("api/auth/login", map, params: {});
+    print(response!);
 
-      Map<String, dynamic> responseObj = jsonDecode(response!);
+    Map<String, dynamic> responseObj = jsonDecode(response);
 
-      if (responseObj.containsKey('success') &&
-          responseObj['success'] == true) {
-        // Login successful
-        prefs.setString("token", responseObj['data']['accessToken']);
-        print("correct"); // Print "correct" to console
-        return {
-          'status': true,
-          'message': 'Successfully logged in.',
-        };
-      } else {
-        // Login failed
-        print("password or number is wrong"); // Print error message to console
-        return {
-          'status': false,
-          'message': 'Login failed. Please try again.',
-        };
-      }
-    } catch (e) {
-      // Exception occurred during login request
-      print("Login request failed: $e");
+    if (responseObj.containsKey('success') && responseObj['success'] == true) {
+      // Login successful
+      prefs.setString("token", responseObj['data']['accessToken']);
+      print("correct"); // Print "correct" to console
+      return {
+        'status': true,
+        'message': 'Successfully logged in.',
+        'userDto': responseObj['data']['userDTO']
+      };
+    } else {
+      // Login failed
+      print("password or number is wrong"); // Print error message to console
       return {
         'status': false,
         'message': 'Login failed. Please try again.',

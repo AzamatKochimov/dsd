@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:dsd/common/router/route_name.dart';
+import 'package:dsd/common/server/api/api.dart';
 import 'package:dsd/common/styles/colors.dart';
 import 'package:dsd/feature/auth/presentation/widgets/register/register.dart';
 import 'package:dsd/feature/auth/view_model/auth_vm.dart';
@@ -21,12 +24,14 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
   TextEditingController passwordController = TextEditingController();
 
   bool isNumberValid = true;
+  bool doesNumberExists = false;
   bool isEmailValid = true;
+  bool doesEmailExists = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+        resizeToAvoidBottomInset: false,
         backgroundColor: AppColors.backround,
         appBar: AppBar(
           centerTitle: true,
@@ -48,23 +53,35 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ...customTextfield(firstnameController, "First name"),
+                  ...customTextfield(firstnameController, "First name", inputType: TextInputType.name),
                   const SizedBox(
                     height: 10,
                   ),
-                  ...customTextfield(lastnameController, "Last name"),
+                  ...customTextfield(lastnameController, "Last name", inputType: TextInputType.name),
                   const SizedBox(
                     height: 10,
                   ),
-                  ...customTextfield(phoneController, "Phone number", color: isNumberValid ? Colors.white : Colors.red),
+                  ...customTextfield(
+                    inputType: TextInputType.phone,
+                      phoneController,
+                      doesNumberExists
+                          ? "Phone number is already registered"
+                          : "Phone number",
+                      color: isNumberValid && !doesNumberExists ? Colors.white : Colors.red),
                   const SizedBox(
                     height: 10,
                   ),
-                  ...customTextfield(emailController, "Email address", color: isEmailValid ? Colors.white : Colors.red),
+                  ...customTextfield(
+                    inputType: TextInputType.emailAddress,
+                      emailController,
+                      doesEmailExists
+                          ? "Email is already registered"
+                          : "Email Address",
+                      color: isEmailValid && !doesEmailExists ? Colors.white : Colors.red),
                   const SizedBox(
                     height: 10,
                   ),
-                  ...customTextfield(passwordController, "Password"),
+                  ...customTextfield(passwordController, "Password", inputType: TextInputType.text),
                   const SizedBox(
                     height: 10,
                   ),
@@ -84,8 +101,13 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                         color: AppColors.greenishblue,
                         child: InkWell(
                           borderRadius: BorderRadius.circular(15),
-                          onTap: () {
-                            if (validatePhoneNumber(phoneController.text) && validateEmail(emailController.text)) {
+                          onTap: () async {
+                            bool aa = await a(phoneController.text);
+                            bool bb = await b(emailController.text);
+                            if (validatePhoneNumber(phoneController.text) &&
+                                validateEmail(emailController.text) &&
+                                !aa &&
+                                !bb) {
                               reff.getSms(emailController.text);
                               reff.phoneNumber = phoneController.text;
                               reff.email = emailController.text;
@@ -94,14 +116,16 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                               reff.lastName = lastnameController.text;
                               isEmailValid = true;
                               isNumberValid = true;
-                              setState(() {
-                                
-                              });
+                              setState(() {});
                               Navigator.pushNamed(
                                   context, AppRouteName.SMS_VERIFICATION_PAGE);
-                            } else{
-                              isNumberValid = validatePhoneNumber(phoneController.text);
-                              isEmailValid = validateEmail(emailController.text);
+                            } else {
+                              isNumberValid =
+                                  validatePhoneNumber(phoneController.text);
+                              doesNumberExists = aa;
+                              isEmailValid =
+                                  validateEmail(emailController.text);
+                              doesEmailExists = bb;
                               setState(() {});
                             }
                           },
@@ -124,93 +148,8 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                     ),
                   ),
                   const SizedBox(
-                    height: 10,
+                    height: 50,
                   ),
-                  Center(child: Image.asset('assets/images/or.png')),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Center(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        border: Border.all(
-                          color: Colors.white,
-                          width: 2,
-                        ),
-                      ),
-                      child: Material(
-                        borderRadius: BorderRadius.circular(15),
-                        elevation: 5,
-                        color: const Color.fromARGB(120, 255, 255, 255),
-                        child: InkWell(
-                          borderRadius: BorderRadius.circular(15),
-                          onTap: () {},
-                          child: SizedBox(
-                            height: 55,
-                            width: 310,
-                            child: Center(
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Image.asset('assets/images/google.png'),
-                                  const SizedBox(width: 20),
-                                  const Text(
-                                    "Register with Google",
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w700,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  // Center(
-                  //   child: Container(
-                  //     decoration: BoxDecoration(
-                  //       borderRadius: BorderRadius.circular(15),
-                  //       border: Border.all(
-                  //         color: Colors.white,
-                  //         width: 2,
-                  //       ),
-                  //     ),
-                  //     child: Material(
-                  //       borderRadius: BorderRadius.circular(15),
-                  //       elevation: 5,
-                  //       color: const Color.fromARGB(120, 255, 255, 255),
-                  //       child: InkWell(
-                  //         borderRadius: BorderRadius.circular(15),
-                  //         onTap: () {
-                  //           Navigator.pushNamed(
-                  //               context, AppRouteName.REGISTER_PAGE);
-                  //         },
-                  //         child: con st SizedBox(
-                  //           height: 55,
-                  //           width: 310,
-                  //           child: Center(
-                  //             child: Text(
-                  //               "Create an account",
-                  //               style: TextStyle(
-                  //                 fontSize: 16,
-                  //                 fontWeight: FontWeight.w700,
-                  //                 color: Colors.white,
-                  //               ),
-                  //             ),
-                  //           ),
-                  //         ),
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
                 ],
               ),
             );
@@ -219,11 +158,40 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
   }
 }
 
+Future<bool> a(String phone) async {
+  log("working");
+  log(phone);
+  String? responsePhone = await ApiService.get(
+    "api/auth/exist-phone",
+    {"phone": "$phone"},
+  );
+  log(responsePhone!);
+
+  if (responsePhone == "true") {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+Future<bool> b(String email) async {
+  log(email);
+  log("working");
+  String? responseEmail =
+      await ApiService.get("api/auth/exist-email", {"email": email});
+  log(responseEmail!);
+
+  if (responseEmail == "true") {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 bool validatePhoneNumber(String phoneNumber) {
-  // Remove any non-numeric characters from the phone number
+  bool result = false;
   String cleanedNumber = phoneNumber.replaceAll(RegExp(r'[^\d]'), '');
 
-  // Define regular expressions for valid phone number patterns
   Map<String, String> countryPatterns = {
     'UZ': r'^(998)?[35789]\d{8}$', // Uzbekistan (+998)
     'KZ': r'^(7)?[7-8]\d{9}$', // Kazakhstan (+7)
@@ -232,27 +200,21 @@ bool validatePhoneNumber(String phoneNumber) {
     'RU': r'^(7)?[3489]\d{9}$', // Russia (+7)
   };
 
-  // Check against each country's pattern
   for (String countryCode in countryPatterns.keys) {
     String pattern = countryPatterns[countryCode]!;
     RegExp regExp = RegExp(pattern);
     if (regExp.hasMatch(cleanedNumber)) {
-      // Valid phone number for the specified country
       print('Valid $countryCode phone number: $phoneNumber');
       return true;
     }
   }
 
-  // If no patterns match, consider it invalid
   print('Invalid phone number: $phoneNumber');
   return false;
 }
 
 bool validateEmail(String email) {
-  // Regular expression pattern for validating email addresses
-  // This pattern allows for basic email validation but may not cover all edge cases
   RegExp emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
 
-  // Check if the email matches the regex pattern
   return emailRegex.hasMatch(email);
 }
