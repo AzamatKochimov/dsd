@@ -268,7 +268,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                           if (result['status'] == true) {
                             // Login successful
                             var data = result['userDto'];
-                            reff.currentUser = User(phoneNumber: data['phoneNumber'], email: data['email'], firstName: data['firstName'], lastName: data['lastName'], id: data['id'], photo_url: data['attachment']);
+                            reff.currentUser = User(phoneNumber: data['phoneNumber'], email: data['email'], firstName: data['firstName'], lastName: data['lastName'], id: data['id']);
                             log("heres the current user");
                             print(reff.currentUser.toString());
                             // print(result);

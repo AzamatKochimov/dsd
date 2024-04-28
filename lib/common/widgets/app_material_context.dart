@@ -1,3 +1,4 @@
+import 'package:dsd/common/router/route_name.dart';
 import 'package:dsd/common/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -62,7 +63,7 @@ class _AppMaterialContextState extends State<AppMaterialContext> {
                 local.changeLocal(LangCodes.ru);
                 return const Locale('ru', 'RU');
               },
-              initialRoute: '/',
+              initialRoute: AppRouteName.LOGIN_PAGE,
               // initialRoute: AppRouteName.REGISTER_PAGE,
               onGenerateRoute: router.onGenerateRoute,
               builder: (context, child) => MediaQuery(
