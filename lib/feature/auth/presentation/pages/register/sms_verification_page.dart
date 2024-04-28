@@ -134,7 +134,7 @@ class _SMSVerificationPageState extends ConsumerState<SMSVerificationPage> {
                         AndroidSmsAutofillMethod.smsUserConsentApi,
                     listenForMultipleSmsOnAndroid: true,
                     separatorBuilder: (index) => const SizedBox(width: 20),
-                    validator: (value) {},
+                    // validator: (value) {},
                     hapticFeedbackType: HapticFeedbackType.lightImpact,
                     onCompleted: (pin) async {
                       log('onCompleted: $pin');
