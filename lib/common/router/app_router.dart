@@ -1,6 +1,4 @@
 import 'package:dsd/common/router/route_name.dart';
-import 'package:dsd/common/router/route_name.dart';
-import 'package:dsd/common/router/route_name.dart';
 import 'package:dsd/common/styles/colors.dart';
 import 'package:dsd/common/widgets/tab_bar.dart';
 import 'package:dsd/feature/crud/presentation/pages/add_item_home_page.dart';
@@ -8,7 +6,6 @@ import 'package:dsd/feature/crud/presentation/pages/create_part/create_product_m
 import 'package:flutter/material.dart';
 import '../../feature/crud/presentation/pages/active_products_page.dart';
 import '../../feature/crud/presentation/pages/draft_products_page.dart';
-import '../styles/colors.dart';
 import 'package:dsd/feature/auth/presentation/pages/initial/initial_page.dart';
 import 'package:dsd/feature/auth/presentation/pages/log_in/log_in_page.dart';
 import 'package:dsd/feature/auth/presentation/pages/register/on_complete_page.dart';
@@ -20,7 +17,6 @@ import 'package:dsd/feature/profile/presentation/change_email.dart';
 import 'package:dsd/feature/profile/presentation/edit_profile.dart';
 import 'package:dsd/feature/profile/presentation/notifications.dart';
 import 'package:dsd/feature/profile/presentation/profile_settings.dart';
-import 'package:flutter/material.dart';
 // >>>>>>> e58c54169a0f60f47bcdeec9e5d62abea04c5d5c
 
 class AppRouter<T extends Object?> {
@@ -28,7 +24,6 @@ class AppRouter<T extends Object?> {
   Route<T> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
       case AppRouteName.TAB_BAR:
-// <<<<<<< HEAD
         return MaterialPageRoute(builder: (ctx) => const TabScreen());
       case AppRouteName.ADDITEMHOMEPAGE:
         return MaterialPageRoute(builder: (ctx) => const AddItemHomePage());
@@ -38,10 +33,6 @@ class AppRouter<T extends Object?> {
         return MaterialPageRoute(builder: (ctx) => const ActiveProductsPage());
       case AppRouteName.CREATEPRODUCTMAINPAGE:
         return MaterialPageRoute(builder: (ctx) => const CreateProductMainPage());
-// =======
-        return MaterialPageRoute(
-          builder: (ctx) => const TabScreen(),
-        );
       case AppRouteName.EDIT_PROFILE:
         return MaterialPageRoute(
           builder: (ctx) => const EditProfile(),

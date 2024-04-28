@@ -185,7 +185,6 @@ class ProductGenerator extends ConsumerStatefulWidget {
 class _ProductGeneratorState extends ConsumerState<ProductGenerator> {
   @override
   Widget build(BuildContext context) {
-    final likedProducts = ref.watch(likedProductsProvider);
     return GestureDetector(
       onTap: () {
         Navigator.pushNamed(context, AppRouteName.PRODUCT_DETAILS_PAGE);
