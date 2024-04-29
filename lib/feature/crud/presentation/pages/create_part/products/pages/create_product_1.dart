@@ -1,5 +1,3 @@
-import 'dart:io';
-import 'package:dsd/common/styles/colors.dart';
 import 'package:dsd/common/widgets/custom_text_widget.dart';
 import 'package:dsd/feature/crud/models/category_model.dart';
 import 'package:dsd/feature/crud/presentation/pages/add_item_home_page.dart';

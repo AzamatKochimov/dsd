@@ -18,7 +18,7 @@ class _InitialPageState extends State<InitialPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backround,
+      backgroundColor: AppColors.background,
       body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -32,7 +32,7 @@ class _InitialPageState extends State<InitialPage> {
             ),
             const Text('Welcome to (yor logo name)',
                 style: TextStyle(
-                    color: AppColors.greenishblue,
+                    color: AppColors.greenishBlue,
                     fontSize: 18,
                     fontWeight: FontWeight.w600)),
             SizedBox(
@@ -53,7 +53,7 @@ class _InitialPageState extends State<InitialPage> {
                 style: const TextStyle(color: AppColors.white),
                 value: dropdownvalue,
                 icon: const Icon(Icons.keyboard_arrow_down),
-                dropdownColor: AppColors.backround,
+                dropdownColor: AppColors.background,
                 items: items.map((String items) {
                   return DropdownMenuItem(
                     value: items,
@@ -75,7 +75,7 @@ class _InitialPageState extends State<InitialPage> {
             Material(
               borderRadius: BorderRadius.circular(15),
               elevation: 5,
-              color: AppColors.greenishblue,
+              color: AppColors.greenishBlue,
               child: InkWell(
                 borderRadius: BorderRadius.circular(15),
                 onTap: () {},

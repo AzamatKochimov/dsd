@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../../../common/router/route_name.dart';
 import '../../../../../../../common/styles/colors.dart';
 import '../../../../../../../common/widgets/custom_text_widget.dart';
 import '../../../../../models/category_model.dart';

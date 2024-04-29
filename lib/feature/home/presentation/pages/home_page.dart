@@ -16,16 +16,17 @@ class HomePageState extends ConsumerState<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backround,
+      backgroundColor: AppColors.background,
       body: Consumer(
         builder: (context, ref, child) {
-          // ref.watch(homeref);
           return SingleChildScrollView(
             child: Container(
-              padding: const EdgeInsets.only(top: 50, bottom: 15, right: 15, left: 15),
+              padding: const EdgeInsets.all(15),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  SizedBox(height: 45.h),
+
                   /// search bar and notifications
                   Row(
                     children: [
@@ -62,9 +63,9 @@ class HomePageState extends ConsumerState<HomePage> {
                       ),
                     ],
                   ),
-                  const SizedBox(
-                    height: 15,
-                  ),
+                  SizedBox(height: 15.h),
+
+                  /// Choose region part
                   const Row(
                     children: [
                       Spacer(),
@@ -79,19 +80,23 @@ class HomePageState extends ConsumerState<HomePage> {
                       )
                     ],
                   ),
+
+                  /// Categories
                   const Text(
                     "Find what?",
                     style: TextStyle(color: Colors.white),
                   ),
-                  SizedBox(height: 300.h, child: const CategoriesWidget()),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  SizedBox(height: 250.h, child: const CategoriesWidget()),
                   Image.asset(
                     'assets/images/sale.png',
                     height: 150,
                     width: double.infinity,
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
+
+                  /// products
                   const ProductGenerator(),
                 ],
               ),

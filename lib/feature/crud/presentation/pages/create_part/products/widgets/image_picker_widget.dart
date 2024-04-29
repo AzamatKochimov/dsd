@@ -1,10 +1,8 @@
 import 'dart:io';
 import 'package:dsd/common/widgets/custom_text_widget.dart';
-import 'package:dsd/feature/crud/services/get_categories_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
-import '../pages/create_product_1.dart';
 import '../pages/view_picked_image_page.dart';
 import '../view_model/image_picker_vm.dart';
 
@@ -94,7 +92,6 @@ class ImagePickerWidget extends ConsumerWidget {
       String text, bool isCamera) {
     return IconButton(
         onPressed: () {
-          var image = ref.read(imageProvider.notifier).pickImage(isCamera);
           Navigator.pop(context);
         },
         icon: Column(children: [Icon(icon), Text(text)]));

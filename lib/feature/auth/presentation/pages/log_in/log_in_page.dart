@@ -27,7 +27,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: AppColors.backround,
+        backgroundColor: AppColors.background,
         body: Consumer(
           builder: (context, ref, _) {
             ref.watch(loginref);
@@ -76,8 +76,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                           borderRadius: BorderRadius.circular(15),
                           elevation: 5,
                           color: ref.read(loginref).isEmail
-                              ? AppColors.greenishblue
-                              : AppColors.backround,
+                              ? AppColors.greenishBlue
+                              : AppColors.background,
                           child: InkWell(
                             borderRadius: BorderRadius.circular(15),
                             onTap: () {
@@ -114,8 +114,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                           borderRadius: BorderRadius.circular(15),
                           elevation: 5,
                           color: ref.read(loginref).isEmail
-                              ? AppColors.backround
-                              : AppColors.greenishblue,
+                              ? AppColors.background
+                              : AppColors.greenishBlue,
                           child: InkWell(
                             borderRadius: BorderRadius.circular(15),
                             onTap: () {
@@ -213,11 +213,11 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             border: Border.all(
-                              color: AppColors.greenishblue,
+                              color: AppColors.greenishBlue,
                               width: 2.5,
                             ),
                             color: ref.read(loginref).isChecked
-                                ? AppColors.greenishblue
+                                ? AppColors.greenishBlue
                                 : Colors.transparent,
                           ),
                           child: ref.read(loginref).isChecked
@@ -240,7 +240,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       const Text(
                         "Forgot Password?",
                         style: TextStyle(
-                            fontSize: 12, color: AppColors.greenishblue),
+                            fontSize: 12, color: AppColors.greenishBlue),
                       ),
                     ],
                   ),
@@ -251,7 +251,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     child: Material(
                       borderRadius: BorderRadius.circular(15),
                       elevation: 5,
-                      color: AppColors.greenishblue,
+                      color: AppColors.greenishBlue,
                       child: InkWell(
                         borderRadius: BorderRadius.circular(15),
                         onTap: () async {

@@ -32,10 +32,10 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: AppColors.backround,
+        backgroundColor: AppColors.background,
         appBar: AppBar(
           centerTitle: true,
-          backgroundColor: AppColors.backround,
+          backgroundColor: AppColors.background,
           leading: const Icon(
             Icons.arrow_back_ios_new,
             color: Colors.white,
@@ -98,7 +98,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                       child: Material(
                         borderRadius: BorderRadius.circular(15),
                         elevation: 5,
-                        color: AppColors.greenishblue,
+                        color: AppColors.greenishBlue,
                         child: InkWell(
                           borderRadius: BorderRadius.circular(15),
                           onTap: () async {
@@ -189,7 +189,6 @@ Future<bool> b(String email) async {
 }
 
 bool validatePhoneNumber(String phoneNumber) {
-  bool result = false;
   String cleanedNumber = phoneNumber.replaceAll(RegExp(r'[^\d]'), '');
 
   Map<String, String> countryPatterns = {
