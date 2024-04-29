@@ -1,4 +1,3 @@
-import 'package:dsd/common/styles/colors.dart';
 import 'package:dsd/common/widgets/custom_text_widget.dart';
 import 'package:dsd/feature/crud/models/category_model.dart';
 import 'package:dsd/feature/crud/presentation/pages/add_item_home_page.dart';
@@ -86,20 +85,20 @@ class CreateProductOnePage extends ConsumerWidget {
               spaceWidget(isHeight: true, size: 20),
 
               //! user_info
-              Column(
-                children: [
-                  Container(
-                    width: double.infinity,
-                    height: 65,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: AppColors.c202020),
-                    child: const CustomTextWidget(
-                      text: "+998904430302",
-                    ),
-                  )
-                ],
-              ),
+              // Column(
+              //   children: [
+              //     Container(
+              //       width: double.infinity,
+              //       height: 65,
+              //       decoration: BoxDecoration(
+              //           borderRadius: BorderRadius.circular(20),
+              //           color: AppColors.c202020),
+              //       child: const CustomTextWidget(
+              //         text: "+998904430302",
+              //       ),
+              //     )
+              //   ],
+              // ),
 
               spaceWidget(isHeight: true, size: 20),
             ],

@@ -5,6 +5,7 @@ CategoryModel categoryModelFromJson(String str) => CategoryModel.fromJson(json.d
 String categoryModelToJson(CategoryModel data) => json.encode(data.toJson());
 
 class CategoryModel {
+
   final bool success;
   final List<Categories> data;
 

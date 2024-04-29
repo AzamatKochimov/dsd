@@ -37,20 +37,28 @@ class AppRouter<T extends Object?> {
       case AppRouteName.ACTIVEPRODUCTSPAGE:
         return MaterialPageRoute(
             builder: (ctx) => const ActiveProductsPage(), settings: settings);
+      // case AppRouteName.CHILDREN_PRODUCT_PAGE:
+      //   return MaterialPageRoute(
+      //       builder: (ctx) => const CreateChildrenProduct(),
+      //       settings: settings);
       case AppRouteName.REAL_ESTATE_PAGE:
         return MaterialPageRoute(
             builder: (ctx) => const TabScreen(), settings: settings);
 
       // CRUD FOLDER PAGES
-      case AppRouteName.ADDITEMHOMEPAGE:
-        return MaterialPageRoute(
-            builder: (ctx) => const AddItemHomePage(), settings: settings);
-      case AppRouteName.DRAFTPRODUCTSPAGE:
-        return MaterialPageRoute(
-            builder: (ctx) => const DraftProductsPage(), settings: settings);
-      case AppRouteName.ACTIVEPRODUCTSPAGE:
-        return MaterialPageRoute(
-            builder: (ctx) => const ActiveProductsPage(), settings: settings);
+      // case AppRouteName.ADDITEMHOMEPAGE:
+      //   return MaterialPageRoute(
+      //       builder: (ctx) => const AddItemHomePage(), settings: settings);
+      // case AppRouteName.DRAFTPRODUCTSPAGE:
+      //   return MaterialPageRoute(
+      //       builder: (ctx) => const DraftProductsPage(), settings: settings);
+      // case AppRouteName.ACTIVEPRODUCTSPAGE:
+      //   return MaterialPageRoute(
+      //       builder: (ctx) => const ActiveProductsPage(), settings: settings);
+      // case AppRouteName.CREATEPRODUCTMAINPAGE:
+      //   return MaterialPageRoute(
+      //       builder: (ctx) => const CreateChildrenProduct(),
+      //       settings: settings);
       case AppRouteName.CHOOSECATEGORYMAINPAGE:
         return MaterialPageRoute(
             builder: (ctx) => const ChooseCategoryMainPage(),
