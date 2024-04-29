@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+// model for images
 ImageModel imageModelFromJson(String str) => ImageModel.fromJson(json.decode(str));
 
 String imageModelToJson(ImageModel data) => json.encode(data.toJson());

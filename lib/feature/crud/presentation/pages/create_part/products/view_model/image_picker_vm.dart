@@ -5,6 +5,8 @@ import 'package:image_picker/image_picker.dart';
 final imageProvider = StateNotifierProvider<CustomImageNotifier, XFile?>(
         (ref) => CustomImageNotifier());
 
+var constPickedImage;
+
 class CustomImageNotifier extends StateNotifier<XFile?> {
   CustomImageNotifier() : super(null);
 
@@ -15,9 +17,10 @@ class CustomImageNotifier extends StateNotifier<XFile?> {
     final XFile? imageFile = await _imagePicker.pickImage(source: source);
     if(imageFile != null){
       state = imageFile;
-      GetCategoriesService.uploadImage(GetCategoriesService.apiUploadImageAttachment, imageFile);
+      constPickedImage = GetCategoriesService.uploadImage(GetCategoriesService.apiUploadImageAttachment, imageFile);
     }
   }
+
 
 
   void clearImage() => state = null;

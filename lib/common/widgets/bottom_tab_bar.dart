@@ -1,7 +1,5 @@
-import 'package:dsd/common/styles/colors.dart';
 import 'package:dsd/common/widgets/navigation_bar.dart';
 import 'package:dsd/feature/cart/presentation/pages/cart_page.dart';
-import 'package:dsd/feature/crud/view_model/add_item_vm.dart';
 import 'package:dsd/feature/home/presentation/pages/home_page.dart';
 import 'package:dsd/feature/likes/presentation/pages/likes_page.dart';
 import 'package:dsd/feature/profile/presentation/profile_page.dart';

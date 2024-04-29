@@ -2,8 +2,6 @@ import 'package:dsd/common/router/route_name.dart';
 import 'package:dsd/common/styles/colors.dart';
 import 'package:dsd/common/widgets/bottom_tab_bar.dart';
 import 'package:dsd/feature/crud/presentation/pages/add_item_home_page.dart';
-import 'package:dsd/feature/crud/presentation/pages/create_part/categories/create_childs_product.dart';
-import 'package:dsd/feature/crud/presentation/pages/create_part/categories/create_real_estate.dart';
 import 'package:dsd/feature/crud/presentation/pages/create_part/category_part/choose_subcategory.dart';
 import 'package:dsd/feature/crud/presentation/pages/create_part/products/pages/create_product_1.dart';
 import 'package:flutter/material.dart';
@@ -48,15 +46,15 @@ class AppRouter<T extends Object?> {
             builder: (ctx) => const TabScreen(), settings: settings);
 
       // CRUD FOLDER PAGES
-      case AppRouteName.ADDITEMHOMEPAGE:
-        return MaterialPageRoute(
-            builder: (ctx) => const AddItemHomePage(), settings: settings);
-      case AppRouteName.DRAFTPRODUCTSPAGE:
-        return MaterialPageRoute(
-            builder: (ctx) => const DraftProductsPage(), settings: settings);
-      case AppRouteName.ACTIVEPRODUCTSPAGE:
-        return MaterialPageRoute(
-            builder: (ctx) => const ActiveProductsPage(), settings: settings);
+      // case AppRouteName.ADDITEMHOMEPAGE:
+      //   return MaterialPageRoute(
+      //       builder: (ctx) => const AddItemHomePage(), settings: settings);
+      // case AppRouteName.DRAFTPRODUCTSPAGE:
+      //   return MaterialPageRoute(
+      //       builder: (ctx) => const DraftProductsPage(), settings: settings);
+      // case AppRouteName.ACTIVEPRODUCTSPAGE:
+      //   return MaterialPageRoute(
+      //       builder: (ctx) => const ActiveProductsPage(), settings: settings);
       // case AppRouteName.CREATEPRODUCTMAINPAGE:
       //   return MaterialPageRoute(
       //       builder: (ctx) => const CreateChildrenProduct(),

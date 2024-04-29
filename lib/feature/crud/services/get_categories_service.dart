@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:dsd/common/server/api/api.dart';
 import 'package:dsd/feature/crud/models/category_model.dart';
 import 'package:dsd/feature/crud/presentation/pages/create_part/extra_later_will_be_deleted/model.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:l/l.dart';
@@ -107,8 +108,10 @@ class GetCategoriesService {
       // Perform a POST request to upload the image
       Response response = await init().post(api, data: formData);
       if (response.statusCode == 200) {
+        l.i("${response.data}");
         return "Image uploaded successfully";
       } else {
+        l.e("${response.statusCode}");
         return "Failed to upload image: ${response.statusCode}";
       }
     } on DioError catch (e) {
@@ -116,5 +119,21 @@ class GetCategoriesService {
     } catch (e) {
       return "Error: $e";
     }
+  }
+
+  static Future<String> addProduct(String api, String sendData)async{
+    Response response = await init().post(api, data: sendData);
+   try{
+     if(response.statusCode == 200){
+       l.i(response.data);
+        return "added succesfully";
+     }else{
+       l.e(response.data);
+       return "${response.statusCode}";
+     }
+   }
+   catch(e){
+     return "Error: $e";
+   }
   }
 }
