@@ -1,5 +1,6 @@
 import 'package:dsd/common/styles/colors.dart';
 import 'package:dsd/feature/home/presentation/widgets/home_widget.dart';
+import 'package:dsd/feature/home/view_model/home_vm.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -19,6 +20,7 @@ class HomePageState extends ConsumerState<HomePage> {
       backgroundColor: AppColors.background,
       body: Consumer(
         builder: (context, ref, child) {
+          ref.watch(homeref).getProductsForHome();
           return SingleChildScrollView(
             child: Container(
               padding: const EdgeInsets.all(15),
@@ -86,10 +88,7 @@ class HomePageState extends ConsumerState<HomePage> {
                     "Find what?",
                     style: TextStyle(color: Colors.white),
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  SizedBox(height: 250.h, child: const CategoriesWidget()),
+                  SizedBox(height: 270.h, child: const CategoriesWidget()),
                   Image.asset(
                     'assets/images/sale.png',
                     height: 150,
