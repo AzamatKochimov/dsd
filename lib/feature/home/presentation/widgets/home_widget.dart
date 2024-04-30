@@ -1,8 +1,4 @@
-import 'dart:developer';
-
-import 'package:dsd/common/router/route_name.dart';
 import 'package:dsd/common/styles/colors.dart';
-import 'package:dsd/data/entities/product_list_model.dart';
 import 'package:dsd/feature/home/view_model/home_vm.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

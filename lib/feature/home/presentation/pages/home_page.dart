@@ -18,7 +18,7 @@ class HomePageState extends ConsumerState<HomePage> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       // This code will run after the first frame is displayed
       ref.read(homeref).getProductsForHome();
     });

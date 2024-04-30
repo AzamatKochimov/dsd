@@ -3,7 +3,6 @@ import 'dart:developer';
 
 import 'package:dsd/common/server/api/api.dart';
 import 'package:dsd/common/server/api/api_constants.dart';
-import 'package:dsd/data/entities/product_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
