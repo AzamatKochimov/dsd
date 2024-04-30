@@ -84,20 +84,18 @@ class LoginNotifier extends ChangeNotifier {
   //   return response;
   // }
 
-  
-
   Future<Map<String, dynamic>> register(Map<String, dynamic> map) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-      log("register check:");
-    
-      String? response =
-          await ApiService.post("api/auth/register", map, params: {});
+    log("register check:");
 
-      log("register check:");
-      print(response);
-      Map<String, dynamic> responseObj = jsonDecode(response!);
+    String? response =
+        await ApiService.post("api/auth/register", map, params: {});
 
-      if (responseObj.containsKey('success') && responseObj['success'] == true) {
+    log("register check:");
+    print(response);
+    Map<String, dynamic> responseObj = jsonDecode(response!);
+
+    if (responseObj.containsKey('success') && responseObj['success'] == true) {
       // Login successful
       prefs.setString("token", responseObj['data']['accessToken']);
       print("correct"); // Print "correct" to console
@@ -114,7 +112,6 @@ class LoginNotifier extends ChangeNotifier {
         'message': 'Register failed. Please try again.',
       };
     }
-    
   }
 
   Future<void> logOut() async {
@@ -125,9 +122,14 @@ class LoginNotifier extends ChangeNotifier {
   Future<Map<String, dynamic>> login(Map<String, dynamic> map) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    log("login func");
-    String? response = await ApiService.post("api/auth/login", map, params: {});
-    print(response!);
+    String? response;
+    log("login func begins");
+    try {
+      response = await ApiService.post("api/auth/login", map, params: {});
+      log("aaaa ${response!}");
+    } catch (e) {
+      return {'status': false};
+    }
 
     Map<String, dynamic> responseObj = jsonDecode(response);
 
@@ -150,11 +152,9 @@ class LoginNotifier extends ChangeNotifier {
     }
   }
 
-
-  Future<bool>isLoggedIn()async{
+  Future<bool> isLoggedIn() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString('token');
     return token != null;
   }
-
 }

@@ -129,6 +129,7 @@ class LikesPage extends ConsumerWidget {
                                               price: "1.2 mil",
                                               description:
                                                   "Very smart and big...",
+                                              condition: "10 years",
                                             ),
                                           );
                                     } else {

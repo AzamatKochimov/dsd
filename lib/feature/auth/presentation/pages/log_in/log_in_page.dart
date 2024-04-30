@@ -144,6 +144,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     height: 40,
                   ),
                   TextField(
+                    keyboardType: ref.read(loginref).isEmail ? TextInputType.emailAddress : TextInputType.phone,
                     controller: ref.read(loginref).isEmail
                         ? emailController
                         : phoneController,
@@ -271,8 +272,6 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                             reff.currentUser = User(phoneNumber: data['phoneNumber'], email: data['email'], firstName: data['firstName'], lastName: data['lastName'], id: data['id']);
                             log("heres the current user");
                             print(reff.currentUser.toString());
-                            // print(result);
-                            // print(result['userDto']);
                             Navigator.pushReplacementNamed(context, '/');
                             log("login successful");
                           } else {

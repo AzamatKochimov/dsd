@@ -1,6 +1,7 @@
 import 'package:dsd/common/router/route_name.dart';
 import 'package:dsd/common/styles/colors.dart';
 import 'package:dsd/common/widgets/bottom_tab_bar.dart';
+import 'package:dsd/feature/cart/presentation/pages/cart_page.dart';
 import 'package:dsd/feature/crud/presentation/pages/add_item_home_page.dart';
 import 'package:dsd/feature/crud/presentation/pages/create_part/category_part/choose_subcategory.dart';
 import 'package:dsd/feature/crud/presentation/pages/create_part/products/pages/create_product_1.dart';
@@ -102,6 +103,9 @@ class AppRouter<T extends Object?> {
       case AppRouteName.HOME_PAGE:
         return MaterialPageRoute(
             builder: (ctx) => const HomePage(), settings: settings);
+      case AppRouteName.BASKET:
+        return MaterialPageRoute(
+            builder: (ctx) => const BasketPage(), settings: settings);
       default:
         return _errorRoute();
     }
