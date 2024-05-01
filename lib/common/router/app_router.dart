@@ -14,7 +14,6 @@ import 'package:dsd/feature/auth/presentation/pages/register/on_complete_page.da
 import 'package:dsd/feature/auth/presentation/pages/register/register_page.dart';
 import 'package:dsd/feature/auth/presentation/pages/register/sms_verification_page.dart';
 import 'package:dsd/feature/home/presentation/pages/home_page.dart';
-import 'package:dsd/feature/product_details/presentation/pages/product_details_page.dart';
 import 'package:dsd/feature/profile/presentation/change_email.dart';
 import 'package:dsd/feature/profile/presentation/edit_profile.dart';
 import 'package:dsd/feature/profile/presentation/notifications.dart';
@@ -81,9 +80,9 @@ class AppRouter<T extends Object?> {
       case AppRouteName.CHANGE_EMAIL:
         return MaterialPageRoute(
             builder: (ctx) => const ChangeEmail(), settings: settings);
-      case AppRouteName.PRODUCT_DETAILS_PAGE:
-        return MaterialPageRoute(
-            builder: (ctx) => const ProductDetailsPage(), settings: settings);
+      // case AppRouteName.PRODUCT_DETAILS_PAGE:
+      //   return MaterialPageRoute(
+      //       builder: (ctx) => const ProductDetailsPage(), settings: settings);
       case AppRouteName.INITIAL_PAGE:
         return MaterialPageRoute(
             builder: (ctx) => const InitialPage(), settings: settings);

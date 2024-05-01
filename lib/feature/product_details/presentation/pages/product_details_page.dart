@@ -6,7 +6,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class ProductDetailsPage extends ConsumerStatefulWidget {
-  const ProductDetailsPage({super.key});
+  final Map<String, dynamic> product;
+  const ProductDetailsPage({super.key, required this.product});
 
   @override
   ConsumerState<ProductDetailsPage> createState() => _ProductDetailsPageState();
@@ -58,9 +59,9 @@ class _ProductDetailsPageState extends ConsumerState<ProductDetailsPage> {
               ),
         
               /// Product name
-              const Text(
-                "Horse",
-                style: TextStyle(
+              Text(
+                "${widget.product["productName"]}",
+                style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
                     color: AppColors.white),
@@ -68,9 +69,9 @@ class _ProductDetailsPageState extends ConsumerState<ProductDetailsPage> {
               SizedBox(height: 6.h),
         
               /// Product price
-              const Text(
-                "\$ 3 000",
-                style: TextStyle(
+              Text(
+                "\$${widget.product["price"]}",
+                style: const TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.w700,
                     color: AppColors.white),
@@ -103,9 +104,9 @@ class _ProductDetailsPageState extends ConsumerState<ProductDetailsPage> {
               SizedBox(height: 6.h),
         
               /// Product description
-              const Text(
-                "The helmet is a crucial piece of protective gear worn on the head to safeguard against injuries during various activities, such as sports, construction work, or military operations.",
-                style: TextStyle(
+              Text(
+                "${widget.product["description"]}",
+                style: const TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w400,
                     color: AppColors.white),
@@ -143,9 +144,9 @@ class _ProductDetailsPageState extends ConsumerState<ProductDetailsPage> {
                       color: AppColors.white.withOpacity(0.5),
                     ),
                   ),
-                  const Text(
-                    'new',
-                    style: TextStyle(
+                  Text(
+                    '${widget.product["conditionProduct"]}',
+                    style: const TextStyle(
                       fontSize: 8,
                       color: AppColors.c33FF00,
                     ),
@@ -168,9 +169,9 @@ class _ProductDetailsPageState extends ConsumerState<ProductDetailsPage> {
                       color: AppColors.white.withOpacity(0.5),
                     ),
                   ),
-                  const Text(
-                    'only via order',
-                    style: TextStyle(
+                  Text(
+                    '${widget.product["availability"]}',
+                    style: const TextStyle(
                       fontSize: 8,
                       color: AppColors.white,
                     ),
@@ -187,7 +188,7 @@ class _ProductDetailsPageState extends ConsumerState<ProductDetailsPage> {
                     ),
                   ),
                   const Text(
-                    'only by BTS Post',
+                    'only by UZPost',
                     style: TextStyle(
                       fontSize: 8,
                       color: AppColors.white,
@@ -203,15 +204,15 @@ class _ProductDetailsPageState extends ConsumerState<ProductDetailsPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'salesman:',
+                        'salesman: ',
                         style: TextStyle(
                           fontSize: 14,
                           color: AppColors.white.withOpacity(0.5),
                         ),
                       ),
-                      const Text(
-                        'Aleksey Alekseyevich:',
-                        style: TextStyle(
+                      Text(
+                        '${widget.product["seller [firstName]"] } ${widget.product["lastName"]} :',
+                        style: const TextStyle(
                           fontSize: 16,
                           color: AppColors.white,
                         ),

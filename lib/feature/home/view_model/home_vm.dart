@@ -32,7 +32,6 @@ class HomeNotifier extends ChangeNotifier {
     String? response = await ApiService.get(ApiConst.getAllProduct, {});
     Map<String, dynamic> responseObj = jsonDecode(response!);
     if (responseObj['data'] != null) {
-      log("its not null");
       print(responseObj['data']);
       // Ensure responseObj['data'] is List<dynamic>
       if (responseObj['data'] is List<dynamic>) {

@@ -1,7 +1,7 @@
-import 'package:dsd/common/router/route_name.dart';
 import 'package:dsd/common/styles/colors.dart';
 import 'package:dsd/feature/home/presentation/widgets/home_widget.dart';
 import 'package:dsd/feature/home/view_model/home_vm.dart';
+import 'package:dsd/feature/product_details/presentation/pages/product_details_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -31,84 +31,84 @@ class HomePageState extends ConsumerState<HomePage> {
       body: Consumer(
         builder: (context, ref, child) {
           var reff = ref.watch(homeref);
-          return SingleChildScrollView(
-            child: Container(
-              padding: const EdgeInsets.all(15),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(height: 45.h),
+          return reff.productsForHome != null
+              ? SingleChildScrollView(
+                  child: Container(
+                    padding: const EdgeInsets.all(15),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(height: 45.h),
 
-                  /// search bar and notifications
-                  Row(
-                    children: [
-                      const HomePageSearchBar(),
-                      const Spacer(),
-                      Stack(
-                        children: [
-                          SvgPicture.asset(
-                            'assets/icons/kolokolchik.svg',
-                            height: 24,
-                            width: 24,
-                          ),
-                          Positioned(
-                            right: 0,
-                            child: Container(
-                              width: 7,
-                              height: 7,
-                              decoration: BoxDecoration(
-                                  color: const Color(0xff33FF00),
-                                  borderRadius: const BorderRadius.all(
-                                      Radius.circular(15)),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: const Color(0xFF0eff00)
-                                          .withOpacity(1),
-                                      offset: const Offset(0, 0),
-                                      blurRadius: 18,
-                                      spreadRadius: 8,
-                                    ),
-                                  ]),
+                        /// search bar and notifications
+                        Row(
+                          children: [
+                            const HomePageSearchBar(),
+                            const Spacer(),
+                            Stack(
+                              children: [
+                                SvgPicture.asset(
+                                  'assets/icons/kolokolchik.svg',
+                                  height: 24,
+                                  width: 24,
+                                ),
+                                Positioned(
+                                  right: 0,
+                                  child: Container(
+                                    width: 7,
+                                    height: 7,
+                                    decoration: BoxDecoration(
+                                        color: const Color(0xff33FF00),
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(15)),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: const Color(0xFF0eff00)
+                                                .withOpacity(1),
+                                            offset: const Offset(0, 0),
+                                            blurRadius: 18,
+                                            spreadRadius: 8,
+                                          ),
+                                        ]),
+                                  ),
+                                )
+                              ],
                             ),
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 15.h),
+                          ],
+                        ),
+                        SizedBox(height: 15.h),
 
-                  /// Choose region part
-                  const Row(
-                    children: [
-                      Spacer(),
-                      Column(
-                        children: [
-                          Text(
-                            "Where to look?",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          AllRegionsDropDown(),
-                        ],
-                      )
-                    ],
-                  ),
+                        /// Choose region part
+                        const Row(
+                          children: [
+                            Spacer(),
+                            Column(
+                              children: [
+                                Text(
+                                  "Where to look?",
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                                AllRegionsDropDown(),
+                              ],
+                            )
+                          ],
+                        ),
 
-                  /// Categories
-                  const Text(
-                    "Find what?",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  SizedBox(height: 270.h, child: const CategoriesWidget()),
-                  Image.asset(
-                    'assets/images/sale.png',
-                    height: 150,
-                    width: double.infinity,
-                  ),
+                        /// Categories
+                        const Text(
+                          "Find what?",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        SizedBox(
+                            height: 270.h, child: const CategoriesWidget()),
+                        Image.asset(
+                          'assets/images/sale.png',
+                          height: 150,
+                          width: double.infinity,
+                        ),
 
-                  /// products
-
-                  reff.productsForHome != null
-                      ? GridView.builder(
+                        /// products
+                        GridView.builder(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                           itemCount: reff.productsForHome?.length ??
@@ -129,9 +129,14 @@ class HomePageState extends ConsumerState<HomePage> {
                               // Assuming ProductListModel has a property data which holds a list of Datum
                               return GestureDetector(
                                 onTap: () {
-                                  Navigator.pushNamed(
+                                  Navigator.push(
                                     context,
-                                    AppRouteName.PRODUCT_DETAILS_PAGE,
+                                    MaterialPageRoute(
+                                      builder: (context) => ProductDetailsPage(
+                                        product:
+                                            currentProduct, // Pass the current product
+                                      ),
+                                    ),
                                   );
                                 },
                                 child: Container(
@@ -155,9 +160,8 @@ class HomePageState extends ConsumerState<HomePage> {
                                       SizedBox(
                                         width: 200,
                                         height: 150,
-                                        child:
-                                            Image.network(
-                                              "uploadIMG/2024/4/25/b2974d14-aed7-4b61-810c-047dea320f2a.jpg")
+                                        child: Image.asset(
+                                            "assets/images/404.jpg"),
                                       ),
                                       Padding(
                                         padding: const EdgeInsets.all(10),
@@ -206,20 +210,22 @@ class HomePageState extends ConsumerState<HomePage> {
                             } else {
                               print(
                                   "Error: There are no products or the list is null");
-                              return SizedBox(); // Return an empty SizedBox as a placeholder
+
+                              /// Return an empty SizedBox as a placeholder
+                              return const SizedBox();
                             }
                           },
                         )
-                      : Container(
-                          margin: const EdgeInsets.only(top: 30),
-                          child: const Center(
-                            child: CircularProgressIndicator(),
-                          ),
-                        )
-                ],
-              ),
-            ),
-          );
+                      ],
+                    ),
+                  ),
+                )
+              : Container(
+                  margin: const EdgeInsets.only(top: 30),
+                  child: const Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                );
         },
       ),
     );
