@@ -20,7 +20,7 @@ class TabScreen extends ConsumerWidget {
       const HomePage(),
       LikesPage(),
       const AddItemHomePage(),
-      const CartPage(),
+      const BasketPage(),
       const Profile(),
     ];
 
