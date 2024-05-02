@@ -1,7 +1,6 @@
 import 'package:dsd/common/styles/colors.dart';
 import 'package:dsd/data/entities/product_model_sardor.dart';
 import 'package:dsd/feature/cart/view_model/cart_vm.dart';
-import 'package:dsd/feature/crud/models/product_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -66,7 +65,7 @@ class _ProductDetailsPageState extends ConsumerState<ProductDetailsPage> {
 
                 /// Product name
                 Text(
-                  "${widget.product.productName}",
+                  widget.product.productName,
                   style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
@@ -111,7 +110,7 @@ class _ProductDetailsPageState extends ConsumerState<ProductDetailsPage> {
 
                 /// Product description
                 Text(
-                  "${widget.product.description}",
+                  widget.product.description,
                   style: const TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w400,
@@ -157,7 +156,7 @@ class _ProductDetailsPageState extends ConsumerState<ProductDetailsPage> {
                       ),
                     ),
                     Text(
-                      '${widget.product.conditionProduct}',
+                      widget.product.conditionProduct,
                       style: const TextStyle(
                         fontSize: 8,
                         color: AppColors.c33FF00,
@@ -265,16 +264,19 @@ class _ProductDetailsPageState extends ConsumerState<ProductDetailsPage> {
   }
 
   void _addToCart(BuildContext context) {
-    ref
-        .read(addedToCartProvider.notifier)
-        .addToCartProvider(
-          ProductModel(
-            productName: widget.product.productName,
-            price: widget.product.price,
-            description: widget.product.description,
-            conditionProduct: widget.product.seller.toString(),
-          ),
-        );
+    ref.read(addedToCartProvider.notifier).addToCartProvider(ProductModelSardor(
+          id: widget.product.id,
+          productName: widget.product.productName,
+          price: widget.product.price,
+          productCategory: widget.product.productCategory,
+          availability: widget.product.availability,
+          payType: widget.product.payType,
+          conditionProduct: widget.product.conditionProduct,
+          description: widget.product.description,
+          seller: widget.product.seller,
+          attachment: widget.product.attachment,
+          productDtoLists: widget.product.productDtoLists,
+        ));
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text('Product added to cart'),

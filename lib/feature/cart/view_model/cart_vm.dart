@@ -1,15 +1,15 @@
-import 'package:dsd/feature/crud/models/product_model.dart';
+import 'package:dsd/data/entities/product_model_sardor.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final addedToCartProvider =
-    StateNotifierProvider<AddedToCartProvider, List<ProductModel>>((ref) {
+    StateNotifierProvider<AddedToCartProvider, List<ProductModelSardor>>((ref) {
   return AddedToCartProvider([]);
 });
 
-class AddedToCartProvider extends StateNotifier<List<ProductModel>> {
+class AddedToCartProvider extends StateNotifier<List<ProductModelSardor>> {
   AddedToCartProvider(super.state);
 
-  void addToCartProvider(ProductModel product) {
+  void addToCartProvider(ProductModelSardor product) {
     state = [...state, product];
   }
 

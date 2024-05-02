@@ -54,7 +54,7 @@ class _BasketPageState extends ConsumerState<BasketPage> {
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             Image.asset(
-                              'assets/images/horse_bashara.png',
+                              'assets/images/horse.png',
                               height: 70,
                               width: 70,
                               fit: BoxFit.cover,
@@ -93,7 +93,7 @@ class _BasketPageState extends ConsumerState<BasketPage> {
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
                                     const Icon(Icons.location_on_rounded,
-                                        color: AppColors.c57C5B6),
+                                        color: AppColors.c57C5B6, size: 16,),
                                     customTextWidget(
                                         text: "Kazakhstan, Almaty",
                                         fontSize: 9,
@@ -107,7 +107,11 @@ class _BasketPageState extends ConsumerState<BasketPage> {
                                         .read(addedToCartProvider.notifier)
                                         .removeFromCart(index);
                                   },
-                                  icon: const Icon(Icons.remove_circle),
+                                  icon: const Icon(
+                                    Icons.remove_circle,
+                                    size: 28,
+                                    color: AppColors.white,
+                                  ),
                                 ),
                               ],
                             ),
