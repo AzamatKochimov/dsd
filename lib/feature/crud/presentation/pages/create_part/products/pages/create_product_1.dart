@@ -127,24 +127,35 @@ class CreateProductOnePage extends ConsumerWidget {
                     borderRadius: BorderRadius.circular(12)),
                 minWidth: double.infinity,
                 color: AppColors.c57C5B6,
-                onPressed: () {
-                  List<int> attachmentsList = ref.read(attachmentIdsProvider);
-                  ref.read(addProductNotifierProvider.notifier).productAdd(
-                      productName: _nameOfProductController.text,
-                      price: 12,
-                      productCategoryID: data.id,
-                      availability: true,
-                      payType: "USD",
-                      conditionProduct: "NEW",
-                      description: _descriptionController.text,
-                      sellerID: 102,
-                      attachmentIDS: attachmentsList,
-                      productDTOS: []);
-                },
-                child: const CustomTextWidget(
-                  text: "Save",
-                  textColor: AppColors.white,
-                ),
+                onPressed: ref.watch(addProductStateProvider) ==
+                        AddProductState.loading
+                    ? null
+                    : () {
+                        List<int> attachmentsList =
+                            ref.read(attachmentIdsProvider);
+                        ref
+                            .read(addProductNotifierProvider.notifier)
+                            .productAdd(
+                                context: context,
+                                ref: ref,
+                                productName: _nameOfProductController.text,
+                                price: 12,
+                                productCategoryID: data.id,
+                                availability: true,
+                                payType: "USD",
+                                conditionProduct: "NEW",
+                                description: _descriptionController.text,
+                                sellerID: 102,
+                                attachmentIDS: attachmentsList,
+                                productDTOS: []);
+                      },
+                child: ref.watch(addProductStateProvider) ==
+                        AddProductState.loading
+                    ? const CircularProgressIndicator()
+                    : const CustomTextWidget(
+                        text: "Save",
+                        textColor: AppColors.white,
+                      ),
               ),
               spaceWidget(isHeight: true, size: 20),
             ],
