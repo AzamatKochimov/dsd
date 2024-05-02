@@ -92,6 +92,7 @@ class ImagePickerWidget extends ConsumerWidget {
       String text, bool isCamera) {
     return IconButton(
         onPressed: () {
+          ref.watch(imageProvider.notifier).pickImage(isCamera);
           Navigator.pop(context);
         },
         icon: Column(children: [Icon(icon), Text(text)]));

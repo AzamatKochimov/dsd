@@ -1,12 +1,22 @@
+import 'package:dsd/common/styles/colors.dart';
 import 'package:dsd/common/widgets/custom_text_widget.dart';
 import 'package:dsd/feature/crud/models/category_model.dart';
 import 'package:dsd/feature/crud/presentation/pages/add_item_home_page.dart';
+import 'package:dsd/feature/crud/presentation/pages/create_part/products/view_model/add_product_vm.dart';
+import 'package:dsd/feature/crud/presentation/pages/create_part/products/view_model/attachment_vm.dart';
 import 'package:dsd/feature/crud/presentation/widgets/general_widgets.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../widgets/image_picker_widget.dart';
 import '../widgets/show_category_name_widget.dart';
+
+final nameControllerProvider =
+    Provider<TextEditingController>((ref) => TextEditingController());
+final priceControllerProvider =
+    Provider<TextEditingController>((ref) => TextEditingController());
+final descriptionControllerProvider =
+    Provider<TextEditingController>((ref) => TextEditingController());
 
 class CreateProductOnePage extends ConsumerWidget {
   const CreateProductOnePage({super.key});
@@ -14,6 +24,12 @@ class CreateProductOnePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var data = ModalRoute.of(context)?.settings.arguments as Categories;
+    TextEditingController _nameOfProductController =
+        ref.watch(nameControllerProvider);
+    TextEditingController _priceController = ref.watch(priceControllerProvider);
+    TextEditingController _descriptionController =
+        ref.watch(descriptionControllerProvider);
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -44,15 +60,17 @@ class CreateProductOnePage extends ConsumerWidget {
               //! category
               ProductCategoryNameWidget(data: data),
               //! text_fields
-              const Column(
+              Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CustomTextWidget(text: 'Name product'),
                   TextField(
+                    controller: _nameOfProductController,
                     decoration: InputDecoration(border: OutlineInputBorder()),
                   ),
                   CustomTextWidget(text: 'Description'),
                   TextField(
+                    controller: _descriptionController,
                     decoration: InputDecoration(border: OutlineInputBorder()),
                   ),
                 ],
@@ -63,9 +81,10 @@ class CreateProductOnePage extends ConsumerWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  const Expanded(
+                  Expanded(
                     flex: 3,
                     child: TextField(
+                      controller: _priceController,
                       decoration: InputDecoration(border: OutlineInputBorder()),
                     ),
                   ),
@@ -100,6 +119,33 @@ class CreateProductOnePage extends ConsumerWidget {
               //   ],
               // ),
 
+              spaceWidget(isHeight: true, size: 20),
+
+              MaterialButton(
+                height: 60.h,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12)),
+                minWidth: double.infinity,
+                color: AppColors.c57C5B6,
+                onPressed: () {
+                  List<int> attachmentsList = ref.read(attachmentIdsProvider);
+                  ref.read(addProductNotifierProvider.notifier).productAdd(
+                      productName: _nameOfProductController.text,
+                      price: 12,
+                      productCategoryID: data.id,
+                      availability: true,
+                      payType: "USD",
+                      conditionProduct: "NEW",
+                      description: _descriptionController.text,
+                      sellerID: 102,
+                      attachmentIDS: attachmentsList,
+                      productDTOS: []);
+                },
+                child: const CustomTextWidget(
+                  text: "Save",
+                  textColor: AppColors.white,
+                ),
+              ),
               spaceWidget(isHeight: true, size: 20),
             ],
           ),

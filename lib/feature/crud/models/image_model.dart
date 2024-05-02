@@ -15,12 +15,12 @@ class ImageModel {
 
   factory ImageModel.fromJson(Map<String, dynamic> json) => ImageModel(
     success: json["success"],
-    images: Images.fromJson(json["images"]),
+    images: Images.fromJson(json["data"]),
   );
 
   Map<String, dynamic> toJson() => {
     "success": success,
-    "images": images.toJson(),
+    "data": images.toJson(),
   };
 }
 
