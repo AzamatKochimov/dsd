@@ -1,13 +1,9 @@
-import 'package:dsd/common/router/route_name.dart';
 import 'package:dsd/common/styles/colors.dart';
-import 'package:dsd/data/entities/product_model.dart';
-import 'package:dsd/feature/home/presentation/widgets/favorite_button.dart';
-import 'package:dsd/feature/likes/view_model/likes_vm.dart';
+import 'package:dsd/feature/home/view_model/home_vm.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:dsd/feature/home/view_model/home_vm.dart';
 
 class HomePageSearchBar extends StatelessWidget {
   const HomePageSearchBar({super.key});
@@ -137,9 +133,9 @@ class _CategoriesWidgetState extends ConsumerState<CategoriesWidget> {
       itemCount: 6,
       physics: const NeverScrollableScrollPhysics(),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3, // number of items in each row
-        mainAxisSpacing: 8.0, // spacing between rows
-        crossAxisSpacing: 8.0, // spacing between columns
+        crossAxisCount: 3,
+        mainAxisSpacing: 8.0,
+        crossAxisSpacing: 8.0,
       ),
       itemBuilder: (context, index) {
         String categoryName = categoryList.keys.elementAt(index);
@@ -171,147 +167,6 @@ class _CategoriesWidgetState extends ConsumerState<CategoriesWidget> {
           ),
         );
       },
-    );
-  }
-}
-
-class ProductGenerator extends ConsumerStatefulWidget {
-  const ProductGenerator({super.key});
-
-  @override
-  ConsumerState<ProductGenerator> createState() => _ProductGeneratorState();
-}
-
-class _ProductGeneratorState extends ConsumerState<ProductGenerator> {
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.pushNamed(context, AppRouteName.PRODUCT_DETAILS_PAGE);
-      },
-      child: GridView.builder(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        // itemCount: likedProducts.length,
-        itemCount: 6,
-        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-          maxCrossAxisExtent: 200.w, // Maximum width of each item
-          mainAxisSpacing: 10.0, // Spacing between rows
-          crossAxisSpacing: 8.0, // Spacing between columns
-          mainAxisExtent: 260.h, // Height of each item
-        ),
-        itemBuilder: (context, index) {
-          // final product = likedProducts[index];
-          return Container(
-            decoration: const BoxDecoration(
-              color: Color(0xff313131),
-              borderRadius: BorderRadius.all(Radius.circular(15)),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  width: 200.w,
-                  child: Image.asset(
-                    'assets/images/horse.png',
-                    //product.imageUrl
-                    fit: BoxFit.fill,
-                  ),
-                ),
-                Container(
-                  padding: const EdgeInsets.all(10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              /// Title
-                              Text(
-                                // product.name,
-                                "Black hourse 1.5m",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 10,
-                                ),
-                              ),
-
-                              /// Product Price
-                              Text(
-                                // product.price,
-                                "450 \$",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 10,
-                                ),
-                              ),
-
-                              /// Product Description
-                              Text(
-                                // product.description,
-                                "Very smart and big...",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 10,
-                                ),
-                              ),
-                            ],
-                          ),
-                          FavoriteButton(
-                            iconSize: 34,
-                            isFavorite: false,
-                            valueChanged: (isFavorite) {
-                              if (isFavorite) {
-                                /// Get the provider and add the product to likedProducts
-                                ref
-                                    .read(likedProductsProvider.notifier)
-                                    .addToLikedProducts(
-                                      Product(
-                                        name: "Black horse 1.5m",
-                                        price: "1.2 mil",
-                                        description: "Very smart and big...",
-                                      ),
-                                    );
-                              } 
-                              // else {
-                              //   // Remove the product from the liked products list
-                              //   ref
-                              //       .read(likedProductsProvider.notifier)
-                              //       .removeFromLikedProducts(product);
-                              // }
-                            },
-                            context: context,
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 15.h),
-                      const Text(
-                        "Kazakhstan, Almaty",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 10,
-                        ),
-                      ),
-                      const Text(
-                        "18 February 4:02 pm",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 10,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          );
-        },
-      ),
     );
   }
 }

@@ -6,6 +6,7 @@ class ApiConst {
   static const version = '';
 
   // Courses api
+  static const getAllProduct = '/product/list';
 
 }
 

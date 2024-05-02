@@ -1,6 +1,5 @@
+import 'package:dsd/data/entities/product_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '../../../data/entities/product_model.dart';
 
 final likedProductsProvider =
     StateNotifierProvider<LikedProductsNotifier, List<Product>>((ref) {
