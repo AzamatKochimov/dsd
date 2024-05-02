@@ -1,12 +1,12 @@
 // To parse this JSON data, do
 //
-//     final ProductModelSardor = ProductModelSardorFromJson(jsonString);
+//     final productModelSardor = productModelSardorFromJson(jsonString);
 
 import 'dart:convert';
 
-List<ProductModelSardor> ProductModelSardorFromJson(String str) => List<ProductModelSardor>.from(json.decode(str).map((x) => ProductModelSardor.fromJson(x)));
+List<ProductModelSardor> productModelSardorFromJson(String str) => List<ProductModelSardor>.from(json.decode(str).map((x) => ProductModelSardor.fromJson(x)));
 
-String ProductModelSardorToJson(List<ProductModelSardor> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String productModelSardorToJson(List<ProductModelSardor> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class ProductModelSardor {
     int id;
@@ -14,8 +14,8 @@ class ProductModelSardor {
     double price;
     TCategory productCategory;
     bool availability;
-    PayType payType;
-    ConditionProduct conditionProduct;
+    String payType;
+    String conditionProduct;
     String description;
     Seller seller;
     List<Attachment> attachment;
@@ -41,8 +41,8 @@ class ProductModelSardor {
         price: json["price"],
         productCategory: TCategory.fromJson(json["productCategory"]),
         availability: json["availability"],
-        payType: payTypeValues.map[json["payType"]]!,
-        conditionProduct: conditionProductValues.map[json["conditionProduct"]]!,
+        payType: json["payType"],
+        conditionProduct: json["conditionProduct"],
         description: json["description"],
         seller: Seller.fromJson(json["seller"]),
         attachment: List<Attachment>.from(json["attachment"].map((x) => Attachment.fromJson(x))),
@@ -55,8 +55,8 @@ class ProductModelSardor {
         "price": price,
         "productCategory": productCategory.toJson(),
         "availability": availability,
-        "payType": payTypeValues.reverse[payType],
-        "conditionProduct": conditionProductValues.reverse[conditionProduct],
+        "payType": payType,
+        "conditionProduct": conditionProduct,
         "description": description,
         "seller": seller.toJson(),
         "attachment": List<dynamic>.from(attachment.map((x) => x.toJson())),
@@ -96,22 +96,6 @@ class Attachment {
     };
 }
 
-enum ConditionProduct {
-    NEW
-}
-
-final conditionProductValues = EnumValues({
-    "NEW": ConditionProduct.NEW
-});
-
-enum PayType {
-    USD
-}
-
-final payTypeValues = EnumValues({
-    "USD": PayType.USD
-});
-
 class TCategory {
     DateTime createdAt;
     DateTime updatedAt;
@@ -119,7 +103,7 @@ class TCategory {
     dynamic createdById;
     dynamic updatedById;
     int id;
-    Name name;
+    String name;
     TCategory? parentCategory;
     dynamic attachment;
 
@@ -142,7 +126,7 @@ class TCategory {
         createdById: json["createdById"],
         updatedById: json["updatedById"],
         id: json["id"],
-        name: nameValues.map[json["name"]]!,
+        name: json["name"],
         parentCategory: json["parentCategory"] == null ? null : TCategory.fromJson(json["parentCategory"]),
         attachment: json["attachment"],
     );
@@ -154,25 +138,11 @@ class TCategory {
         "createdById": createdById,
         "updatedById": updatedById,
         "id": id,
-        "name": nameValues.reverse[name],
+        "name": name,
         "parentCategory": parentCategory?.toJson(),
         "attachment": attachment,
     };
 }
-
-enum Name {
-    ELECTRONICS,
-    FOOD_BEVERAGES,
-    HOME_GARDEN,
-    INTELLIGENT_CONCRETE_CAR
-}
-
-final nameValues = EnumValues({
-    "Electronics": Name.ELECTRONICS,
-    "Food & Beverages": Name.FOOD_BEVERAGES,
-    "Home & Garden": Name.HOME_GARDEN,
-    "Intelligent Concrete Car": Name.INTELLIGENT_CONCRETE_CAR
-});
 
 class ProductDtoList {
     int id;
@@ -232,10 +202,10 @@ class ProductFeatureName {
 
 class Seller {
     int id;
-    FirstName firstName;
-    LastName lastName;
+    String firstName;
+    String lastName;
     String phoneNumber;
-    Email email;
+    String email;
     Address? address;
     dynamic attachment;
 
@@ -251,20 +221,20 @@ class Seller {
 
     factory Seller.fromJson(Map<String, dynamic> json) => Seller(
         id: json["id"],
-        firstName: firstNameValues.map[json["firstName"]]!,
-        lastName: lastNameValues.map[json["lastName"]]!,
+        firstName: json["firstName"],
+        lastName: json["lastName"],
         phoneNumber: json["phoneNumber"],
-        email: emailValues.map[json["email"]]!,
+        email: json["email"],
         address: json["address"] == null ? null : Address.fromJson(json["address"]),
         attachment: json["attachment"],
     );
 
     Map<String, dynamic> toJson() => {
         "id": id,
-        "firstName": firstNameValues.reverse[firstName],
-        "lastName": lastNameValues.reverse[lastName],
+        "firstName": firstName,
+        "lastName": lastName,
         "phoneNumber": phoneNumber,
-        "email": emailValues.reverse[email],
+        "email": email,
         "address": address?.toJson(),
         "attachment": attachment,
     };
@@ -277,8 +247,8 @@ class Address {
     dynamic createdById;
     dynamic updatedById;
     int id;
-    Country country;
-    Region region;
+    String country;
+    String region;
 
     Address({
         required this.createdAt,
@@ -298,8 +268,8 @@ class Address {
         createdById: json["createdById"],
         updatedById: json["updatedById"],
         id: json["id"],
-        country: countryValues.map[json["country"]]!,
-        region: regionValues.map[json["region"]]!,
+        country: json["country"],
+        region: json["region"],
     );
 
     Map<String, dynamic> toJson() => {
@@ -309,65 +279,7 @@ class Address {
         "createdById": createdById,
         "updatedById": updatedById,
         "id": id,
-        "country": countryValues.reverse[country],
-        "region": regionValues.reverse[region],
+        "country": country,
+        "region": region,
     };
-}
-
-enum Country {
-    UZBEKISTAN
-}
-
-final countryValues = EnumValues({
-    "UZBEKISTAN": Country.UZBEKISTAN
-});
-
-enum Region {
-    BERLIN
-}
-
-final regionValues = EnumValues({
-    "Berlin": Region.BERLIN
-});
-
-enum Email {
-    NO0404_IR_GMAIL_COM,
-    ZIKRILLOHAKRAMOV2_GMAIL_COM
-}
-
-final emailValues = EnumValues({
-    "no0404ir@gmail.com": Email.NO0404_IR_GMAIL_COM,
-    "zikrillohakramov2@gmail.com": Email.ZIKRILLOHAKRAMOV2_GMAIL_COM
-});
-
-enum FirstName {
-    ADMIN,
-    Z
-}
-
-final firstNameValues = EnumValues({
-    "Admin": FirstName.ADMIN,
-    "z": FirstName.Z
-});
-
-enum LastName {
-    A,
-    ADMINOV
-}
-
-final lastNameValues = EnumValues({
-    "a": LastName.A,
-    "Adminov": LastName.ADMINOV
-});
-
-class EnumValues<T> {
-    Map<String, T> map;
-    late Map<T, String> reverseMap;
-
-    EnumValues(this.map);
-
-    Map<T, String> get reverse {
-        reverseMap = map.map((k, v) => MapEntry(v, k));
-        return reverseMap;
-    }
 }
