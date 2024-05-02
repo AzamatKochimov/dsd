@@ -1,4 +1,5 @@
 import 'package:dsd/common/styles/colors.dart';
+import 'package:dsd/data/entities/product_model_sardor.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -6,7 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class ProductDetailsPage extends ConsumerStatefulWidget {
-  final Map<String, dynamic> product;
+  final ProductModelSardor product;
   const ProductDetailsPage({super.key, required this.product});
 
   @override
@@ -60,7 +61,7 @@ class _ProductDetailsPageState extends ConsumerState<ProductDetailsPage> {
         
               /// Product name
               Text(
-                "${widget.product["productName"]}",
+                "${widget.product.productName}",
                 style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
@@ -70,7 +71,7 @@ class _ProductDetailsPageState extends ConsumerState<ProductDetailsPage> {
         
               /// Product price
               Text(
-                "\$${widget.product["price"]}",
+                "\$${widget.product.price}",
                 style: const TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.w700,
@@ -105,7 +106,7 @@ class _ProductDetailsPageState extends ConsumerState<ProductDetailsPage> {
         
               /// Product description
               Text(
-                "${widget.product["description"]}",
+                "${widget.product.description}",
                 style: const TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w400,
@@ -145,7 +146,7 @@ class _ProductDetailsPageState extends ConsumerState<ProductDetailsPage> {
                     ),
                   ),
                   Text(
-                    '${widget.product["conditionProduct"]}',
+                    '${widget.product.conditionProduct}',
                     style: const TextStyle(
                       fontSize: 8,
                       color: AppColors.c33FF00,
@@ -170,7 +171,7 @@ class _ProductDetailsPageState extends ConsumerState<ProductDetailsPage> {
                     ),
                   ),
                   Text(
-                    '${widget.product["availability"]}',
+                    '${widget.product.availability}',
                     style: const TextStyle(
                       fontSize: 8,
                       color: AppColors.white,
@@ -211,7 +212,7 @@ class _ProductDetailsPageState extends ConsumerState<ProductDetailsPage> {
                         ),
                       ),
                       Text(
-                        '${widget.product["seller [firstName]"] } ${widget.product["lastName"]} :',
+                        '${widget.product.seller.firstName} ${widget.product.seller.lastName} :',
                         style: const TextStyle(
                           fontSize: 16,
                           color: AppColors.white,

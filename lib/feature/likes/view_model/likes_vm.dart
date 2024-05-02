@@ -1,19 +1,19 @@
-import 'package:dsd/data/entities/product_model.dart';
+import 'package:dsd/data/entities/product_model_sardor.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final likedProductsProvider =
-    StateNotifierProvider<LikedProductsNotifier, List<Product>>((ref) {
+    StateNotifierProvider<LikedProductsNotifier, List<ProductModelSardor>>((ref) {
   return LikedProductsNotifier([]);
 });
 
-class LikedProductsNotifier extends StateNotifier<List<Product>> {
+class LikedProductsNotifier extends StateNotifier<List<ProductModelSardor>> {
   LikedProductsNotifier(super.state);
 
-  void addToLikedProducts(Product product) {
+  void addToLikedProducts(ProductModelSardor product) {
     state = [...state, product];
   }
 
-  void removeFromLikedProducts(Product product) {
+  void removeFromLikedProducts(ProductModelSardor product) {
     state = state.where((p) => p != product).toList();
   }
 }
