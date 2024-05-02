@@ -18,8 +18,11 @@ import '../models/image_model.dart';
 // https://dominant-soft-development.up.railway.app/category/list
 
 class GetCategoriesService {
+  GetCategoriesService._();
+
   static BaseOptions _options = BaseOptions();
   static Dio _dio = Dio();
+
   static const Duration connectionTimeout = Duration(seconds: 30);
   static const Duration receiveTimeout = Duration(seconds: 30);
   static const String baseUrl =
@@ -31,18 +34,36 @@ class GetCategoriesService {
   static const String apiAddNewProductAPI = "/product";
 
   // headers
-  static const Map<String, String> headers = {
-    "Content-Type": "application/json",
-    "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMDIiLCJpYXQiOjE3MTQ2MjM1ODQsImV4cCI6MTcxNDYyNzE4NH0.iJ89byUBxAvUkZzvpWITZVBJ3LiZrilSJ3NgFUfqCWo"
-  };
+  // static Map<String, String> headers = {
+  //   "Content-Type": "application/json",
+  //   "Authorization": "Bearer ${AuthManager.getToken()}"
+  // };
 
-  static Dio init() {
+  // header get
+  static Future<Map<String, String>> getHeaders({bool isUpload = false}) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final headers = <String, String>{
+      'Content-type':
+          isUpload ? 'multipart/form-data' : 'application/json; charset=UTF-8',
+      'Accept':
+          isUpload ? 'multipart/form-data' : 'application/json; charset=UTF-8',
+    };
 
+    final token = prefs.getString('token') ?? '';
+
+    if (token.isNotEmpty) {
+      headers.putIfAbsent('Authorization', () => 'Bearer $token');
+    }
+
+    return headers;
+  }
+
+  static Future<Dio> init() async {
     _options = BaseOptions(
       baseUrl: baseUrl,
       connectTimeout: connectionTimeout,
       receiveTimeout: receiveTimeout,
-      headers: headers,
+      headers: await GetCategoriesService.getHeaders(),
       responseType: ResponseType.json,
       validateStatus: (statusCode) => statusCode! <= 205,
     );
@@ -52,7 +73,7 @@ class GetCategoriesService {
 
   static Future<List<Categories>> fetchAllData(String api) async {
     try {
-      final response = await init().get(api);
+      final response = await (await init()).get(api);
       if (response.statusCode == 200) {
         List<dynamic> responseData = response.data['data'];
         List<Categories> categories = [];
@@ -85,7 +106,7 @@ class GetCategoriesService {
 
     // try {
     // Perform a POST request to upload the image
-    Response response = await init().post(api, data: formData);
+    Response response = await (await init()).post(api, data: formData);
     l.i("Rasm uploaded succesfully ${response.data}");
     if (response.statusCode == 200) {
       ImageModel imageResponse = ImageModel.fromJson(response.data);
@@ -117,11 +138,9 @@ class GetCategoriesService {
 
   static Future<String> createProduct(String api, String sendData) async {
     try {
-      Response response = await init().post(api, data: sendData);
+      Response response = await (await init()).post(api, data: sendData);
       if (response.statusCode == 200) {
         l.i("added successfully : ${response.data}");
-        print("Headers being sent: ${_dio.options.headers}succes");
-
         return "added successfully";
       } else {
         l.e("Failed with status code: ${response.statusCode}");
@@ -129,7 +148,6 @@ class GetCategoriesService {
         return "Error: status code ${response.statusCode}";
       }
     } catch (e) {
-      print("Headers being sent: ${_dio.options.headers} error");
       l.e("Exception caught: $e");
       return "Exception: $e";
     }
