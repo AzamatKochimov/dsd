@@ -84,20 +84,18 @@ class LoginNotifier extends ChangeNotifier {
   //   return response;
   // }
 
-  
-
   Future<Map<String, dynamic>> register(Map<String, dynamic> map) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-      log("register check:");
-    
-      String? response =
-          await ApiService.post("api/auth/register", map, params: {});
+    log("register check:");
 
-      log("register check:");
-      print(response);
-      Map<String, dynamic> responseObj = jsonDecode(response!);
+    String? response =
+        await ApiService.post("api/auth/register", map, params: {});
 
-      if (responseObj.containsKey('success') && responseObj['success'] == true) {
+    log("register check:");
+    print(response);
+    Map<String, dynamic> responseObj = jsonDecode(response!);
+
+    if (responseObj.containsKey('success') && responseObj['success'] == true) {
       // Login successful
       prefs.setString("token", responseObj['data']['accessToken']);
       print("correct"); // Print "correct" to console
@@ -114,7 +112,6 @@ class LoginNotifier extends ChangeNotifier {
         'message': 'Register failed. Please try again.',
       };
     }
-    
   }
 
   Future<void> logOut() async {
@@ -133,6 +130,9 @@ class LoginNotifier extends ChangeNotifier {
 
     if (responseObj.containsKey('success') && responseObj['success'] == true) {
       // Login successful
+      currentUser =
+          User.fromJson(responseObj['data']['userDTO']); // Set currentUser
+      notifyListeners();
       prefs.setString("token", responseObj['data']['accessToken']);
       print("correct"); // Print "correct" to console
       return {
@@ -150,11 +150,29 @@ class LoginNotifier extends ChangeNotifier {
     }
   }
 
-
-  Future<bool>isLoggedIn()async{
+  Future<bool> isLoggedIn() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString('token');
     return token != null;
   }
-
 }
+
+
+class AuthManager {
+  final SharedPreferences prefs;
+
+  AuthManager(this.prefs);
+
+  Future<String?> getToken() async {
+    return prefs.getString('token');
+  }
+
+  Future<void> setToken(String token) async {
+    await prefs.setString('token', token);
+  }
+
+  Future<void> removeToken() async {
+    await prefs.remove('token');
+  }
+}
+

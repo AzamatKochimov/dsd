@@ -2,12 +2,14 @@ import 'dart:convert';
 import 'package:device_preview/device_preview.dart';
 import 'package:dio/dio.dart';
 import 'package:dsd/common/server/api/api.dart';
+import 'package:dsd/feature/auth/view_model/auth_vm.dart';
 import 'package:dsd/feature/crud/models/category_model.dart';
 import 'package:dsd/feature/crud/presentation/pages/create_part/extra_later_will_be_deleted/model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:l/l.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/image_model.dart';
 
@@ -26,13 +28,16 @@ class GetCategoriesService {
   // apies
   static const String apiGetAllCategoryList = "/category/list";
   static const String apiUploadImageAttachment = "/attachment/upload";
+  static const String apiAddNewProductAPI = "/product";
 
   // headers
   static const Map<String, String> headers = {
     "Content-Type": "application/json",
+    "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMDIiLCJpYXQiOjE3MTQ2MjM1ODQsImV4cCI6MTcxNDYyNzE4NH0.iJ89byUBxAvUkZzvpWITZVBJ3LiZrilSJ3NgFUfqCWo"
   };
 
   static Dio init() {
+
     _options = BaseOptions(
       baseUrl: baseUrl,
       connectTimeout: connectionTimeout,
@@ -44,32 +49,6 @@ class GetCategoriesService {
     _dio = Dio(_options);
     return _dio;
   }
-
-  // static Future<List<Categories>> fetchAllData(String api) async {
-  //   try {
-  //     final response = await init().get(api);
-  //
-  //     // List<ExamModel> exams = examModelFromJson(response.data);
-  //     // return exams;
-  //
-  //     // List<CategoryModel> exams = (response.data as List)
-  //     //     .map((examJson) =>
-  //     //         CategoryModel.fromJson(examJson as Map<String, dynamic>))
-  //     //     .toList();
-  //     if(response.data != null && response.statusCode == 200 && response.data[response.data] != null) {
-  //       var responseData = response.data['data'] as List;
-  //       List<Categories> model =
-  //       responseData.map((e) => Categories.fromJson(e)).toList();
-  //       l.w("$responseData / $response");
-  //
-  //       return model;
-  //     }else{
-  //       throw Exception("$response");
-  //     }
-  //   } catch (e) {
-  //     throw Exception('Failed to load data $e');
-  //   }
-  // }
 
   static Future<List<Categories>> fetchAllData(String api) async {
     try {
@@ -98,42 +77,61 @@ class GetCategoriesService {
     }
   }
 
-  static Future<String> uploadImage(String api, XFile imageFile) async {
+  static Future<int> uploadImage(String api, XFile imageFile) async {
     FormData formData = FormData.fromMap({
       'file': await MultipartFile.fromFile(imageFile.path,
           filename: imageFile.name),
     });
 
-    try {
-      // Perform a POST request to upload the image
-      Response response = await init().post(api, data: formData);
-      if (response.statusCode == 200) {
-        l.i("${response.data}");
-        return "Image uploaded successfully";
+    // try {
+    // Perform a POST request to upload the image
+    Response response = await init().post(api, data: formData);
+    l.i("Rasm uploaded succesfully ${response.data}");
+    if (response.statusCode == 200) {
+      ImageModel imageResponse = ImageModel.fromJson(response.data);
+      if (imageResponse.success && imageResponse.images.id != null) {
+        l.i('${imageResponse.images.id} si olindi succes');
+        return imageResponse.images.id!;
       } else {
-        l.e("${response.statusCode}");
-        return "Failed to upload image: ${response.statusCode}";
+        l.e('Image id is not found');
+        throw Exception('The Image id is not found');
       }
-    } on DioError catch (e) {
-      return "DioError: ${e.response?.data['message'] ?? e.message}";
-    } catch (e) {
-      return "Error: $e";
+      // int? imageId = response.data['id'];
+      // if (imageId != null) {
+      //   l.i("The ID of Image get succesfully $imageId");
+      //   return imageId;
+      // } else {
+      //   l.e("Image id is not get $imageId");
+      //   throw Exception('Image id is not get');
+      // }
+    } else {
+      l.e("Failed to upload Image ${response.statusCode}");
+      throw Exception('Failed to Upload Image');
     }
+    // } on DioError catch (e) {
+    //   return "DioError: ${e.response?.data['message'] ?? e.message}";
+    // } catch (e) {
+    //   return "Error: $e";
+    // }
   }
 
-  static Future<String> addProduct(String api, String sendData)async{
-    Response response = await init().post(api, data: sendData);
-   try{
-     if(response.statusCode == 200){
-       l.i(response.data);
-        return "added succesfully";
-     }else{
-       l.e(response.data);
-       return "${response.statusCode}";
-     }
-   }
-   catch(e){
-     return "Error: $e";
-   }
+  static Future<String> createProduct(String api, String sendData) async {
+    try {
+      Response response = await init().post(api, data: sendData);
+      if (response.statusCode == 200) {
+        l.i("added successfully : ${response.data}");
+        print("Headers being sent: ${_dio.options.headers}succes");
+
+        return "added successfully";
+      } else {
+        l.e("Failed with status code: ${response.statusCode}");
+        l.e("Response data: ${response.data}");
+        return "Error: status code ${response.statusCode}";
+      }
+    } catch (e) {
+      print("Headers being sent: ${_dio.options.headers} error");
+      l.e("Exception caught: $e");
+      return "Exception: $e";
+    }
   }
 }

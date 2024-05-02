@@ -7,7 +7,7 @@ String productModelToJson(ProductModel data) => json.encode(data.toJson());
 
 class ProductModel {
   final String productName;
-  final int price;
+  final double price;
   final int productCategory;
   final bool availability;
   final String payType;
@@ -52,7 +52,7 @@ class ProductModel {
     "conditionProduct": conditionProduct,
     "description": description,
     "sellerId": sellerId,
-    "attachmentIds": List<dynamic>.from(attachmentIds.map((x) => x)),
-    "productFeaturesDTOS": List<dynamic>.from(productFeaturesDtos.map((x) => x)),
+    "attachmentIds": List<int>.from(attachmentIds.map((x) => x)),
+    "productFeaturesDTOS": List.from(productFeaturesDtos.map((x) => x)),
   };
 }
