@@ -12,12 +12,12 @@ var loginref =
 
 class LoginNotifier extends ChangeNotifier {
   User? currentUser;
+  String? currentUserToken;
 
-  bool isEmail = true;
+  bool isEmail = false;
   bool isObscure = true;
   bool isChecked = false;
 
-  String? currentUserToken;
 
   String? phoneNumber;
   String? email;
@@ -126,25 +126,28 @@ class LoginNotifier extends ChangeNotifier {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     log("login func");
+
+
+    try {
     String? response = await ApiService.post("api/auth/login", map, params: {});
     print(response!);
 
     Map<String, dynamic> responseObj = jsonDecode(response);
-
-    if (responseObj.containsKey('success') && responseObj['success'] == true) {
+    print(responseObj.containsKey('success') && responseObj['success'] == true);
       // Login successful
       currentUser =
           User.fromJson(responseObj['data']['userDTO']); // Set currentUser
       notifyListeners();
       prefs.setString("token", responseObj['data']['accessToken']);
       currentUserToken = prefs.getString('token');
+      log("here it is ${currentUserToken}");
       print("correct"); // Print "correct" to console
       return {
         'status': true,
         'message': 'Successfully logged in.',
         'userDto': responseObj['data']['userDTO']
       };
-    } else {
+    } catch(e) {
       // Login failed
       print("password or number is wrong"); // Print error message to console
       return {

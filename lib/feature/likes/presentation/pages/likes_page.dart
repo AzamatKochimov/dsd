@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dsd/feature/auth/view_model/auth_vm.dart';
 import 'package:dsd/feature/crud/presentation/pages/add_item_home_page.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +16,8 @@ class LikesPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final likedProducts = ref.watch(likedProductsProvider);
+
+    log("${ref.watch(loginref).currentUserToken}");
 
     if (ref.watch(loginref).currentUserToken == null || ref.watch(loginref).currentUserToken!.isEmpty) {
       return const NotLoggedInUi();

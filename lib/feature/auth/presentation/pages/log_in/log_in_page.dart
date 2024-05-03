@@ -63,87 +63,90 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   const SizedBox(
                     height: 25,
                   ),
-                  Row(
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          border: ref.read(loginref).isEmail
-                              ? Border.all(color: Colors.transparent)
-                              : Border.all(color: Colors.white),
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: Material(
-                          borderRadius: BorderRadius.circular(15),
-                          elevation: 5,
-                          color: ref.read(loginref).isEmail
-                              ? AppColors.greenishBlue
-                              : AppColors.background,
-                          child: InkWell(
-                            borderRadius: BorderRadius.circular(15),
-                            onTap: () {
-                              ref.read(loginref).swapEmail();
-                            },
-                            child: SizedBox(
-                              height: 55,
-                              width: 150.w,
-                              child: const Center(
-                                child: Text(
-                                  "Email",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w700,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 15,
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                          border: ref.read(loginref).isEmail
-                              ? Border.all(color: Colors.white)
-                              : Border.all(color: Colors.transparent),
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: Material(
-                          borderRadius: BorderRadius.circular(15),
-                          elevation: 5,
-                          color: ref.read(loginref).isEmail
-                              ? AppColors.background
-                              : AppColors.greenishBlue,
-                          child: InkWell(
-                            borderRadius: BorderRadius.circular(15),
-                            onTap: () {
-                              ref.read(loginref).swapEmail();
-                            },
-                            child: SizedBox(
-                              height: 55,
-                              width: 150.w,
-                              child: const Center(
-                                child: Text(
-                                  "Mobile Number",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w700,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                  // i commented this section bcuz we desied users will login only by their phone numbers so its commented for now
+                  // Row(
+                  //   children: [
+                  //     Container(
+                  //       decoration: BoxDecoration(
+                  //         border: ref.read(loginref).isEmail
+                  //             ? Border.all(color: Colors.transparent)
+                  //             : Border.all(color: Colors.white),
+                  //         borderRadius: BorderRadius.circular(15),
+                  //       ),
+                  //       child: Material(
+                  //         borderRadius: BorderRadius.circular(15),
+                  //         elevation: 5,
+                  //         color: ref.read(loginref).isEmail
+                  //             ? AppColors.greenishBlue
+                  //             : AppColors.background,
+                  //         child: InkWell(
+                  //           borderRadius: BorderRadius.circular(15),
+                  //           onTap: () {
+                  //             ref.read(loginref).swapEmail();
+                  //           },
+                  //           child: SizedBox(
+                  //             height: 55,
+                  //             width: 150.w,
+                  //             child: const Center(
+                  //               child: Text(
+                  //                 "Email",
+                  //                 style: TextStyle(
+                  //                   fontSize: 16,
+                  //                   fontWeight: FontWeight.w700,
+                  //                   color: Colors.white,
+                  //                 ),
+                  //               ),
+                  //             ),
+                  //           ),
+                  //         ),
+                  //       ),
+                  //     ),
+                  //     const SizedBox(
+                  //       width: 15,
+                  //     ),
+                  //     Container(
+                  //       decoration: BoxDecoration(
+                  //         border: ref.read(loginref).isEmail
+                  //             ? Border.all(color: Colors.white)
+                  //             : Border.all(color: Colors.transparent),
+                  //         borderRadius: BorderRadius.circular(15),
+                  //       ),
+                  //       child: Material(
+                  //         borderRadius: BorderRadius.circular(15),
+                  //         elevation: 5,
+                  //         color: ref.read(loginref).isEmail
+                  //             ? AppColors.background
+                  //             : AppColors.greenishBlue,
+                  //         child: InkWell(
+                  //           borderRadius: BorderRadius.circular(15),
+                  //           onTap: () {
+                  //             ref.read(loginref).swapEmail();
+                  //           },
+                  //           child: SizedBox(
+                  //             height: 55,
+                  //             width: 150.w,
+                  //             child: const Center(
+                  //               child: Text(
+                  //                 "Mobile Number",
+                  //                 style: TextStyle(
+                  //                   fontSize: 16,
+                  //                   fontWeight: FontWeight.w700,
+                  //                   color: Colors.white,
+                  //                 ),
+                  //               ),
+                  //             ),
+                  //           ),
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
+                  
                   const SizedBox(
                     height: 40,
                   ),
                   TextField(
+                    keyboardType: TextInputType.phone,
                     controller: ref.read(loginref).isEmail
                         ? emailController
                         : phoneController,
