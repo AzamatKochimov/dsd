@@ -9,7 +9,7 @@ List<ProductModelSardor> productModelSardorFromJson(String str) => List<ProductM
 String productModelSardorToJson(List<ProductModelSardor> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class ProductModelSardor {
-    int id;
+    int? id;
     String productName;
     double price;
     TCategory productCategory;
@@ -22,7 +22,7 @@ class ProductModelSardor {
     List<ProductDtoList> productDtoLists;
 
     ProductModelSardor({
-        required this.id,
+        this.id,
         required this.productName,
         required this.price,
         required this.productCategory,

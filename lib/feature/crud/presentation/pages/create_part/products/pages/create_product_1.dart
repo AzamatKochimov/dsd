@@ -11,12 +11,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../widgets/image_picker_widget.dart';
 import '../widgets/show_category_name_widget.dart';
 
-final nameControllerProvider =
-    Provider<TextEditingController>((ref) => TextEditingController());
-final priceControllerProvider =
-    Provider<TextEditingController>((ref) => TextEditingController());
-final descriptionControllerProvider =
-    Provider<TextEditingController>((ref) => TextEditingController());
+
 
 class CreateProductOnePage extends ConsumerWidget {
   const CreateProductOnePage({super.key});
@@ -63,15 +58,15 @@ class CreateProductOnePage extends ConsumerWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CustomTextWidget(text: 'Name product'),
+                  const CustomTextWidget(text: 'Name product'),
                   TextField(
                     controller: _nameOfProductController,
                     decoration: InputDecoration(border: OutlineInputBorder()),
                   ),
-                  CustomTextWidget(text: 'Description'),
+                  const CustomTextWidget(text: 'Description'),
                   TextField(
                     controller: _descriptionController,
-                    decoration: InputDecoration(border: OutlineInputBorder()),
+                    decoration: const InputDecoration(border: OutlineInputBorder()),
                   ),
                 ],
               ),
@@ -127,24 +122,35 @@ class CreateProductOnePage extends ConsumerWidget {
                     borderRadius: BorderRadius.circular(12)),
                 minWidth: double.infinity,
                 color: AppColors.c57C5B6,
-                onPressed: () {
-                  List<int> attachmentsList = ref.read(attachmentIdsProvider);
-                  ref.read(addProductNotifierProvider.notifier).productAdd(
-                      productName: _nameOfProductController.text,
-                      price: 12,
-                      productCategoryID: data.id,
-                      availability: true,
-                      payType: "USD",
-                      conditionProduct: "NEW",
-                      description: _descriptionController.text,
-                      sellerID: 102,
-                      attachmentIDS: attachmentsList,
-                      productDTOS: []);
-                },
-                child: const CustomTextWidget(
-                  text: "Save",
-                  textColor: AppColors.white,
-                ),
+                onPressed: ref.watch(addProductStateProvider) ==
+                        AddProductState.loading
+                    ? null
+                    : () {
+                        List<int> attachmentsList =
+                            ref.read(attachmentIdsProvider);
+                        ref
+                            .read(addProductNotifierProvider.notifier)
+                            .productAdd(
+                                context: context,
+                                ref: ref,
+                                productName: _nameOfProductController.text,
+                                price: 12,
+                                productCategoryID: data.id,
+                                availability: true,
+                                payType: "USD",
+                                conditionProduct: "NEW",
+                                description: _descriptionController.text,
+                                sellerID: 102,
+                                attachmentIDS: attachmentsList,
+                                productDTOS: []);
+                      },
+                child: ref.watch(addProductStateProvider) ==
+                        AddProductState.loading
+                    ? const CircularProgressIndicator()
+                    : const CustomTextWidget(
+                        text: "Save",
+                        textColor: AppColors.white,
+                      ),
               ),
               spaceWidget(isHeight: true, size: 20),
             ],

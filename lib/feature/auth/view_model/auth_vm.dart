@@ -164,22 +164,18 @@ class LoginNotifier extends ChangeNotifier {
   }
 }
 
-
-class AuthManager {
-  final SharedPreferences prefs;
-
-  AuthManager(this.prefs);
-
-  Future<String?> getToken() async {
-    return prefs.getString('token');
-  }
-
-  Future<void> setToken(String token) async {
-    await prefs.setString('token', token);
-  }
-
-  Future<void> removeToken() async {
-    await prefs.remove('token');
-  }
-}
-
+// class AuthManager {
+//   static SharedPreferences? prefs;
+//
+//   static Future<String?> getToken() async {
+//     return prefs!.getString('token');
+//   }
+// //
+// // Future<void> setToken(String token) async {
+// //   await prefs.setString('token', token);
+// // }
+// //
+// // Future<void> removeToken() async {
+// //   await prefs.remove('token');
+// // }
+// }
