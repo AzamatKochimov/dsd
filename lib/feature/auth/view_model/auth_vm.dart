@@ -17,6 +17,8 @@ class LoginNotifier extends ChangeNotifier {
   bool isObscure = true;
   bool isChecked = false;
 
+  String? currentUserToken;
+
   String? phoneNumber;
   String? email;
   String? password;
@@ -98,6 +100,7 @@ class LoginNotifier extends ChangeNotifier {
     if (responseObj.containsKey('success') && responseObj['success'] == true) {
       // Login successful
       prefs.setString("token", responseObj['data']['accessToken']);
+      currentUserToken = prefs.getString('token');
       print("correct"); // Print "correct" to console
       return {
         'status': true,
@@ -134,6 +137,7 @@ class LoginNotifier extends ChangeNotifier {
           User.fromJson(responseObj['data']['userDTO']); // Set currentUser
       notifyListeners();
       prefs.setString("token", responseObj['data']['accessToken']);
+      currentUserToken = prefs.getString('token');
       print("correct"); // Print "correct" to console
       return {
         'status': true,
