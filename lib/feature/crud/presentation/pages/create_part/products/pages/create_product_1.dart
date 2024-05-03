@@ -11,12 +11,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../widgets/image_picker_widget.dart';
 import '../widgets/show_category_name_widget.dart';
 
-final nameControllerProvider =
-    Provider<TextEditingController>((ref) => TextEditingController());
-final priceControllerProvider =
-    Provider<TextEditingController>((ref) => TextEditingController());
-final descriptionControllerProvider =
-    Provider<TextEditingController>((ref) => TextEditingController());
+
 
 class CreateProductOnePage extends ConsumerWidget {
   const CreateProductOnePage({super.key});
@@ -63,15 +58,15 @@ class CreateProductOnePage extends ConsumerWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CustomTextWidget(text: 'Name product'),
+                  const CustomTextWidget(text: 'Name product'),
                   TextField(
                     controller: _nameOfProductController,
                     decoration: InputDecoration(border: OutlineInputBorder()),
                   ),
-                  CustomTextWidget(text: 'Description'),
+                  const CustomTextWidget(text: 'Description'),
                   TextField(
                     controller: _descriptionController,
-                    decoration: InputDecoration(border: OutlineInputBorder()),
+                    decoration: const InputDecoration(border: OutlineInputBorder()),
                   ),
                 ],
               ),
