@@ -128,7 +128,7 @@ class HomePageState extends ConsumerState<HomePage> {
                             maxCrossAxisExtent: 200.w,
                             mainAxisSpacing: 10.0,
                             crossAxisSpacing: 8.0,
-                            mainAxisExtent: 260.h,
+                            mainAxisExtent: 300.h,
                           ),
                           itemBuilder: (context, index) {
                             print("null null null");
