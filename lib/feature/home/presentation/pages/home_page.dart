@@ -31,6 +31,7 @@ class HomePageState extends ConsumerState<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    List<String> months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     return Scaffold(
       backgroundColor: AppColors.background,
       body: Consumer(
@@ -107,10 +108,12 @@ class HomePageState extends ConsumerState<HomePage> {
                         SizedBox(
                             height: 270.h, child: const CategoriesWidget()),
                         // const SizedBox(height: 20,),
-                        const SizedBox(height: 30,),
+                        const SizedBox(
+                          height: 30,
+                        ),
                         Container(
-                            height: 150,
-                            width: double.infinity,
+                          height: 150,
+                          width: double.infinity,
                           child: Image.asset(
                             'assets/images/sale.png',
                             fit: BoxFit.fill,
@@ -128,7 +131,7 @@ class HomePageState extends ConsumerState<HomePage> {
                             maxCrossAxisExtent: 200.w,
                             mainAxisSpacing: 10.0,
                             crossAxisSpacing: 8.0,
-                            mainAxisExtent: 300.h,
+                            mainAxisExtent: 345.h,
                           ),
                           itemBuilder: (context, index) {
                             print("null null null");
@@ -145,8 +148,7 @@ class HomePageState extends ConsumerState<HomePage> {
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) => ProductDetailsPage(
-                                        product:
-                                            currentProduct,
+                                        product: currentProduct,
                                       ),
                                     ),
                                   );
@@ -215,7 +217,6 @@ class HomePageState extends ConsumerState<HomePage> {
                                                       }
                                                     },
                                                   ),
-                                          
                                           )),
                                       Padding(
                                         padding: const EdgeInsets.all(10),
@@ -224,7 +225,9 @@ class HomePageState extends ConsumerState<HomePage> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
                                               children: [
                                                 Text(
                                                   currentProduct.productName,
@@ -247,8 +250,7 @@ class HomePageState extends ConsumerState<HomePage> {
                                                               likedProductsProvider
                                                                   .notifier)
                                                           .addToLikedProducts(
-                                                            currentProduct
-                                                          );
+                                                              currentProduct);
                                                     }
                                                   },
                                                   context: context,
@@ -276,6 +278,35 @@ class HomePageState extends ConsumerState<HomePage> {
                                               maxLines: 2,
                                               overflow: TextOverflow.ellipsis,
                                             ),
+                                            Text(
+                                              "condition: ${currentProduct.conditionProduct}",
+                                              style: const TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                            ),
+                                            const SizedBox(
+                                              height: 10,
+                                            ),
+                                            Text(
+                                              "${currentProduct.seller.address?.country ?? ""}, ${currentProduct.seller.address?.region ?? ""}",
+                                              style: const TextStyle(
+                                                color: Colors.white70,
+                                                fontSize: 12,
+                                              ),
+                                              maxLines: 2,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                            Text(
+                                              "${currentProduct.productCategory.createdAt.day} ${months[currentProduct.productCategory.createdAt.month+1]} ${currentProduct.productCategory.createdAt.hour}:${currentProduct.productCategory.createdAt.minute}",
+                                              style: const TextStyle(
+                                                color: Colors.white70,
+                                                fontSize: 12,
+                                              ),
+                                              maxLines: 2,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
                                           ],
                                         ),
                                       ),
@@ -292,7 +323,6 @@ class HomePageState extends ConsumerState<HomePage> {
                             }
                           },
                         )
-                        
                       ],
                     ),
                   ),
