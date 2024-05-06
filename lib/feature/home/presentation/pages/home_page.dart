@@ -31,6 +31,7 @@ class HomePageState extends ConsumerState<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    List<String> months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     return Scaffold(
       backgroundColor: AppColors.background,
       body: Consumer(
@@ -106,16 +107,19 @@ class HomePageState extends ConsumerState<HomePage> {
                         ),
                         SizedBox(
                             height: 270.h, child: const CategoriesWidget()),
-                        const SizedBox(height: 20,),
+                        // const SizedBox(height: 20,),
+                        const SizedBox(
+                          height: 30,
+                        ),
                         Container(
-                            height: 150,
-                            width: double.infinity,
+                          height: 150,
+                          width: double.infinity,
                           child: Image.asset(
                             'assets/images/sale.png',
                             fit: BoxFit.fill,
                           ),
                         ),
-
+                        // const SizedBox(height: 10,),
                         /// products
                         GridView.builder(
                           shrinkWrap: true,
@@ -127,7 +131,7 @@ class HomePageState extends ConsumerState<HomePage> {
                             maxCrossAxisExtent: 200.w,
                             mainAxisSpacing: 10.0,
                             crossAxisSpacing: 8.0,
-                            mainAxisExtent: 260.h,
+                            mainAxisExtent: 345.h,
                           ),
                           itemBuilder: (context, index) {
                             print("null null null");
@@ -144,8 +148,7 @@ class HomePageState extends ConsumerState<HomePage> {
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) => ProductDetailsPage(
-                                        product:
-                                            currentProduct,
+                                        product: currentProduct,
                                       ),
                                     ),
                                   );
@@ -171,50 +174,49 @@ class HomePageState extends ConsumerState<HomePage> {
                                       Container(
                                           padding: const EdgeInsets.all(10),
                                           child: Center(
-                                            child: Image.asset('assets/images/horse.png')
-                                            // currentProduct
-                                            //             .attachment.isEmpty ||
-                                            //         currentProduct.attachment[0]
-                                            //             .contentUrl.isEmpty
-                                            //     ? Image.asset(
-                                            //         "assets/images/404.jpg",
-                                            //         height: 140,
-                                            //         width: 160,
-                                            //       )
-                                            //     : Image.network(
-                                            //         'http://192.168.0.122:8080/attachment/${currentProduct.attachment[0].id}',
-                                            //         height: 140,
-                                            //         width: 160,
-                                            //         loadingBuilder: (BuildContext
-                                            //                 context,
-                                            //             Widget child,
-                                            //             ImageChunkEvent?
-                                            //                 loadingProgress) {
-                                            //           if (loadingProgress ==
-                                            //               null) {
-                                            //             return child;
-                                            //           } else {
-                                            //             return Center(
-                                            //               child: SizedBox(
-                                            //                 height: 100,
-                                            //                 width: 100,
-                                            //                 child:
-                                            //                     CircularProgressIndicator(
-                                            //                   value: loadingProgress
-                                            //                               .expectedTotalBytes !=
-                                            //                           null
-                                            //                       ? loadingProgress
-                                            //                               .cumulativeBytesLoaded /
-                                            //                           loadingProgress
-                                            //                               .expectedTotalBytes!
-                                            //                       : null,
-                                            //                 ),
-                                            //               ),
-                                            //             );
-                                            //           }
-                                            //         },
-                                            //       ),
-                                          
+                                            // child: Image.asset('assets/images/horse.png')
+                                            child: currentProduct
+                                                        .attachment.isEmpty ||
+                                                    currentProduct.attachment[0]
+                                                        .contentUrl.isEmpty
+                                                ? Image.asset(
+                                                    "assets/images/404.jpg",
+                                                    height: 160,
+                                                    width: 180,
+                                                  )
+                                                : Image.network(
+                                                    'https://dominant-soft-development.up.railway.app/attachment/5',
+                                                    height: 160,
+                                                    width: 180,
+                                                    loadingBuilder: (BuildContext
+                                                            context,
+                                                        Widget child,
+                                                        ImageChunkEvent?
+                                                            loadingProgress) {
+                                                      if (loadingProgress ==
+                                                          null) {
+                                                        return child;
+                                                      } else {
+                                                        return Center(
+                                                          child: SizedBox(
+                                                            height: 160,
+                                                            width: 180,
+                                                            child:
+                                                                CircularProgressIndicator(
+                                                              value: loadingProgress
+                                                                          .expectedTotalBytes !=
+                                                                      null
+                                                                  ? loadingProgress
+                                                                          .cumulativeBytesLoaded /
+                                                                      loadingProgress
+                                                                          .expectedTotalBytes!
+                                                                  : null,
+                                                            ),
+                                                          ),
+                                                        );
+                                                      }
+                                                    },
+                                                  ),
                                           )),
                                       Padding(
                                         padding: const EdgeInsets.all(10),
@@ -223,7 +225,9 @@ class HomePageState extends ConsumerState<HomePage> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
                                               children: [
                                                 Text(
                                                   currentProduct.productName,
@@ -246,8 +250,7 @@ class HomePageState extends ConsumerState<HomePage> {
                                                               likedProductsProvider
                                                                   .notifier)
                                                           .addToLikedProducts(
-                                                            currentProduct
-                                                          );
+                                                              currentProduct);
                                                     }
                                                   },
                                                   context: context,
@@ -267,7 +270,36 @@ class HomePageState extends ConsumerState<HomePage> {
                                             Text(
                                               truncateText(
                                                   currentProduct.description,
-                                                  40),
+                                                  25),
+                                              style: const TextStyle(
+                                                color: Colors.white70,
+                                                fontSize: 12,
+                                              ),
+                                              maxLines: 2,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                            Text(
+                                              "condition: ${currentProduct.conditionProduct}",
+                                              style: const TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                            ),
+                                            const SizedBox(
+                                              height: 10,
+                                            ),
+                                            Text(
+                                              "${currentProduct.seller.address?.country ?? ""}, ${currentProduct.seller.address?.region ?? ""}",
+                                              style: const TextStyle(
+                                                color: Colors.white70,
+                                                fontSize: 12,
+                                              ),
+                                              maxLines: 2,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                            Text(
+                                              "${currentProduct.productCategory.createdAt.day} ${months[currentProduct.productCategory.createdAt.month+1]} ${currentProduct.productCategory.createdAt.hour}:${currentProduct.productCategory.createdAt.minute}",
                                               style: const TextStyle(
                                                 color: Colors.white70,
                                                 fontSize: 12,
@@ -291,7 +323,6 @@ class HomePageState extends ConsumerState<HomePage> {
                             }
                           },
                         )
-                        
                       ],
                     ),
                   ),

@@ -25,4 +25,5 @@ class AppRouteName {
   static const String PRODUCT_DETAILS_PAGE = "/product_details_page";
   static const String CHILDREN_PRODUCT_PAGE = "/children_product_page";
   static const String REAL_ESTATE_PAGE = "/real_estate_page";
+  static const String FAVOURITE_PAGE = "/favourite_page";
 }

@@ -7,6 +7,7 @@ class ApiConst {
 
   // Courses api
   static const getAllProduct = '/product/list';
+  static const getFavProduct = '/favourite/list';
 
 }
 

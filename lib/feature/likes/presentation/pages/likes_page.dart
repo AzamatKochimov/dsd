@@ -9,17 +9,42 @@ import 'package:dsd/feature/home/presentation/widgets/favorite_button.dart';
 import 'package:dsd/feature/likes/view_model/likes_vm.dart';
 import 'package:dsd/feature/product_details/presentation/pages/product_details_page.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class LikesPage extends ConsumerWidget {
-  const LikesPage({Key? key});
+class LikesPage extends ConsumerStatefulWidget {
+  const LikesPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<LikesPage> createState() => _LikesPageState();
+}
+
+class _LikesPageState extends ConsumerState<LikesPage> {
+  bool isLOggedIn = false;
+
+  @override
+  void initState() {
+    super.initState();
+    log('initState called');
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    retrieveData();
+  }
+
+  Future<void> retrieveData() async {
+    print('retrieveData called');
+    isLOggedIn = await ref.watch(loginref).isLoggedIn();
+    log("${await ref.watch(loginref).isLoggedIn()}");
+    setState(() {});
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final likedProducts = ref.watch(likedProductsProvider);
 
-    log("${ref.watch(loginref).currentUserToken}");
-
-    if (ref.watch(loginref).currentUserToken == null || ref.watch(loginref).currentUserToken!.isEmpty) {
+    if (!isLOggedIn) {
       return const NotLoggedInUi();
     }
 
@@ -111,31 +136,15 @@ class LikesPage extends ConsumerWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    currentProduct.productName,
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                  FavoriteButton(
-                                    iconSize: 30,
-                                    valueChanged: (isFavorite) {
-                                      if (isFavorite) {
-                                        ref
-                                            .read(likedProductsProvider.notifier)
-                                            .addToLikedProducts(currentProduct);
-                                      }
-                                    },
-                                    context: context,
-                                  ),
-                                ],
+                              Text(
+                                currentProduct.productName,
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                               ),
                               const SizedBox(height: 5),
                               Text(
@@ -167,12 +176,12 @@ class LikesPage extends ConsumerWidget {
             ),
     );
   }
+}
 
-  String truncateText(String text, int maxLength) {
-    if (text.length > maxLength) {
-      return '${text.substring(0, maxLength)}...';
-    } else {
-      return text;
-    }
+String truncateText(String text, int maxLength) {
+  if (text.length > maxLength) {
+    return '${text.substring(0, maxLength)}...';
+  } else {
+    return text;
   }
 }
