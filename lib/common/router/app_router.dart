@@ -4,6 +4,7 @@ import 'package:dsd/common/widgets/bottom_tab_bar.dart';
 import 'package:dsd/feature/crud/presentation/pages/add_item_home_page.dart';
 import 'package:dsd/feature/crud/presentation/pages/create_part/category_part/choose_subcategory.dart';
 import 'package:dsd/feature/crud/presentation/pages/create_part/products/pages/create_product_1.dart';
+import 'package:dsd/feature/likes/presentation/pages/likes_page.dart';
 import 'package:flutter/material.dart';
 import '../../feature/crud/presentation/pages/active_products_page.dart';
 import '../../feature/crud/presentation/pages/create_part/category_part/choose_category_main_page.dart';
@@ -36,28 +37,9 @@ class AppRouter<T extends Object?> {
       case AppRouteName.ACTIVEPRODUCTSPAGE:
         return MaterialPageRoute(
             builder: (ctx) => const ActiveProductsPage(), settings: settings);
-      // case AppRouteName.CHILDREN_PRODUCT_PAGE:
-      //   return MaterialPageRoute(
-      //       builder: (ctx) => const CreateChildrenProduct(),
-      //       settings: settings);
       case AppRouteName.REAL_ESTATE_PAGE:
         return MaterialPageRoute(
             builder: (ctx) => const TabScreen(), settings: settings);
-
-      // CRUD FOLDER PAGES
-      // case AppRouteName.ADDITEMHOMEPAGE:
-      //   return MaterialPageRoute(
-      //       builder: (ctx) => const AddItemHomePage(), settings: settings);
-      // case AppRouteName.DRAFTPRODUCTSPAGE:
-      //   return MaterialPageRoute(
-      //       builder: (ctx) => const DraftProductsPage(), settings: settings);
-      // case AppRouteName.ACTIVEPRODUCTSPAGE:
-      //   return MaterialPageRoute(
-      //       builder: (ctx) => const ActiveProductsPage(), settings: settings);
-      // case AppRouteName.CREATEPRODUCTMAINPAGE:
-      //   return MaterialPageRoute(
-      //       builder: (ctx) => const CreateChildrenProduct(),
-      //       settings: settings);
       case AppRouteName.CHOOSECATEGORYMAINPAGE:
         return MaterialPageRoute(
             builder: (ctx) => const ChooseCategoryMainPage(),
@@ -80,9 +62,6 @@ class AppRouter<T extends Object?> {
       case AppRouteName.CHANGE_EMAIL:
         return MaterialPageRoute(
             builder: (ctx) => const ChangeEmail(), settings: settings);
-      // case AppRouteName.PRODUCT_DETAILS_PAGE:
-      //   return MaterialPageRoute(
-      //       builder: (ctx) => const ProductDetailsPage(), settings: settings);
       case AppRouteName.INITIAL_PAGE:
         return MaterialPageRoute(
             builder: (ctx) => const InitialPage(), settings: settings);
@@ -101,6 +80,9 @@ class AppRouter<T extends Object?> {
       case AppRouteName.HOME_PAGE:
         return MaterialPageRoute(
             builder: (ctx) => const HomePage(), settings: settings);
+      case AppRouteName.FAVOURITE_PAGE:
+        return MaterialPageRoute(
+            builder: (ctx) => const LikesPage(), settings: settings);
       default:
         return _errorRoute();
     }

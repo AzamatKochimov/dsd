@@ -106,7 +106,8 @@ class HomePageState extends ConsumerState<HomePage> {
                         ),
                         SizedBox(
                             height: 270.h, child: const CategoriesWidget()),
-                        const SizedBox(height: 20,),
+                        // const SizedBox(height: 20,),
+                        const SizedBox(height: 30,),
                         Container(
                             height: 150,
                             width: double.infinity,
@@ -115,7 +116,7 @@ class HomePageState extends ConsumerState<HomePage> {
                             fit: BoxFit.fill,
                           ),
                         ),
-
+                        // const SizedBox(height: 10,),
                         /// products
                         GridView.builder(
                           shrinkWrap: true,
@@ -171,49 +172,49 @@ class HomePageState extends ConsumerState<HomePage> {
                                       Container(
                                           padding: const EdgeInsets.all(10),
                                           child: Center(
-                                            child: Image.asset('assets/images/horse.png')
-                                            // currentProduct
-                                            //             .attachment.isEmpty ||
-                                            //         currentProduct.attachment[0]
-                                            //             .contentUrl.isEmpty
-                                            //     ? Image.asset(
-                                            //         "assets/images/404.jpg",
-                                            //         height: 140,
-                                            //         width: 160,
-                                            //       )
-                                            //     : Image.network(
-                                            //         'http://192.168.0.122:8080/attachment/${currentProduct.attachment[0].id}',
-                                            //         height: 140,
-                                            //         width: 160,
-                                            //         loadingBuilder: (BuildContext
-                                            //                 context,
-                                            //             Widget child,
-                                            //             ImageChunkEvent?
-                                            //                 loadingProgress) {
-                                            //           if (loadingProgress ==
-                                            //               null) {
-                                            //             return child;
-                                            //           } else {
-                                            //             return Center(
-                                            //               child: SizedBox(
-                                            //                 height: 100,
-                                            //                 width: 100,
-                                            //                 child:
-                                            //                     CircularProgressIndicator(
-                                            //                   value: loadingProgress
-                                            //                               .expectedTotalBytes !=
-                                            //                           null
-                                            //                       ? loadingProgress
-                                            //                               .cumulativeBytesLoaded /
-                                            //                           loadingProgress
-                                            //                               .expectedTotalBytes!
-                                            //                       : null,
-                                            //                 ),
-                                            //               ),
-                                            //             );
-                                            //           }
-                                            //         },
-                                            //       ),
+                                            // child: Image.asset('assets/images/horse.png')
+                                            child: currentProduct
+                                                        .attachment.isEmpty ||
+                                                    currentProduct.attachment[0]
+                                                        .contentUrl.isEmpty
+                                                ? Image.asset(
+                                                    "assets/images/404.jpg",
+                                                    height: 160,
+                                                    width: 180,
+                                                  )
+                                                : Image.network(
+                                                    'https://dominant-soft-development.up.railway.app/attachment/5',
+                                                    height: 160,
+                                                    width: 180,
+                                                    loadingBuilder: (BuildContext
+                                                            context,
+                                                        Widget child,
+                                                        ImageChunkEvent?
+                                                            loadingProgress) {
+                                                      if (loadingProgress ==
+                                                          null) {
+                                                        return child;
+                                                      } else {
+                                                        return Center(
+                                                          child: SizedBox(
+                                                            height: 160,
+                                                            width: 180,
+                                                            child:
+                                                                CircularProgressIndicator(
+                                                              value: loadingProgress
+                                                                          .expectedTotalBytes !=
+                                                                      null
+                                                                  ? loadingProgress
+                                                                          .cumulativeBytesLoaded /
+                                                                      loadingProgress
+                                                                          .expectedTotalBytes!
+                                                                  : null,
+                                                            ),
+                                                          ),
+                                                        );
+                                                      }
+                                                    },
+                                                  ),
                                           
                                           )),
                                       Padding(
@@ -267,7 +268,7 @@ class HomePageState extends ConsumerState<HomePage> {
                                             Text(
                                               truncateText(
                                                   currentProduct.description,
-                                                  40),
+                                                  25),
                                               style: const TextStyle(
                                                 color: Colors.white70,
                                                 fontSize: 12,

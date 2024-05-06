@@ -56,11 +56,40 @@ class _ProductDetailsPageState extends ConsumerState<ProductDetailsPage> {
               children: [
                 /// Product image
                 SizedBox(
-                  width: 318.w,
-                  child: Image.asset(
-                    'assets/images/horse.png',
-                    fit: BoxFit.fill,
-                  ),
+                  width: 350.w,
+                  child: widget.product.attachment.isEmpty ||
+                          widget.product.attachment[0].contentUrl.isEmpty
+                      ? Image.asset(
+                          "assets/images/404.jpg",
+                          height: 350.h,
+                          width: 350.w,
+                        )
+                      : Image.network(
+                          'https://dominant-soft-development.up.railway.app/attachment/5',
+                          height: 350.h,
+                          width: 350.w,
+                          loadingBuilder: (BuildContext context, Widget child,
+                              ImageChunkEvent? loadingProgress) {
+                            if (loadingProgress == null) {
+                              return child;
+                            } else {
+                              return Center(
+                                child: SizedBox(
+                                  height: 100,
+                                  width: 100,
+                                  child: CircularProgressIndicator(
+                                    value: loadingProgress.expectedTotalBytes !=
+                                            null
+                                        ? loadingProgress
+                                                .cumulativeBytesLoaded /
+                                            loadingProgress.expectedTotalBytes!
+                                        : null,
+                                  ),
+                                ),
+                              );
+                            }
+                          },
+                        ),
                 ),
 
                 /// Product name

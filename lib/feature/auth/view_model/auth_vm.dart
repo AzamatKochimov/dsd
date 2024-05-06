@@ -12,12 +12,10 @@ var loginref =
 
 class LoginNotifier extends ChangeNotifier {
   User? currentUser;
-  String? currentUserToken;
 
   bool isEmail = false;
   bool isObscure = true;
   bool isChecked = false;
-
 
   String? phoneNumber;
   String? email;
@@ -100,8 +98,8 @@ class LoginNotifier extends ChangeNotifier {
     if (responseObj.containsKey('success') && responseObj['success'] == true) {
       // Login successful
       prefs.setString("token", responseObj['data']['accessToken']);
-      currentUserToken = prefs.getString('token');
-      print("correct"); // Print "correct" to console
+      print("correct");
+      notifyListeners();
       return {
         'status': true,
         'message': 'Successfully registered.',
@@ -127,27 +125,27 @@ class LoginNotifier extends ChangeNotifier {
 
     log("login func");
 
-
     try {
-    String? response = await ApiService.post("api/auth/login", map, params: {});
-    print(response!);
+      String? response =
+          await ApiService.post("api/auth/login", map, params: {});
+      print(response!);
 
-    Map<String, dynamic> responseObj = jsonDecode(response);
-    print(responseObj.containsKey('success') && responseObj['success'] == true);
+      Map<String, dynamic> responseObj = jsonDecode(response);
+      print(
+          responseObj.containsKey('success') && responseObj['success'] == true);
       // Login successful
       currentUser =
           User.fromJson(responseObj['data']['userDTO']); // Set currentUser
-      notifyListeners();
       prefs.setString("token", responseObj['data']['accessToken']);
-      currentUserToken = prefs.getString('token');
-      log("here it is ${currentUserToken}");
+      log("prefs token ${prefs.getString('token')}");
       print("correct"); // Print "correct" to console
+      notifyListeners();
       return {
         'status': true,
         'message': 'Successfully logged in.',
         'userDto': responseObj['data']['userDTO']
       };
-    } catch(e) {
+    } catch (e) {
       // Login failed
       print("password or number is wrong"); // Print error message to console
       return {
@@ -157,10 +155,13 @@ class LoginNotifier extends ChangeNotifier {
     }
   }
 
-  Future<bool> isLoggedIn() async {
+  Future<bool> isLoggedIn2() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString('token');
     return token != null;
+  }
+  Future<bool> isLoggedIn() async {
+    return true;
   }
 }
 

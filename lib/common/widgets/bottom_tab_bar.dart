@@ -18,7 +18,7 @@ class TabScreen extends ConsumerWidget {
 
     final List<Widget> children = [
       const HomePage(),
-      LikesPage(),
+      const LikesPage(),
       const AddItemHomePage(),
       const BasketPage(),
       const Profile(),
