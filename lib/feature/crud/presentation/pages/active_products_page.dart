@@ -1,9 +1,14 @@
 import 'package:dsd/common/router/route_name.dart';
 import 'package:dsd/common/styles/colors.dart';
+import 'package:dsd/data/entities/product_model_sardor.dart';
 import 'package:dsd/feature/crud/presentation/widgets/general_widgets.dart';
+import 'package:dsd/feature/crud/view_model/get_categories_vm.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:l/l.dart';
 import '../../../../common/const/assets/images.dart';
+import '../../../../common/widgets/custom_text_widget.dart';
 
 class ActiveProductsPage extends StatelessWidget {
   const ActiveProductsPage({super.key});
@@ -15,25 +20,28 @@ class ActiveProductsPage extends StatelessWidget {
     // var itemWidth = size.width / 2;
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      body: CustomScrollView(
-        physics: const BouncingScrollPhysics(),
-        slivers: [
-          SliverToBoxAdapter(
-              child: ClipRRect(
-            borderRadius: BorderRadius.circular(10),
-            child: Image.asset(
-                width: double.infinity,
-                fit: BoxFit.cover,
-                height: 200.h,
-                ConstImages.AD_IMAGE),
-          )),
-          const SliverAppBar(
-            centerTitle: true,
-            title: Text('Ads'),
-            pinned: true,
-          ),
-          const CustomProductsCardGridView(),
-        ],
+      body: Padding(
+        padding: const EdgeInsets.only(bottom: 50),
+        child: CustomScrollView(
+          physics: const BouncingScrollPhysics(),
+          slivers: [
+            SliverToBoxAdapter(
+                child: ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Image.asset(
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                  height: 200.h,
+                  ConstImages.AD_IMAGE),
+            )),
+            const SliverAppBar(
+              centerTitle: true,
+              title: Text('Ads'),
+              pinned: true,
+            ),
+            const CustomProductsCardGridView(),
+          ],
+        ),
       ),
       floatingActionButton: const CustomFloatingActionButton(),
     );
@@ -41,96 +49,143 @@ class ActiveProductsPage extends StatelessWidget {
 }
 
 // custom grid view for cards
-class CustomProductsCardGridView extends StatelessWidget {
+class CustomProductsCardGridView extends ConsumerWidget {
   const CustomProductsCardGridView({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context) {
-    return SliverGrid(
-      delegate: SliverChildListDelegate(
-          List.generate(10, (index) {
-        return const CustomProductCard();
-      })),
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          mainAxisSpacing: 5,
-          crossAxisSpacing: 2,
-          // childAspectRatio: (itemWidth / itemHeight),
-          mainAxisExtent: 350.h),
-    );
+  Widget build(BuildContext context, WidgetRef ref) {
+    final AsyncValue<List<ProductModelSardor>> products =
+        ref.watch(getActiveProducts);
+    return products.when(
+        data: (data) {
+          return SliverGrid(
+            delegate: SliverChildBuilderDelegate(childCount: data.length,
+                (context, index) {
+              final product = data[index];
+              return CustomProductCard(product: product);
+            }),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 5,
+                crossAxisSpacing: 2,
+                // childAspectRatio: (itemWidth / itemHeight),
+                mainAxisExtent: 350.h),
+          );
+        },
+        error: (error, stack) {
+          l.e(error);
+          l.e(stack);
+          return SliverFillRemaining(
+            child: Center(
+              child: customTextWidget(text: 'Oops, something went wrong'),
+            ),
+          );
+        },
+        loading: () => const SliverFillRemaining(
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            ));
   }
 }
 
 // custom card for products (CRUD)
 class CustomProductCard extends StatelessWidget {
-  const CustomProductCard({
-    super.key,
-  });
+  final ProductModelSardor product;
+
+  const CustomProductCard({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: Column(
+        mainAxisSize: MainAxisSize.max,
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(10),
-            child: Image.asset(
-                height: 140.h,
-                width: double.infinity,
-                fit: BoxFit.cover,
-                ConstImages.CARD_IMAGE),
+            child: product.attachment.isEmpty ||
+                    product.attachment[0].contentUrl.isEmpty
+                ? Image.asset(
+                    ConstImages.CARD_IMAGE,
+                    height: 160,
+                    width: 180,
+                  )
+                : Image.network(
+              // product.attachment[0].contentUrl,
+                    'https://dominant-soft-development.up.railway.app/attachment/5',
+                    height: 160,
+                    width: 180,
+                    loadingBuilder: (BuildContext context, Widget child,
+                        ImageChunkEvent? loadingProgress) {
+                      if (loadingProgress == null) {
+                        return child;
+                      } else {
+                        return Center(
+                          child: SizedBox(
+                            height: 160,
+                            width: 180,
+                            child: CircularProgressIndicator(
+                              value: loadingProgress.expectedTotalBytes != null
+                                  ? loadingProgress.cumulativeBytesLoaded /
+                                      loadingProgress.expectedTotalBytes!
+                                  : null,
+                            ),
+                          ),
+                        );
+                      }
+                    },
+                  ),
           ),
           ListTile(
+            isThreeLine: true,
             contentPadding: const EdgeInsets.symmetric(horizontal: 8),
-            title: const Text(
-              'Savannah Tigr',
-              style: TextStyle(fontSize: 18),
+            title: Text(
+              product.productName,
+              style: const TextStyle(fontSize: 18),
               overflow: TextOverflow.ellipsis,
             ),
             subtitle: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  '1 240 \$',
-                  style: TextStyle(fontWeight: FontWeight.w900),
+                Text(
+                  '${product.price} \$',
+                  style: const TextStyle(fontWeight: FontWeight.w900),
                 ),
-                const Text(
+                Text(
                     overflow: TextOverflow.ellipsis,
                     softWrap: true,
-                    'Very smart and big aaaaaa'),
+                    product.description),
                 const Text('condition: 5 years'),
                 const Text('Russian, Moscow'),
                 const Text('18 February 2024'),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text(
-                      '16:02',
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(fontSize: 14),
-                    ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.edit,
-                        size: 20,
-                      ),
-                    )
-                  ],
-                )
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //   children: [
+                //     const Text(
+                //       '16:02',
+                //       overflow: TextOverflow.ellipsis,
+                //       style: TextStyle(fontSize: 14),
+                //     ),
+                //     IconButton(
+                //       onPressed: () {},
+                //       icon: const Icon(
+                //         Icons.edit,
+                //         size: 20,
+                //       ),
+                //     )
+                //   ],
+                // )
               ],
             ),
-            isThreeLine: true,
           ),
         ],
       ),
     );
   }
 }
-
 
 // add new product
 class CustomFloatingActionButton extends StatelessWidget {

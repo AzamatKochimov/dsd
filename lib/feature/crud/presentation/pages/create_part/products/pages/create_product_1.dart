@@ -79,8 +79,9 @@ class CreateProductOnePage extends ConsumerWidget {
                   Expanded(
                     flex: 3,
                     child: TextField(
+                      keyboardType: TextInputType.number,
                       controller: _priceController,
-                      decoration: InputDecoration(border: OutlineInputBorder()),
+                      decoration: const InputDecoration(border: OutlineInputBorder()),
                     ),
                   ),
                   spaceWidget(isHeight: false, size: 10),

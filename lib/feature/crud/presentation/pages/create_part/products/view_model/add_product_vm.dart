@@ -1,6 +1,6 @@
 import 'package:dsd/common/router/route_name.dart';
 import 'package:dsd/feature/crud/models/product_model.dart';
-import 'package:dsd/feature/crud/presentation/pages/create_part/products/pages/create_product_1.dart';
+import 'package:dsd/feature/crud/presentation/pages/create_part/products/view_model/attachment_vm.dart';
 import 'package:dsd/feature/crud/presentation/pages/create_part/products/view_model/image_picker_vm.dart';
 import 'package:dsd/feature/crud/services/get_categories_service.dart';
 import 'package:flutter/cupertino.dart';
@@ -14,12 +14,13 @@ final addProductNotifierProvider =
         (ref) => AddProductNotifier());
 
 // controllers
-final nameControllerProvider =
-    Provider<TextEditingController>((ref) => TextEditingController());
-final priceControllerProvider =
-    Provider<TextEditingController>((ref) => TextEditingController());
+final nameControllerProvider = Provider.autoDispose<TextEditingController>(
+    (ref) => TextEditingController());
+final priceControllerProvider = Provider.autoDispose<TextEditingController>(
+    (ref) => TextEditingController());
 final descriptionControllerProvider =
-    Provider<TextEditingController>((ref) => TextEditingController());
+    Provider.autoDispose<TextEditingController>(
+        (ref) => TextEditingController());
 
 final addProductStateProvider =
     StateProvider<AddProductState>((ref) => AddProductState.initial);
@@ -68,6 +69,7 @@ class AddProductNotifier extends StateNotifier<String?> {
       ref.read(priceControllerProvider).clear();
       ref.read(descriptionControllerProvider).clear();
       ref.read(imageProvider.notifier).clearImage();
+      ref.read(attachmentIdsProvider.notifier).clearAttachmentsList();
 
       ref.read(addProductStateProvider.notifier).state =
           AddProductState.success;

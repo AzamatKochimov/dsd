@@ -3,6 +3,7 @@ import 'package:device_preview/device_preview.dart';
 import 'package:dio/dio.dart';
 import 'package:dsd/common/router/route_name.dart';
 import 'package:dsd/common/server/api/api.dart';
+import 'package:dsd/data/entities/product_model_sardor.dart';
 import 'package:dsd/feature/auth/view_model/auth_vm.dart';
 import 'package:dsd/feature/crud/models/category_model.dart';
 import 'package:dsd/feature/crud/presentation/pages/create_part/extra_later_will_be_deleted/model.dart';
@@ -33,6 +34,7 @@ class GetCategoriesService {
   static const String apiGetAllCategoryList = "/category/list";
   static const String apiUploadImageAttachment = "/attachment/upload";
   static const String apiAddNewProductAPI = "/product";
+  static const String apiGetActiveProducts = "/product/active-product";
 
   // headers
   // static Map<String, String> headers = {
@@ -43,18 +45,20 @@ class GetCategoriesService {
   // header get
   static Future<Map<String, String>> getHeaders({bool isUpload = false}) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('token') ?? '';
+    l.i("$token getting");
     final headers = <String, String>{
       'Content-type':
           isUpload ? 'multipart/form-data' : 'application/json; charset=UTF-8',
       'Accept':
           isUpload ? 'multipart/form-data' : 'application/json; charset=UTF-8',
+      if(token.isNotEmpty) 'Authorization' : 'Bearer $token'
     };
 
-    final token = prefs.getString('token') ?? '';
-
-    if (token.isNotEmpty) {
-      headers.putIfAbsent('Authorization', () => 'Bearer $token');
-    }
+    // l.i(token);
+    // if (token.isNotEmpty) {
+    //   headers.putIfAbsent('Authorization', () => 'Bearer $token');
+    // }
 
     return headers;
   }
@@ -152,5 +156,32 @@ class GetCategoriesService {
       l.e("Exception caught: $e");
       return "Exception: $e";
     }
+  }
+
+  static Future<List<ProductModelSardor>> getActiveProducts(String api) async {
+    final response = await (await init()).get(api);
+
+    // try {
+    if (response.statusCode == 200) {
+      List<ProductModelSardor> listOfProducts =
+          productModelSardorFromJson(jsonEncode(response.data['data']));
+      l.i(listOfProducts[0]);
+      return listOfProducts;
+    } else {
+      l.e("$response error");
+      throw Exception(
+          "Failed to fetch products. Status code: ${response.statusCode}");
+    }
+    // } on DioException catch (e) {
+    //   l.e("Dio Exception ${e.response?.data} ");
+    //   throw DioException.badResponse(
+    //       statusCode: e.response!.statusCode!,
+    //       requestOptions: RequestOptions(),
+    //       response: e.response?.data);
+    //   throw Exception("Dio Error");
+    // // } catch (e) {
+    //   l.e('Failed to load data: $e');
+    //   throw Exception('Failed to load data: $e');
+    // }
   }
 }

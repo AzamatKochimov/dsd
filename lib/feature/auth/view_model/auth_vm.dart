@@ -5,6 +5,7 @@ import 'package:dsd/common/server/api/api.dart';
 import 'package:dsd/data/entities/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:l/l.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 var loginref =
@@ -160,6 +161,7 @@ class LoginNotifier extends ChangeNotifier {
   Future<bool> isLoggedIn() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString('token');
+    l.i("Token $token");
     return token != null;
   }
 }
